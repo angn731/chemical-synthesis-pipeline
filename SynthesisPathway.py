@@ -1,7 +1,7 @@
 from rdkit import Chem
 from rdkit.Chem import AllChem
 import json
-import forward_pred
+import ForwardPred
 
 # output: dictionary, where keys are SMILES strings representing reaction products and the values are tuples
 # each element of the tuple is a dictionary produced by the forward prediction code.
@@ -85,33 +85,40 @@ with open(products_path, 'r') as file:
 
 # store synthesis pathways in a dict
 reaction_pathways = {}
+
 # simultaneously store a list of all the reactions
 all_reactions = []
-for prod, data in products_data.keys():
+for prod, data in products_data.items():
     # rxn_pathway is a tuple of reaction strings
     reaction_pathways[prod] = synthesis_pathway(prod, data)
     rxns = list(reaction_pathways[prod])
     all_reactions.extend(rxns)
 
 # feed the list of reactions into the forward pred
-rxn_contexts_and_preds = forward_pred.contexts_and_preds(all_reactions)
-print('finished predicting contexts and top products')
-print(rxn_contexts_and_preds)
+# rxn_contexts_and_preds = ForwardPred.contexts_and_preds(all_reactions)
+# print('finished predicting contexts and top products')
+
+file_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/small_test_case_contexts_and_ppreds.json'
+
+with open(file_path, 'r') as file:
+    rxn_contexts_and_preds = json.load(file)
 
 # only keep conditions where the highest probability product matches the desired product
-valid_conditions = forward_pred.compare_products(rxn_contexts_and_preds)
+valid_conditions = ForwardPred.compare_products(rxn_contexts_and_preds)
 print('finished comparing top products to desired product')
-print(valid_conditions)
+# print(valid_conditions)
 
 # reaction_pathways is a dict with desired product mapped to a tuple of SMILES strings
 # representing reactions
 # loop through all of the tuples and grab a list of dicts of conditions from
 # valid_conditions
 pathways_with_conditions = {}
-for product, pathway in reaction_pathways:
+for product, pathway in reaction_pathways.items():
     pathway_with_conditions = tuple()
     for reaction in pathway:
-        pathway_with_conditions += (valid_conditions[reaction],)
+        reaction_dict = {}
+        reaction_dict[reaction] = valid_conditions[reaction]
+        pathway_with_conditions += (reaction_dict,)
     pathways_with_conditions[product] = pathway_with_conditions
 
 print('finished adding conditions to pathways')

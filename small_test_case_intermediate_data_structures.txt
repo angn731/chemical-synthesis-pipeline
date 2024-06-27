@@ -1,0 +1,17 @@
+# reaction_pathways dict
+{
+  "O=C(O)c1ccc(Nc2ncccc2Br)cc1": [
+    "C1=CC(=C(N=C1)N)Br.O=C(O)c1ccc(B(O)O)cc1>>O=C(O)c1ccc(Nc2ncccc2Br)cc1"
+  ],
+  "O=S(=O)(N(c1ccccc1)c1ncccn1)C(F)(F)F": [
+    "B(C1=CC=CC=C1)(O)O.Nc1ncccn1>>c1ccc(Nc2ncccn2)cc1",
+    "c1ccc(Nc2ncccn2)cc1.O=S(=O)(Cl)C(F)(F)F>>O=S(=O)(N(c1ccccc1)c1ncccn1)C(F)(F)F"
+  ]
+}
+
+# all_reactions list
+[
+  "C1=CC(=C(N=C1)N)Br.O=C(O)c1ccc(B(O)O)cc1>>O=C(O)c1ccc(Nc2ncccc2Br)cc1",
+  "B(C1=CC=CC=C1)(O)O.Nc1ncccn1>>c1ccc(Nc2ncccn2)cc1",
+  "c1ccc(Nc2ncccn2)cc1.O=S(=O)(Cl)C(F)(F)F>>O=S(=O)(N(c1ccccc1)c1ncccn1)C(F)(F)F"
+]

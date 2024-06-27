@@ -151,7 +151,7 @@ def compare_products(contexts):
     condition_params = ["temperature", "solvent", "reagent", "catalyst"]
     for rxn_smiles in contexts:
         print('next reaction')
-        rxn_product = rxn_smiles.split('>> ')[1]
+        rxn_product = rxn_smiles.split('>>')[1]
         # print(f'rxn_product: {rxn_product}')
         valid_conditions = []
         # each rxn_condition is a dict
