@@ -63,6 +63,18 @@ def synthesis_pathway(product, data):
         raise ValueError("The final product does not match the desired product.")
     return rxn_pathway
 
+# forward pred took a json file that was a list of reaction SMILES strings, then output a dict
+# where the keys were reaction SMILES strings and the values were a list of dicts with conditions and
+# the probability of generating the desired product
+
+# # load json file with products and their associated data
+# products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/small_test_case.json'
+
+# with open(products_path, 'r') as file:
+#     products_data = json.load(file)
+
+
+
 if __name__ == "__main__":
     # test case for react()
     # reactant1 = "C1=CC(=C(N=C1)N)Br"
