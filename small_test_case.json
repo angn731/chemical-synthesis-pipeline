@@ -1,0 +1,14 @@
+{
+"O=C(O)c1ccc(Nc2ncccc2Br)cc1":
+    {"QED": ["0.911222544594899", 0],
+    "similarity": ["0.5859475507174666", 0],
+    "rank": 2,
+    "initial_mol": "C1=CC(=C(N=C1)N)Br",
+    "templates": [{"_id": "ChanLam", "reactants": ["O=C(O)c1ccc(B(O)O)cc1"]}]},
+"O=S(=O)(N(c1ccccc1)c1ncccn1)C(F)(F)F":
+    {"QED": ["0.8735248151923747", 0],
+    "similarity": ["0.579330638082168", 0],
+    "rank": 3,
+    "initial_mol": "B(C1=CC=CC=C1)(O)O",
+    "templates": [{"_id": "ChanLam", "reactants": ["Nc1ncccn1"]}, {"_id": "Sulfonamide", "reactants": ["O=S(=O)(Cl)C(F)(F)F"]}]}
+}

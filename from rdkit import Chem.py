@@ -1,4 +1,5 @@
-from rdkit import Chem, AllChem
+from rdkit import Chem
+from rdkit.Chem import AllChem
 
 # Example reactant SMILES strings
 reactant1_smiles = 'CC(=O)O'
@@ -16,6 +17,7 @@ rxn = AllChem.ReactionFromSmarts(reaction_smarts)
 
 # Run the reaction to predict the product
 products = rxn.RunReactants((reactant1, reactant2))
+print(products)
 
 # Assuming the reaction produces one product, convert it to SMILES
 if products:
