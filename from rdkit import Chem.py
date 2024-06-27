@@ -1,6 +1,7 @@
 from rdkit import Chem
 from rdkit.Chem import AllChem
 import json
+import forward_pred
 
 # output: dictionary, where keys are SMILES strings representing reaction products and the values are tuples
 # each element of the tuple is a dictionary produced by the forward prediction code.
@@ -67,13 +68,59 @@ def synthesis_pathway(product, data):
 # where the keys were reaction SMILES strings and the values were a list of dicts with conditions and
 # the probability of generating the desired product
 
-# # load json file with products and their associated data
-# products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/small_test_case.json'
 
-# with open(products_path, 'r') as file:
-#     products_data = json.load(file)
+# ////////////////////////////////////////////
+# GENERATING SYNTHESIS PATHWAYS AND CONDITIONS
+# ////////////////////////////////////////////
 
+# can refactor code below into a separate function
 
+# load json file with products and their associated data
+original_filename = 'small_test_case.json'
+directory = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code'
+products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/small_test_case.json'
+
+with open(products_path, 'r') as file:
+    products_data = json.load(file)
+
+# store synthesis pathways in a dict
+reaction_pathways = {}
+# simultaneously store a list of all the reactions
+all_reactions = []
+for prod, data in products_data.keys():
+    # rxn_pathway is a tuple of reaction strings
+    reaction_pathways[prod] = synthesis_pathway(prod, data)
+    rxns = list(reaction_pathways[prod])
+    all_reactions.extend(rxns)
+
+# feed the list of reactions into the forward pred
+rxn_contexts_and_preds = forward_pred.contexts_and_preds(all_reactions)
+print('finished predicting contexts and top products')
+print(rxn_contexts_and_preds)
+
+# only keep conditions where the highest probability product matches the desired product
+valid_conditions = forward_pred.compare_products(rxn_contexts_and_preds)
+print('finished comparing top products to desired product')
+print(valid_conditions)
+
+# reaction_pathways is a dict with desired product mapped to a tuple of SMILES strings
+# representing reactions
+# loop through all of the tuples and grab a list of dicts of conditions from
+# valid_conditions
+pathways_with_conditions = {}
+for product, pathway in reaction_pathways:
+    pathway_with_conditions = tuple()
+    for reaction in pathway:
+        pathway_with_conditions += (valid_conditions[reaction],)
+    pathways_with_conditions[product] = pathway_with_conditions
+
+print('finished adding conditions to pathways')
+print(pathways_with_conditions)
+
+pathways_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/small_test_case_pathways_and_conditions.json'
+with open(pathways_path, 'w') as outfile:
+    json.dump(pathways_with_conditions, outfile, indent=4)
+print(f"File saved to {pathways_path}")
 
 if __name__ == "__main__":
     # test case for react()
