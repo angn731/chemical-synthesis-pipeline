@@ -1,5 +1,6 @@
 from rdkit import Chem
 from rdkit.Chem import AllChem
+import json
 
 # Example reactant SMILES strings
 reactant1_smiles = 'CC(=O)O'
@@ -26,3 +27,21 @@ if products:
     print(f'Predicted Product SMILES: {product_smiles}')
 else:
     print('No product generated.')
+
+# output: dictionary, where keys are SMILES strings representing reaction products and the values are tuples
+# each element of the tuple is a dictionary produced by the forward prediction code.
+# so first element would be the first reaction, second element would be the second reaction, etc.
+
+templates_dict_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/templates_dict.json'
+
+with open(templates_dict_path, 'r') as file:
+    rxn_templates = json.load(file)
+
+def react(reactant1_smiles, reactant2_smiles, template_id):
+    """
+    Helper function that returns a SMILES of the product,
+    given two reactant SMILES and a reaction template ID.
+    """
+    reactant1 = Chem.MolFromSmiles(reactant1_smiles)
+    reactant2 = Chem.MolFromSmiles(reactant2_smiles)
+    reaction_smarts =
