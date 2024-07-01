@@ -13,6 +13,7 @@ templates_dict_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pa
 with open(templates_dict_path, 'r') as file:
     rxn_templates = json.load(file)
 
+
 def react(reactant1_smiles, reactant2_smiles, template_id):
     """
     Helper function that returns a SMILES of the product,
@@ -30,9 +31,42 @@ def react(reactant1_smiles, reactant2_smiles, template_id):
         product_smiles = Chem.MolToSmiles(product)
     else:
         products = rxn.RunReactants((reactant2, reactant1))
-        product = products[0][0]
-        product_smiles = Chem.MolToSmiles(product)
+        try:
+            product = products[0][0]
+            product_smiles = Chem.MolToSmiles(product)
+        # if neither reactant order works
+        except IndexError:
+            return None
     return product_smiles
+
+def react_one_reactant(reactant_smiles, template_id):
+    """
+    Helper function that returns a SMILES of the product,
+    given one reactant SMILES and a reaction template ID.
+    """
+    reactant = Chem.MolFromSmiles(reactant_smiles)
+    reaction_comps = rxn_templates[template_id].split(">>")
+    reaction_smarts = reaction_comps[1] + ">>" + reaction_comps[0]
+    rxn = AllChem.ReactionFromSmarts(reaction_smarts)
+    products = rxn.RunReactants((reactant, ))
+    product_smiles = ""
+    try:
+        product = products[0][0]  # Assuming one product
+        product_smiles = Chem.MolToSmiles(product)
+    except IndexError:
+        return None
+    return product_smiles
+
+def make_rxn_smiles(rxn_molecules):
+    """
+    Helper function that takes in a tuple of SMILES and returns a reaction SMILES.
+    Compatible with one or two reactants.
+    """
+    length = len(rxn_molecules)
+    if length == 3:
+        return rxn_molecules[0] + '.' + rxn_molecules[1] + ">>" + rxn_molecules[2]
+    if length == 2:
+        return rxn_molecules[0] + ">>" + rxn_molecules[1]
 
 # templates is a list of dictionaries, each with two keys
 # _id is a string
@@ -46,6 +80,8 @@ def synthesis_pathway(product, data):
     of associated data, returns a tuple of reactions needed to synthesize the product.
     Reactions are represented as SMILES strings.
     """
+    print(f'desired product: {product}')
+    print(f'data: {data}')
     templates = data["templates"]
     reactant1 = data["initial_mol"]
     rxn_pathway = ()
@@ -53,15 +89,27 @@ def synthesis_pathway(product, data):
     for temp in templates:
         template_id = temp["_id"]
         # assume there is only one reactant
-        reactant2 = temp["reactants"][0]
-        intermediate = react(reactant1, reactant2, template_id)
-        rxn_smiles = reactant1 + '.' + reactant2 + ">>" + intermediate
+        rxn_molecules = tuple()
+        try:
+            reactant2 = temp["reactants"][0]
+            intermediate = react(reactant1, reactant2, template_id)
+            rxn_molecules = (reactant1, reactant2, intermediate)
+        # the intermediate from the previous step is the only reactant
+        except IndexError:
+            intermediate = react_one_reactant(reactant1, template_id)
+            rxn_molecules = (reactant1, intermediate)
+        # if one of the reactions in the sequence of reactions doesn't work, return immediately
+        if intermediate is None:
+            return None
+        rxn_smiles = make_rxn_smiles(rxn_molecules)
         rxn_pathway += (rxn_smiles,)
         # update reactant 1 to react the intermediate by the previous step
         # with the reactant in the next step
         reactant1 = intermediate
     # the final product should be the desired product
-    if reactant1 != product:
+    if Chem.MolToSmiles(Chem.MolFromSmiles(reactant1)) != product:
+        print(f'pathway: {rxn_pathway}')
+        print(f'produced product: {reactant1}')
         raise ValueError("The final product does not match the desired product.")
     return rxn_pathway
 
@@ -107,6 +155,11 @@ def make_synthesis_pathways(products_data):
     all_reactions = []
     for prod, data in products_data.items():
         # rxn_pathway is a tuple of reaction strings
+        pathway = synthesis_pathway(prod, data)
+        # if the returned pathway is None, one of the reactions didn't
+        # produce a valid result, so skip the product entirely
+        if pathway is None:
+            continue
         reaction_pathways[prod] = synthesis_pathway(prod, data)
         rxns = list(reaction_pathways[prod])
         all_reactions.extend(rxns)
@@ -174,10 +227,22 @@ if __name__ == "__main__":
     #                   {"_id": "Sulfonamide", "reactants": ["O=S(=O)(Cl)C(F)(F)F"]}]}
     # print(synthesis_pathway(product, data))
 
+    # test case template for testing two reactants and a template ID
+    # reactant1 = Chem.MolFromSmiles('CS(=O)(=O)NS(=O)(=O)c1ccc(Br)cc1')
+    # reactant2 = Chem.MolFromSmiles('NS(=O)(=O)O')
+    # reaction_comps = rxn_templates['Mitsunobu_amine'].split(">>")
+    # reaction_smarts = reaction_comps[1] + ">>" + reaction_comps[0]
+    # rxn = AllChem.ReactionFromSmarts(reaction_smarts)
+    # products = rxn.RunReactants((reactant1, reactant2))
+    # print(products)
+    # product = products[0][0]
+    # product_smiles = Chem.MolToSmiles(product)
+    # print(product_smiles)
+
     # load json file with products and their associated data
-    products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols_for_synthesis.json'
+    products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_for_synthesis.json'
     products_data = read_file(products_path)
     all_reactions, reaction_pathways = make_synthesis_pathways(products_data)
-    dir =
-    file_name =
+    dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols'
+    file_name = 'MFBO_selected_mols'
     pathways_with_conditions(dir, file_name, all_reactions, reaction_pathways)
