@@ -86,16 +86,19 @@ def synthesis_pathway(product, data):
     reactant1 = data["initial_mol"]
     rxn_pathway = ()
     # loop through all the reaction templates, where each template is a dict
-    for temp in templates:
+    for idx, temp in enumerate(templates):
         template_id = temp["_id"]
         # assume there is only one reactant
         rxn_molecules = tuple()
+        multiple_prods = False
+        one_reactant = False
         try:
             reactant2 = temp["reactants"][0]
             intermediate = react(reactant1, reactant2, template_id)
             rxn_molecules = (reactant1, reactant2, intermediate)
         # the intermediate from the previous step is the only reactant
         except IndexError:
+            one_reactant = True
             intermediate = react_one_reactant(reactant1, template_id)
             rxn_molecules = (reactant1, intermediate)
         # if one of the reactions in the sequence of reactions doesn't work, return immediately
@@ -106,6 +109,21 @@ def synthesis_pathway(product, data):
         # update reactant 1 to react the intermediate by the previous step
         # with the reactant in the next step
         reactant1 = intermediate
+        # if isinstance(intermediate, list):
+        #     matches_product = False
+        #     for possible_prod in intermediate:
+        #         if Chem.MolToSmiles(Chem.MolFromSmiles(product)) == possible_prod:
+        #             matches_product = True
+        #             if one_reactant:
+        #                 rxn_molecules = (reactant1, possible_prod)
+        #                 rxn_smiles = make_rxn_smiles(rxn_molecules)
+        #                 rxn_pathway += (rxn_smiles,)
+        #             else:
+        #                 rxn_molecules = (reactant1, reactant2, possible_prod)
+        #                 rxn_smiles = make_rxn_smiles(rxn_molecules)
+        #                 rxn_pathway += (rxn_smiles,)
+        #     if not matches_product:
+        #         raise ValueError("The final product does not match the desired product.")
     # the final product should be the desired product
     if Chem.MolToSmiles(Chem.MolFromSmiles(reactant1)) != product:
         print(f'pathway: {rxn_pathway}')
