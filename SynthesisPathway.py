@@ -73,6 +73,8 @@ def synthesis_pathway(product, data):
 # GENERATING SYNTHESIS PATHWAYS AND CONDITIONS
 # ////////////////////////////////////////////
 
+
+
 # can refactor code below into a separate function
 
 # load json file with products and their associated data
@@ -92,11 +94,14 @@ for prod, data in products_data.items():
     rxns = list(reaction_pathways[prod])
     all_reactions.extend(rxns)
 
-# feed the list of reactions into the forward pred
-# rxn_contexts_and_preds = ForwardPred.contexts_and_preds(all_reactions)
-# print('finished predicting contexts and top products')
+print(f'all_reactions: {all_reactions}')
+print(f'reaction_pathways: {reaction_pathways}')
 
-file_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/small_test_case_contexts_and_ppreds.json'
+# feed the list of reactions into the forward pred
+rxn_contexts_and_preds = ForwardPred.contexts_and_preds(all_reactions)
+print('finished predicting contexts and top products')
+
+file_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/iteration_4_contexts_and_preds.json'
 
 with open(file_path, 'r') as file:
     rxn_contexts_and_preds = json.load(file)
