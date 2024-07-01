@@ -296,3 +296,5 @@ if __name__ == "__main__":
 
     # load in file from synthesis_pathway(); need to store file in SynethsisPathway
     # pass
+
+    # full pipeline test

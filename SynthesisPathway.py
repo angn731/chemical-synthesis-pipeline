@@ -76,9 +76,7 @@ def synthesis_pathway(product, data):
 # can refactor code below into a separate function
 
 # load json file with products and their associated data
-original_filename = 'small_test_case.json'
-directory = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code'
-products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/small_test_case.json'
+products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/iteration_4.json'
 
 with open(products_path, 'r') as file:
     products_data = json.load(file)
