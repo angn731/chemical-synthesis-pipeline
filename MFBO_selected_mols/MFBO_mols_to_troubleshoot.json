@@ -1,0 +1,1096 @@
+{
+    "O=C(O)c1ccc(N(c2ccsc2)n2cnnc2)c(O)c1": {
+        "HDAC_Docking": [
+            "0.0030392993955564896",
+            "-0.91"
+        ],
+        "LogP": [
+            "2.0706295594497854",
+            "0.25900410905325355"
+        ],
+        "Toxicity": [
+            "1.2452733515111454",
+            "0.009622977313977543"
+        ],
+        "similarity": [
+            "0.42775586587546927",
+            0
+        ],
+        "rank": 2,
+        "initial_mol": "Nn1cnnc1",
+        "templates": [
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "OB(O)c1ccsc1"
+                ]
+            },
+            {
+                "_id": "ClickChem_alkyl_halide2azide",
+                "reactants": [
+                    "O=C(O)CCBr"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "O=C(O)c1ccc(Cl)c(O)c1"
+                ]
+            }
+        ]
+    },
+    "CC(C)CN(c1ccc([N+](=O)[O-])cc1)c1cccnc1Cl": {
+        "HDAC_Docking": [
+            "0.003878693182272187",
+            "-0.08"
+        ],
+        "LogP": [
+            "3.9765887613082134",
+            "0.08028436360369184"
+        ],
+        "Toxicity": [
+            "1.3157643271872532",
+            "0.0034876216019144035"
+        ],
+        "similarity": [
+            "0.5820168902136115",
+            0
+        ],
+        "rank": 4,
+        "initial_mol": "O=[N+]([O-])c1ccc(F)cc1",
+        "templates": [
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "CC(C)CN"
+                ]
+            },
+            {
+                "_id": "Mitsunobu_amine",
+                "reactants": [
+                    "Oc1cccnc1Cl"
+                ]
+            },
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "O=S(=O)(Cl)c1cccc(Br)c1"
+                ]
+            }
+        ]
+    },
+    "O=C(c1sc2ccccc2c1Cl)N(n1cnnc1)S(=O)(=O)C(F)(F)F": {
+        "HDAC_Docking": [
+            "0.0026878760298141764",
+            "-0.15"
+        ],
+        "LogP": [
+            "3.2089374804355315",
+            "0.12327002581321267"
+        ],
+        "Toxicity": [
+            "1.5290318949448765",
+            "0.024014977208020483"
+        ],
+        "similarity": [
+            "0.40627024966647607",
+            0
+        ],
+        "rank": 4,
+        "initial_mol": "Nn1cnnc1",
+        "templates": [
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "O=S(=O)(Cl)C(F)(F)F"
+                ]
+            },
+            {
+                "_id": "Amide_amine_acid",
+                "reactants": [
+                    "Nc1cccc(O)c1"
+                ]
+            },
+            {
+                "_id": "Amide_amine_acidChloride",
+                "reactants": [
+                    "O=C(Cl)c1sc2ccccc2c1Cl"
+                ]
+            }
+        ]
+    },
+    "O=C(O)CN(CC(=O)O)c1ccc([N+](=O)[O-])cc1": {
+        "HDAC_Docking": [
+            "0.003534397025519645",
+            "0.57"
+        ],
+        "LogP": [
+            "-0.21692357419886338",
+            "0.050595019994689266"
+        ],
+        "Toxicity": [
+            "1.0040102278475613",
+            "0.0663311376517437"
+        ],
+        "similarity": [
+            "0.40625",
+            0
+        ],
+        "rank": 0,
+        "initial_mol": "O=[N+]([O-])c1ccc(F)cc1",
+        "templates": [
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "Cc1ccc(Cl)cc1C(=O)O"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "O=Cc1ccc(Cl)cc1"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "O=C(O)CNCC(=O)O"
+                ]
+            }
+        ]
+    },
+    "COC(=O)c1nc(N(c2ccccc2)S(=O)(=O)c2ccc(C)cc2)ccc1Cl": {
+        "HDAC_Docking": [
+            "0.002797578841162485",
+            "-0.01"
+        ],
+        "LogP": [
+            "4.530931093720062",
+            "0.08075791808323188"
+        ],
+        "Toxicity": [
+            "1.1778288198468914",
+            "0.0310762211533196"
+        ],
+        "similarity": [
+            "0.39819421411461214",
+            0
+        ],
+        "rank": 2,
+        "initial_mol": "B(C1=CC=CC=C1)(O)O",
+        "templates": [
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "O=C(O)c1ccc(B(O)O)cc1"
+                ]
+            },
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "COC(=O)c1nc(N)ccc1Cl"
+                ]
+            },
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "Cc1ccc(S(=O)(=O)Cl)cc1"
+                ]
+            }
+        ]
+    },
+    "Cc1ccc(S(=O)(=O)N(c2ccc(-n3cc(CCCO)nn3)cc2)c2ccccc2C)cc1": {
+        "HDAC_Docking": [
+            "0.002662945346571803",
+            "-1.26"
+        ],
+        "LogP": [
+            "4.39157551055326",
+            "0.116244274465366"
+        ],
+        "Toxicity": [
+            "1.383194056838727",
+            "0.032358073478579774"
+        ],
+        "similarity": [
+            "0.41583626050085826",
+            0
+        ],
+        "rank": 4,
+        "initial_mol": "Cc1ccccc1F",
+        "templates": [
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "Nc1ccc(N)cc1"
+                ]
+            },
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "Cc1ccc(S(=O)(=O)Cl)cc1"
+                ]
+            },
+            {
+                "_id": "ClickChem_aryl_amine2azide",
+                "reactants": [
+                    "C#CCCCO"
+                ]
+            }
+        ]
+    },
+    "O=S(=O)(c1ccccc1)N(c1cnc2ccccc2c1)S(=O)(=O)c1cccs1": {
+        "HDAC_Docking": [
+            "0.00356147745878581",
+            "-0.66"
+        ],
+        "LogP": [
+            "3.998477400901956",
+            "0.3868415295640083"
+        ],
+        "Toxicity": [
+            "0.9475567537558025",
+            "0.021014204610105967"
+        ],
+        "similarity": [
+            "0.5600336625878422",
+            0
+        ],
+        "rank": 4,
+        "initial_mol": "NS(=O)(=O)c1cccs1",
+        "templates": [
+            {
+                "_id": "Mitsunobu_amine",
+                "reactants": [
+                    "Nc1ccncc1N"
+                ]
+            },
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "OB(O)c1cnc2ccccc2c1"
+                ]
+            },
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "O=S(=O)(Cl)c1ccccc1"
+                ]
+            }
+        ]
+    },
+    "CC(=O)OCC(=O)N(c1ccsc1)n1cnnc1": {
+        "HDAC_Docking": [
+            "0.005380891640679029",
+            "-1.16"
+        ],
+        "LogP": [
+            "0.5602431706875958",
+            "0.05324867994221383"
+        ],
+        "Toxicity": [
+            "1.4947082497777089",
+            "0.04685898841887415"
+        ],
+        "similarity": [
+            "0.4772727272727273",
+            0
+        ],
+        "rank": 2,
+        "initial_mol": "Nn1cnnc1",
+        "templates": [
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "OB(O)c1ccsc1"
+                ]
+            },
+            {
+                "_id": "ClickChem_alkyl_halide2azide",
+                "reactants": [
+                    "O=C(O)CCBr"
+                ]
+            },
+            {
+                "_id": "Amide_amine_acid",
+                "reactants": [
+                    "CC(=O)OCC(=O)O"
+                ]
+            }
+        ]
+    },
+    "CC(C)C(=O)N(n1cnnc1)S(=O)(=O)c1cccs1": {
+        "HDAC_Docking": [
+            "0.00364574906841981",
+            "-0.49"
+        ],
+        "LogP": [
+            "0.9478760448466066",
+            "0.07572789578073758"
+        ],
+        "Toxicity": [
+            "1.5445572979366122",
+            "0.013574856700980131"
+        ],
+        "similarity": [
+            "0.4853268776141117",
+            0
+        ],
+        "rank": 2,
+        "initial_mol": "Nn1cnnc1",
+        "templates": [
+            {
+                "_id": "Amide_amine_acid",
+                "reactants": [
+                    "COc1ccc2c(c1)=NC1=C(C)NCCC=21"
+                ]
+            },
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "O=S(=O)(Cl)c1cccs1"
+                ]
+            },
+            {
+                "_id": "Amide_amine_acid",
+                "reactants": [
+                    "CC(C)C(=O)O"
+                ]
+            }
+        ]
+    },
+    "N#Cc1ccc(N(c2ccc([N+](=O)[O-])cc2)c2ncn[nH]2)cc1": {
+        "HDAC_Docking": [
+            "0.002988078316385471",
+            "0.47"
+        ],
+        "LogP": [
+            "2.6605773468668956",
+            "0.09237414599055338"
+        ],
+        "Toxicity": [
+            "1.3495607923833455",
+            "0.04147743720002528"
+        ],
+        "similarity": [
+            "0.4518367346938776",
+            0
+        ],
+        "rank": 4,
+        "initial_mol": "N#Cc1ccc(B(O)O)cc1",
+        "templates": [
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "OB(O)c1cnc2ccccc2c1"
+                ]
+            },
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "Nc1ncn[nH]1"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "O=[N+]([O-])c1ccc(Cl)cc1"
+                ]
+            }
+        ]
+    },
+    "O=[N+]([O-])c1ccc(N(CCc2ccccc2)c2cccc3ccccc23)cc1": {
+        "HDAC_Docking": [
+            "0.0023961938626459755",
+            "-1.29"
+        ],
+        "LogP": [
+            "5.882325186413604",
+            "0.031060924808045343"
+        ],
+        "Toxicity": [
+            "1.3374930162670333",
+            "0.01607405276296814"
+        ],
+        "similarity": [
+            "0.4124748490945674",
+            0
+        ],
+        "rank": 1,
+        "initial_mol": "O=[N+]([O-])c1ccc(F)cc1",
+        "templates": [
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "O=C(O)c1ccnc(Cl)c1F"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "NCCc1ccccc1"
+                ]
+            },
+            {
+                "_id": "Mitsunobu_amine",
+                "reactants": [
+                    "Oc1cccc2ccccc12"
+                ]
+            }
+        ]
+    },
+    "O=[N+]([O-])c1c(O)cccc1N(c1ccsc1)n1cnnc1": {
+        "HDAC_Docking": [
+            "0.0027798035583285895",
+            "-0.08"
+        ],
+        "LogP": [
+            "1.9609682670907786",
+            "0.24179249150611248"
+        ],
+        "Toxicity": [
+            "1.301712308744422",
+            "0.027311412489297915"
+        ],
+        "similarity": [
+            "0.4341389939750595",
+            0
+        ],
+        "rank": 5,
+        "initial_mol": "Nn1cnnc1",
+        "templates": [
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "OB(O)c1ccsc1"
+                ]
+            },
+            {
+                "_id": "ClickChem_alkyl_halide2azide",
+                "reactants": [
+                    "O=C(O)CCBr"
+                ]
+            },
+            {
+                "_id": "Mitsunobu_amine",
+                "reactants": [
+                    "O=[N+]([O-])c1c(O)cccc1O"
+                ]
+            }
+        ]
+    },
+    "O=C(c1cccc(F)c1)N(c1ccsc1)n1cnnc1": {
+        "HDAC_Docking": [
+            "0.005202541142729112",
+            "-0.88"
+        ],
+        "LogP": [
+            "2.3761542906210926",
+            "0.13040170156028985"
+        ],
+        "Toxicity": [
+            "1.4581812597406698",
+            "0.011885294954635306"
+        ],
+        "similarity": [
+            "0.48125786163522016",
+            0
+        ],
+        "rank": 1,
+        "initial_mol": "O=C(Cl)c1cccc(F)c1",
+        "templates": [
+            {
+                "_id": "Amide_amine_acidChloride",
+                "reactants": [
+                    "Nn1cnnc1"
+                ]
+            },
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "OB(O)c1ccsc1"
+                ]
+            },
+            {
+                "_id": "Nboc_deprotection",
+                "reactants": []
+            }
+        ]
+    },
+    "Cc1ccc(S(=O)(=O)N(c2ccsc2)n2cnnc2)cc1": {
+        "HDAC_Docking": [
+            "0.004130830916350298",
+            "-0.91"
+        ],
+        "LogP": [
+            "2.8512839233334537",
+            "0.11572439889691388"
+        ],
+        "Toxicity": [
+            "1.4442776217219464",
+            "0.04715178575573553"
+        ],
+        "similarity": [
+            "0.5664592077965939",
+            0
+        ],
+        "rank": 3,
+        "initial_mol": "Nn1cnnc1",
+        "templates": [
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "OB(O)c1ccsc1"
+                ]
+            },
+            {
+                "_id": "ClickChem_alkyl_halide2azide",
+                "reactants": [
+                    "O=C(O)CCBr"
+                ]
+            },
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "Cc1ccc(S(=O)(=O)Cl)cc1"
+                ]
+            }
+        ]
+    },
+    "CC(C)=CCC[C@@H](C)CCN(c1ccc([N+](=O)[O-])cc1)c1ccccn1": {
+        "HDAC_Docking": [
+            "0.0027019040776281836",
+            "-0.45"
+        ],
+        "LogP": [
+            "5.995891352722688",
+            "0.13494720126359283"
+        ],
+        "Toxicity": [
+            "1.3947480928069573",
+            "0.007001547755009163"
+        ],
+        "similarity": [
+            "0.38718789866958264",
+            0
+        ],
+        "rank": 0,
+        "initial_mol": "O=[N+]([O-])c1ccc(F)cc1",
+        "templates": [
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "O=C(O)c1ccnc(Cl)c1F"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "Nc1ccccn1"
+                ]
+            },
+            {
+                "_id": "Mitsunobu_amine",
+                "reactants": [
+                    "CC(C)=CCC[C@@H](C)CCO"
+                ]
+            }
+        ]
+    },
+    "O=[N+]([O-])c1ccc(Nn2cnnc2)cc1": {
+        "HDAC_Docking": [
+            "0.004078821019127843",
+            "-0.41"
+        ],
+        "LogP": [
+            "1.8939208850533433",
+            "0.05840035717645353"
+        ],
+        "Toxicity": [
+            "1.4590469698844064",
+            "0.025635799933769743"
+        ],
+        "similarity": [
+            "0.44654471544715446",
+            0
+        ],
+        "rank": 2,
+        "initial_mol": "O=[N+]([O-])c1ccc(F)cc1",
+        "templates": [
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "O=C(O)c1ccnc(Cl)c1F"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "Nn1cnnc1"
+                ]
+            }
+        ]
+    },
+    "CN(C)C(=O)N(c1ccc([N+](=O)[O-])cc1)n1cnnc1": {
+        "HDAC_Docking": [
+            "0.0037152637362658416",
+            "-0.67"
+        ],
+        "LogP": [
+            "1.3066598053494949",
+            "0.05031251165504691"
+        ],
+        "Toxicity": [
+            "1.2863863259059898",
+            "0.011202868784030429"
+        ],
+        "similarity": [
+            "0.4705591291439881",
+            0
+        ],
+        "rank": 2,
+        "initial_mol": "O=[N+]([O-])c1ccc(F)cc1",
+        "templates": [
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "O=C(O)c1ccnc(Cl)c1F"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "Nn1cnnc1"
+                ]
+            },
+            {
+                "_id": "Amide_amine_acidChloride",
+                "reactants": [
+                    "CN(C)C(=O)Cl"
+                ]
+            }
+        ]
+    },
+    "CS(=O)(=O)N(c1ccc(C(=O)O)cc1)S(=O)(=O)c1ccc(Br)cc1": {
+        "HDAC_Docking": [
+            "0.003362074417964275",
+            "-0.34"
+        ],
+        "LogP": [
+            "3.4788556881039385",
+            "0.1281648706833689"
+        ],
+        "Toxicity": [
+            "1.0849223667453525",
+            "0.000783010713956811"
+        ],
+        "similarity": [
+            "0.4073515396496763",
+            0
+        ],
+        "rank": 3,
+        "initial_mol": "CS(N)(=O)=O",
+        "templates": [
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "O=S(=O)(Cl)c1ccc(Br)cc1"
+                ]
+            },
+            {
+                "_id": "Mitsunobu_amine",
+                "reactants": [
+                    "NS(=O)(=O)O"
+                ]
+            },
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "O=C(O)c1ccc(B(O)O)cc1"
+                ]
+            }
+        ]
+    },
+    "CC(C)(C)c1ccc(S(=O)(=O)N(c2ccc(CO)cc2)n2c(-c3ccncc3)n[nH]c2=S)cc1": {
+        "HDAC_Docking": [
+            "0.0019699570940720527",
+            "-1.4"
+        ],
+        "LogP": [
+            "4.068234685888032",
+            "0.3376038090504704"
+        ],
+        "Toxicity": [
+            "1.2470486287222637",
+            "0.029443158362546195"
+        ],
+        "similarity": [
+            "0.4137343795408312",
+            0
+        ],
+        "rank": 2,
+        "initial_mol": "OCc1ccc(F)cc1",
+        "templates": [
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "Nn1c(-c2ccncc2)n[nH]c1=S"
+                ]
+            },
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "CC(C)(C)c1ccc(S(=O)(=O)Cl)cc1"
+                ]
+            },
+            {
+                "_id": "Mitsunobu_amine",
+                "reactants": [
+                    "C=CC(=O)O"
+                ]
+            }
+        ]
+    },
+    "Cc1ccc(S(=O)(=O)N(c2ccc3cc(Br)ccc3c2)c2ncnc3nc[nH]c23)cc1": {
+        "HDAC_Docking": [
+            "0.0034860054250078114",
+            "-0.1"
+        ],
+        "LogP": [
+            "4.793190993606089",
+            "0.17912093464535417"
+        ],
+        "Toxicity": [
+            "1.36779134148354",
+            "0.004907052180765481"
+        ],
+        "similarity": [
+            "0.4110122358175751",
+            0
+        ],
+        "rank": 1,
+        "initial_mol": "Clc1ncnc2nc[nH]c12",
+        "templates": [
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "COc1cccc(Cl)c1"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "Nc1ccc2cc(Br)ccc2c1"
+                ]
+            },
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "Cc1ccc(S(=O)(=O)Cl)cc1"
+                ]
+            }
+        ]
+    },
+    "c1ccc(N(c2ccsc2)n2cnnc2)nc1": {
+        "HDAC_Docking": [
+            "0.003950773450884882",
+            "0.65"
+        ],
+        "LogP": [
+            "1.7888277439172817",
+            "0.1404559613120182"
+        ],
+        "Toxicity": [
+            "1.4266854068940682",
+            "0.03369128414545264"
+        ],
+        "similarity": [
+            "0.33116883116883117",
+            0
+        ],
+        "rank": 0,
+        "initial_mol": "Nn1cnnc1",
+        "templates": [
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "OB(O)c1ccsc1"
+                ]
+            },
+            {
+                "_id": "ClickChem_alkyl_halide2azide",
+                "reactants": [
+                    "O=C(O)CCBr"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "Fc1ccccn1"
+                ]
+            }
+        ]
+    },
+    "Cc1ccc(S(=O)(=O)N(N)c2ccc(C#N)cc2)cc1": {
+        "HDAC_Docking": [
+            "0.003445003686443161",
+            "0.34"
+        ],
+        "LogP": [
+            "2.2976872320227804",
+            "0.04128440449326032"
+        ],
+        "Toxicity": [
+            "1.1636010924086193",
+            "0.046804439178295354"
+        ],
+        "similarity": [
+            "0.3177289186566635",
+            0
+        ],
+        "rank": 1,
+        "initial_mol": "N#Cc1ccc(B(O)O)cc1",
+        "templates": [
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "OB(O)c1cnc2ccccc2c1"
+                ]
+            },
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "Cc1ccc(S(=O)(=O)NN)cc1"
+                ]
+            }
+        ]
+    },
+    "N#CN(c1cccnc1)S(=O)(=O)c1cccs1": {
+        "HDAC_Docking": [
+            "0.0031096831706185347",
+            "-0.56"
+        ],
+        "LogP": [
+            "1.9288232129427771",
+            "0.05734494945951729"
+        ],
+        "Toxicity": [
+            "1.3398210554504875",
+            "0.017113460520551627"
+        ],
+        "similarity": [
+            "0.3521009986809874",
+            0
+        ],
+        "rank": 1,
+        "initial_mol": "N#CN",
+        "templates": [
+            {
+                "_id": "Amide_amine_acid",
+                "reactants": [
+                    "COc1ccc2c(c1)=NC1=C(C)NCCC=21"
+                ]
+            },
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "O=S(=O)(Cl)c1cccs1"
+                ]
+            },
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "OB(O)c1cccnc1"
+                ]
+            }
+        ]
+    },
+    "Cc1ccc(S(=O)(=O)N(N)c2cc3ccccc3o2)cc1": {
+        "HDAC_Docking": [
+            "0.0037897106833520372",
+            "-0.11"
+        ],
+        "LogP": [
+            "3.205617450369364",
+            "0.20850165633813766"
+        ],
+        "Toxicity": [
+            "1.4465321806890132",
+            "0.052905471902473966"
+        ],
+        "similarity": [
+            "0.5009141055949566",
+            0
+        ],
+        "rank": 3,
+        "initial_mol": "OB(O)c1cc2ccccc2o1",
+        "templates": [
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "O=Cc1cc(F)ccc1B(O)O"
+                ]
+            },
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "Cc1ccc(S(=O)(=O)NN)cc1"
+                ]
+            }
+        ]
+    },
+    "CCN(CC)c1ccc([N+](=O)[O-])cc1": {
+        "HDAC_Docking": [
+            "0.0035268781447625307",
+            "0.57"
+        ],
+        "LogP": [
+            "3.173776676018186",
+            "0.008799868901224528"
+        ],
+        "Toxicity": [
+            "1.4085860701952184",
+            "0.012870989797458376"
+        ],
+        "similarity": [
+            "0.4482758620689655",
+            0
+        ],
+        "rank": 1,
+        "initial_mol": "O=[N+]([O-])c1ccc(F)cc1",
+        "templates": [
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "CCNCC"
+                ]
+            },
+            {
+                "_id": "Amide_amine_acidChloride",
+                "reactants": [
+                    "N#Cc1ccc(C(=O)Cl)cc1"
+                ]
+            }
+        ]
+    },
+    "N#Cc1ccccc1N(n1cnnc1)S(=O)(=O)C(F)(F)F": {
+        "HDAC_Docking": [
+            "0.0029689080840300955",
+            "0.02"
+        ],
+        "LogP": [
+            "2.090433811332387",
+            "0.018037356576027896"
+        ],
+        "Toxicity": [
+            "0.9933023814773494",
+            "0.0652703254487822"
+        ],
+        "similarity": [
+            "0.3576068376068376",
+            0
+        ],
+        "rank": 1,
+        "initial_mol": "Nn1cnnc1",
+        "templates": [
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "O=S(=O)(Cl)C(F)(F)F"
+                ]
+            },
+            {
+                "_id": "Amide_amine_acid",
+                "reactants": [
+                    "Nc1cccc(O)c1"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "N#Cc1ccccc1Cl"
+                ]
+            }
+        ]
+    },
+    "O=C(CS)N(c1cnc2ccccc2c1)n1cnnc1": {
+        "HDAC_Docking": [
+            "0.003412105504624675",
+            "-1.24"
+        ],
+        "LogP": [
+            "1.6444865083502591",
+            "0.13276602173594831"
+        ],
+        "Toxicity": [
+            "1.3819919156818377",
+            "0.03811021879919818"
+        ],
+        "similarity": [
+            "0.46384479717813054",
+            0
+        ],
+        "rank": 3,
+        "initial_mol": "Nn1cnnc1",
+        "templates": [
+            {
+                "_id": "Amide_amine_acid",
+                "reactants": [
+                    "O=C(O)CS"
+                ]
+            },
+            {
+                "_id": "ChanLam",
+                "reactants": [
+                    "CC1(C)OB(c2cnc3ccccc3c2)OC1(C)C"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "Nc1ccncc1Cl"
+                ]
+            }
+        ]
+    },
+    "O=[N+]([O-])c1ccc(N(n2cnnc2)S(=O)(=O)c2ccccc2)cc1": {
+        "HDAC_Docking": [
+            "0.0037268875822862447",
+            "0.55"
+        ],
+        "LogP": [
+            "2.6156853206512536",
+            "0.10250461235236763"
+        ],
+        "Toxicity": [
+            "1.3849787605187713",
+            "0.022801898952817812"
+        ],
+        "similarity": [
+            "0.4620121686223381",
+            0
+        ],
+        "rank": 4,
+        "initial_mol": "O=[N+]([O-])c1ccc(F)cc1",
+        "templates": [
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "O=C(O)c1ccnc(Cl)c1F"
+                ]
+            },
+            {
+                "_id": "SnAr_ForCl",
+                "reactants": [
+                    "Nn1cnnc1"
+                ]
+            },
+            {
+                "_id": "Sulfonamide",
+                "reactants": [
+                    "O=S(=O)(Cl)c1ccccc1"
+                ]
+            }
+        ]
+    }
+}
