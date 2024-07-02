@@ -4,6 +4,7 @@ import json
 import yaml
 import os
 import csv
+from SynthesisPathway import save_file
 
 # sets ip API client to communicate with server
 hostname = r'https://askcos.mit.edu:7000/'
@@ -41,7 +42,7 @@ def forward_request(reactants, rxn_conditions, size=4):
     Returns a list where each dictionary element is updated with a key-value pair specifying
     the top 5 products, given the specified set of conditions.
     """
-    print('running forward pred')
+    # print('running forward pred')
     keys = ["prob", "smiles"]
     request_groups = [rxn_conditions[i:i + size]
                     for i in range(0, len(rxn_conditions), size)]
@@ -49,6 +50,7 @@ def forward_request(reactants, rxn_conditions, size=4):
     current_idx = 0
     # loop through dictionaries
     for request_group in request_groups:
+        print(f'forward pred current id {current_idx}')
         current_ids = []
         for conditions in request_group:
             # make a call to the forward predictor using reactants, reagents, and solvent
@@ -61,7 +63,7 @@ def forward_request(reactants, rxn_conditions, size=4):
             # attempt to retrieve the results for each task
             try:
                 task_results = [client.get_result(tid, timeout=600, interval=5) for tid in current_ids]
-                print('retrieving forward preds')
+                # print('retrieving forward preds')
             except KeyError as e:
                 print(f'KeyError: {e}')
                 print(f'params: {params}')
@@ -89,12 +91,18 @@ def contexts_and_preds(reactions_to_request):
     """
     # dict to store context data for each rxn
     contexts = {}
+    current_contexts = {}
     conditions = ["temperature", "solvent", "reagent", "catalyst"]
     size = 4
     request_groups = [reactions_to_request[i:i + size]
                     for i in range(0, len(reactions_to_request), size)]
+    mol_id = 0
+    req_group_id = 0
     for request_group in request_groups:
+        req_group_id += 1
         for rxn_smiles in request_group:
+            mol_id += 1
+            print(f'on molecule {mol_id}')
             current_ids = []
             params = {'reactants':rxn_smiles.split('>>')[0],
                             'products': rxn_smiles.split('>>')[1],
@@ -107,7 +115,7 @@ def contexts_and_preds(reactions_to_request):
             # attempt to retrieve task results using task ID
             try:
                 task_results = [client.get_result(tid[1], timeout=600, interval=5) for tid in current_ids]
-                print('retrieving contexts')
+                # print('retrieving contexts')
             except KeyError as e:
                 print(f'KeyError: {e}')
                 print(f'params: {params}')
@@ -127,6 +135,12 @@ def contexts_and_preds(reactions_to_request):
                 rxn_result = forward_request(smiles_str.split('>>')[0], rxn_result)
                 # current_ids[current_index][0] is a smiles string
                 contexts[smiles_str]= rxn_result
+                current_contexts[smiles_str]= rxn_result
+        # print(f'req group id: {req_group_id}')
+        if req_group_id % 3 == 0:
+            file_path = f'/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_contexts_and_preds_{req_group_id}.json'
+            save_file(file_path, current_contexts)
+            current_contexts = {}
     return contexts
 
 

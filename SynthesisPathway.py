@@ -312,22 +312,10 @@ if __name__ == "__main__":
     products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_for_synthesis.json'
     products_data = read_file(products_path)
     all_reactions, reaction_pathways = make_synthesis_pathways(products_data)
-    # compare keys of original data and the keys of the processed data
-    keys_dict1 = set(products_data.keys())
-    keys_dict2 = set(reaction_pathways.keys())
-    unique_keys_dict1 = keys_dict1 - keys_dict2
-    # print(f'unique keys: {unique_keys_dict1}')
-    # print(f'not included: {len(unique_keys_dict1)}')
-    # print(f'original: {len(keys_dict1)}')
-    problematic_molecules = {}
-    for unique_key in unique_keys_dict1:
-        problematic_molecules[unique_key] = products_data[unique_key]
-    problematic_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_mols_to_troubleshoot.json'
-    save_file(problematic_path, problematic_molecules)
 
-    # dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols'
-    # file_name = 'MFBO_selected_mols'
-    # pathways_with_conditions(dir, file_name, all_reactions, reaction_pathways)
+    dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols'
+    file_name = 'MFBO_selected_mols'
+    pathways_with_conditions(dir, file_name, all_reactions, reaction_pathways)
 
     # test cases cuz pytest isn't working...
     def test_intermediate_rxn():
