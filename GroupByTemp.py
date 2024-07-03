@@ -24,7 +24,7 @@ def save_file(file_path, data):
     print(f"File saved to {file_path}")
 
 
-def check_empty(rxn_dict):
+def check_empty_or_small_prob(rxn_dict):
     """
     Helper function that checks if the list of conditions associated with a
     reaction is empty.
@@ -33,8 +33,11 @@ def check_empty(rxn_dict):
     conditions that produce the desired product.
     Returns a Boolean.
     """
-    for k,v in rxn_dict.items():
-        if v == []:
+    for k,rxns_list in rxn_dict.items():
+        if rxns_list == []:
+            return True
+        probs = [condition["prob"] for condition in rxns_list]
+        if max(probs) < 0.05:
             return True
         else:
             return False
@@ -54,7 +57,7 @@ def filter_data(pathways_with_conditions):
     for product, rxns_list in pathways_with_conditions.items():
         valid = True
         for rxn in rxns_list:
-            if check_empty(rxn):
+            if check_empty_or_small_prob(rxn):
                 valid = False # stop checking remaining rxns in pathway
                 break
         # continue to next product if one the rxns doesn't have valid conditions
@@ -227,130 +230,6 @@ def wellplate_sequence(filtered_pathways):
 
 
 if __name__ == "__main__":
-    # transform data
-    # data = {
-    # "O=C(O)c1ccc(Nc2ncccc2Br)cc1": [
-    #     {
-    #         "C1=CC(=C(N=C1)N)Br.O=C(O)c1ccc(B(O)O)cc1>>O=C(O)c1ccc(Nc2ncccc2Br)cc1": [
-    #             {
-    #                 "temperature": 28.327255249023438,
-    #                 "solvent": "ClCCl",
-    #                 "reagent": "c1ccncc1",
-    #                 "catalyst": "CC(=O)[O-].[Cu+2]",
-    #                 "prob": 0.001115021812759695
-    #             },
-    #             {
-    #                 "temperature": 41.79078674316406,
-    #                 "solvent": "ClCCl",
-    #                 "reagent": "",
-    #                 "catalyst": "CC(=O)[O-].[Cu+]",
-    #                 "prob": 4.193923258137252e-06
-    #             },
-    #             {
-    #                 "temperature": 38.532230377197266,
-    #                 "solvent": "ClCCl",
-    #                 "reagent": "",
-    #                 "catalyst": "CC(=O)[O-].[Cu+2]",
-    #                 "prob": 4.193923258137252e-06
-    #             },
-    #             {
-    #                 "temperature": 28.02731704711914,
-    #                 "solvent": "ClCCl",
-    #                 "reagent": "CCN(CC)CC",
-    #                 "catalyst": "CC(=O)[O-].[Cu+2]",
-    #                 "prob": 9.984051611924022e-06
-    #             },
-    #             {
-    #                 "temperature": 35.62443161010742,
-    #                 "solvent": "ClCCl",
-    #                 "reagent": "c1ccncc1",
-    #                 "catalyst": "CC(=O)[O-].[Cu+]",
-    #                 "prob": 0.001115021812759695
-    #             }
-    #         ]
-    #     }
-    # ],
-    # "O=S(=O)(N(c1ccccc1)c1ncccn1)C(F)(F)F": [
-    #     {
-    #         "B(C1=CC=CC=C1)(O)O.Nc1ncccn1>>c1ccc(Nc2ncccn2)cc1": [
-    #             {
-    #                 "temperature": 26.51129913330078,
-    #                 "solvent": "ClCCl",
-    #                 "reagent": "CCN(CC)CC",
-    #                 "catalyst": "CC(=O)[O-].[Cu+2]",
-    #                 "prob": 0.605522485929338
-    #             },
-    #             {
-    #                 "temperature": 30.631725311279297,
-    #                 "solvent": "ClCCl",
-    #                 "reagent": "c1ccncc1",
-    #                 "catalyst": "CC(=O)[O-].[Cu+2]",
-    #                 "prob": 0.434369254770806
-    #             },
-    #             {
-    #                 "temperature": 88.17671203613281,
-    #                 "solvent": "Cc1ccccc1",
-    #                 "reagent": "O=P([O-])([O-])[O-].[K+]",
-    #                 "catalyst": "",
-    #                 "prob": 0.019987005521394673
-    #             },
-    #             {
-    #                 "temperature": 60.11564636230469,
-    #                 "solvent": "O",
-    #                 "reagent": "O=C([O-])[O-].[K+]",
-    #                 "catalyst": "",
-    #                 "prob": 0.015679980018138476
-    #             },
-    #             {
-    #                 "temperature": 56.967620849609375,
-    #                 "solvent": "",
-    #                 "reagent": "c1ccncc1",
-    #                 "catalyst": "CC(=O)[O-].[Cu+2]",
-    #                 "prob": 0.16607293981531082
-    #             }
-    #         ]
-    #     },
-    #     {
-    #         "c1ccc(Nc2ncccn2)cc1.O=S(=O)(Cl)C(F)(F)F>>O=S(=O)(N(c1ccccc1)c1ncccn1)C(F)(F)F": [
-    #             {
-    #                 "temperature": 13.223930358886719,
-    #                 "solvent": "ClCCl",
-    #                 "reagent": "CCN(CC)CC",
-    #                 "catalyst": "",
-    #                 "prob": 0.8094813695538945
-    #             },
-    #             {
-    #                 "temperature": 17.88831329345703,
-    #                 "solvent": "ClC(Cl)Cl",
-    #                 "reagent": "CCN(CC)CC",
-    #                 "catalyst": "",
-    #                 "prob": 0.8533710279069024
-    #             },
-    #             {
-    #                 "temperature": 21.842477798461914,
-    #                 "solvent": "CC#N",
-    #                 "reagent": "CCN(CC)CC",
-    #                 "catalyst": "",
-    #                 "prob": 0.8756587644695389
-    #             },
-    #             {
-    #                 "temperature": 27.828472137451172,
-    #                 "solvent": "CC#N",
-    #                 "reagent": "O=C([O-])[O-].[K+]",
-    #                 "catalyst": "",
-    #                 "prob": 0.34261022868695973
-    #             },
-    #             {
-    #                 "temperature": 16.287261962890625,
-    #                 "solvent": "ClCCl",
-    #                 "reagent": "",
-    #                 "catalyst": "",
-    #                 "prob": 0.29794359498509
-    #             }
-    #         ]
-    #     }
-    # ]}
-
     # helper function test cases
 
     # rxns_top_conditions, uncompleted, rxns_to_pathways = transform_data(data)
@@ -383,16 +262,16 @@ if __name__ == "__main__":
 
     # wellplates time!!
 
-    inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_filtered_pathways.json'
-    with open(inp_filepath, 'r') as jsonfile:
-        filtered_pathways = json.load(jsonfile)
+    # inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_filtered_pathways.json'
+    # with open(inp_filepath, 'r') as jsonfile:
+    #     filtered_pathways = json.load(jsonfile)
     # rxns_top_conditions, all_rxns, rxns_to_pathways = transform_data(filtered_pathways)
     # print(f'rxns_top_conditions: {rxns_top_conditions[]}')
     # print(f'all_rxns: {all_rxns}')
     # print(f'rxns_to_pathways: {rxns_to_pathways}')
 
     # print('starting wellplates')
-    wellplates_dict = wellplate_sequence(filtered_pathways)
+    # wellplates_dict = wellplate_sequence(filtered_pathways)
     # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_wellplates.json'
     # with open(out_filepath, 'w') as outfile:
     #     json.dump(wellplates_dict, outfile, indent=4)
@@ -404,4 +283,4 @@ if __name__ == "__main__":
             total += len(value)
         return total
 
-    print(f'total rxns: {total_elements(wellplates_dict)}')
+    # print(f'total rxns: {total_elements(wellplates_dict)}')
