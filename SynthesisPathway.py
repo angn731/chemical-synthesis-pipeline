@@ -308,6 +308,7 @@ if __name__ == "__main__":
     # product_smiles = Chem.MolToSmiles(product)
     # print(product_smiles)
 
+
     # load json file with products and their associated data
     products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_for_synthesis.json'
     products_data = read_file(products_path)
@@ -316,6 +317,14 @@ if __name__ == "__main__":
     dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols'
     file_name = 'MFBO_selected_mols'
     pathways_with_conditions(dir, file_name, all_reactions, reaction_pathways)
+
+
+    # # problematic molecules
+    # products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_mols_to_troubleshoot.json'
+    # products_data = read_file(products_path)
+    # all_reactions, reaction_pathways = make_synthesis_pathways(products_data)
+    # print(all_reactions)
+    # print(reaction_pathways)
 
     # test cases cuz pytest isn't working...
     def test_intermediate_rxn():
