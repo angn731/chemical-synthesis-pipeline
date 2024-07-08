@@ -1,0 +1,333 @@
+{
+    "CS(=O)(=O)N(S(=O)(=O)c1ccc(C=Cc2ccccc2)cc1)S(=O)(=O)c1cccs1": [
+        {
+            "CS(N)(=O)=O.O=S(=O)(Cl)c1ccc(Br)cc1>>CS(=O)(=O)NS(=O)(=O)c1ccc(Br)cc1": [
+                {
+                    "temperature": 30.64776611328125,
+                    "solvent": "",
+                    "reagent": "[Na+].[OH-]",
+                    "catalyst": "",
+                    "prob": 0.9981683418872196
+                },
+                {
+                    "temperature": 28.01357650756836,
+                    "solvent": "",
+                    "reagent": "c1ccncc1",
+                    "catalyst": "",
+                    "prob": 0.9995796023502556
+                },
+                {
+                    "temperature": 50.76747512817383,
+                    "solvent": "",
+                    "reagent": "[K+].[OH-]",
+                    "catalyst": "",
+                    "prob": 0.9981683418872196
+                },
+                {
+                    "temperature": 12.903478622436523,
+                    "solvent": "ClCCl",
+                    "reagent": "CCN(CC)CC",
+                    "catalyst": "",
+                    "prob": 0.9998673506593483
+                },
+                {
+                    "temperature": 14.845638275146484,
+                    "solvent": "ClCCl",
+                    "reagent": "c1ccncc1",
+                    "catalyst": "",
+                    "prob": 0.9994466994960658
+                }
+            ]
+        },
+        {
+            "CS(=O)(=O)NS(=O)(=O)c1ccc(Br)cc1.O=S(=O)(Cl)c1cccs1>>CS(=O)(=O)N(S(=O)(=O)c1ccc(Br)cc1)S(=O)(=O)c1cccs1": [
+                {
+                    "temperature": 19.117456436157227,
+                    "solvent": "ClCCl",
+                    "reagent": "CN(C)c1ccncc1",
+                    "catalyst": "",
+                    "prob": 0.5431744461349906
+                },
+                {
+                    "temperature": 21.747774124145508,
+                    "solvent": "C1CCOC1",
+                    "reagent": "CN(C)c1ccncc1.CCN(CC)CC",
+                    "catalyst": "",
+                    "prob": 0.39649758029063814
+                },
+                {
+                    "temperature": 27.91060447692871,
+                    "solvent": "CC#N",
+                    "reagent": "CN(C)c1ccncc1",
+                    "catalyst": "",
+                    "prob": 0.4630621753616085
+                },
+                {
+                    "temperature": 18.420677185058594,
+                    "solvent": "ClCCl",
+                    "reagent": "CCN(CC)CC",
+                    "catalyst": "",
+                    "prob": 0.9066612318653691
+                },
+                {
+                    "temperature": 16.035015106201172,
+                    "solvent": "C1CCOC1",
+                    "reagent": "[H-].[Na+]",
+                    "catalyst": "",
+                    "prob": 0.8824284726378702
+                }
+            ]
+        },
+        {
+            "CS(=O)(=O)N(S(=O)(=O)c1ccc(Br)cc1)S(=O)(=O)c1cccs1.OB(O)/C=C/c1ccccc1>>CS(=O)(=O)N(S(=O)(=O)c1ccc(C=Cc2ccccc2)cc1)S(=O)(=O)c1cccs1": [
+                {
+                    "temperature": 86.14653778076172,
+                    "solvent": "COCCOC",
+                    "reagent": "O=C([O-])[O-].[Na+]",
+                    "catalyst": "c1ccc([P](c2ccccc2)(c2ccccc2)[Pd]([P](c2ccccc2)(c2ccccc2)c2ccccc2)([P](c2ccccc2)(c2ccccc2)c2ccccc2)[P](c2ccccc2)(c2ccccc2)c2ccccc2)cc1",
+                    "prob": 0.5556494386624754
+                },
+                {
+                    "temperature": 99.58039093017578,
+                    "solvent": "CN(C)C=O",
+                    "reagent": "O=C([O-])[O-].[K+]",
+                    "catalyst": "c1ccc([P](c2ccccc2)(c2ccccc2)[Pd]([P](c2ccccc2)(c2ccccc2)c2ccccc2)([P](c2ccccc2)(c2ccccc2)c2ccccc2)[P](c2ccccc2)(c2ccccc2)c2ccccc2)cc1",
+                    "prob": 0.46309254052176385
+                },
+                {
+                    "temperature": 87.7403335571289,
+                    "solvent": "Cc1ccccc1.CCO",
+                    "reagent": "O=C([O-])[O-].[Na+]",
+                    "catalyst": "c1ccc([P](c2ccccc2)(c2ccccc2)[Pd]([P](c2ccccc2)(c2ccccc2)c2ccccc2)([P](c2ccccc2)(c2ccccc2)c2ccccc2)[P](c2ccccc2)(c2ccccc2)c2ccccc2)cc1",
+                    "prob": 0.27142698328422893
+                },
+                {
+                    "temperature": 89.00108337402344,
+                    "solvent": "Cc1ccccc1.CCO",
+                    "reagent": "O=C([O-])[O-].[K+]",
+                    "catalyst": "c1ccc([P](c2ccccc2)(c2ccccc2)[Pd]([P](c2ccccc2)(c2ccccc2)c2ccccc2)([P](c2ccccc2)(c2ccccc2)c2ccccc2)[P](c2ccccc2)(c2ccccc2)c2ccccc2)cc1",
+                    "prob": 0.27142698328422893
+                },
+                {
+                    "temperature": 102.21385192871094,
+                    "solvent": "CN(C)C=O",
+                    "reagent": "O=C([O-])[O-].[Na+]",
+                    "catalyst": "c1ccc([P](c2ccccc2)(c2ccccc2)[Pd]([P](c2ccccc2)(c2ccccc2)c2ccccc2)([P](c2ccccc2)(c2ccccc2)c2ccccc2)[P](c2ccccc2)(c2ccccc2)c2ccccc2)cc1",
+                    "prob": 0.46309254052176385
+                }
+            ]
+        }
+    ],
+    "CC(C)(C)c1ccc(S(=O)(=O)N(C(=O)Cc2ccccc2)S(C)(=O)=O)cc1": [
+        {
+            "CS(N)(=O)=O.CC(C)(C)c1ccc(S(=O)(=O)Cl)cc1>>CC(C)(C)c1ccc(S(=O)(=O)NS(C)(=O)=O)cc1": [
+                {
+                    "temperature": 25.715185165405273,
+                    "solvent": "",
+                    "reagent": "[Na+].[OH-]",
+                    "catalyst": "",
+                    "prob": 0.9986765627249978
+                },
+                {
+                    "temperature": 23.29251480102539,
+                    "solvent": "",
+                    "reagent": "c1ccncc1",
+                    "catalyst": "",
+                    "prob": 0.9994683229551592
+                },
+                {
+                    "temperature": 43.91218948364258,
+                    "solvent": "",
+                    "reagent": "[K+].[OH-]",
+                    "catalyst": "",
+                    "prob": 0.9986765627249978
+                },
+                {
+                    "temperature": 13.042747497558594,
+                    "solvent": "ClCCl",
+                    "reagent": "CCN(CC)CC",
+                    "catalyst": "",
+                    "prob": 0.9998078065469477
+                },
+                {
+                    "temperature": 14.568052291870117,
+                    "solvent": "ClCCl",
+                    "reagent": "c1ccncc1",
+                    "catalyst": "",
+                    "prob": 0.9994949284390608
+                }
+            ]
+        },
+        {
+            "CC(C)(C)c1ccc(S(=O)(=O)NS(C)(=O)=O)cc1.O=C(Cl)Cc1ccccc1>>CC(C)(C)c1ccc(S(=O)(=O)N(C(=O)Cc2ccccc2)S(C)(=O)=O)cc1": [
+                {
+                    "temperature": 18.760902404785156,
+                    "solvent": "ClCCl",
+                    "reagent": "",
+                    "catalyst": "",
+                    "prob": 0.9818362318789564
+                },
+                {
+                    "temperature": 23.166053771972656,
+                    "solvent": "C1CCOC1",
+                    "reagent": "",
+                    "catalyst": "",
+                    "prob": 0.9884155797680787
+                },
+                {
+                    "temperature": 37.63112258911133,
+                    "solvent": "Cc1ccccc1",
+                    "reagent": "",
+                    "catalyst": "",
+                    "prob": 0.963761533765541
+                },
+                {
+                    "temperature": 13.433113098144531,
+                    "solvent": "ClCCl",
+                    "reagent": "CCN(CC)CC",
+                    "catalyst": "",
+                    "prob": 0.9862381444897824
+                },
+                {
+                    "temperature": 15.294031143188477,
+                    "solvent": "ClCCl",
+                    "reagent": "CN(C)c1ccncc1",
+                    "catalyst": "",
+                    "prob": 0.9856015120787999
+                }
+            ]
+        }
+    ],
+    "CS(=O)(=O)N(S(C)(=O)=O)S(=O)(=O)c1ccccc1": [
+        {
+            "CS(N)(=O)=O.CS(=O)(=O)Cl>>CS(=O)(=O)NS(C)(=O)=O": [
+                {
+                    "temperature": 31.196035385131836,
+                    "solvent": "",
+                    "reagent": "[Na+].[OH-]",
+                    "catalyst": "",
+                    "prob": 0.9956130678512866
+                },
+                {
+                    "temperature": 28.406259536743164,
+                    "solvent": "O",
+                    "reagent": "[Na+].[OH-]",
+                    "catalyst": "",
+                    "prob": 0.9939996449180313
+                },
+                {
+                    "temperature": 41.149906158447266,
+                    "solvent": "",
+                    "reagent": "[K+].[OH-]",
+                    "catalyst": "",
+                    "prob": 0.9956130678512866
+                },
+                {
+                    "temperature": 32.37124252319336,
+                    "solvent": "",
+                    "reagent": "c1ccncc1",
+                    "catalyst": "",
+                    "prob": 0.9998710954993539
+                },
+                {
+                    "temperature": 28.85141372680664,
+                    "solvent": "O",
+                    "reagent": "[OH-].[Na+]",
+                    "catalyst": "",
+                    "prob": 0.9939996449180313
+                }
+            ]
+        },
+        {
+            "CS(=O)(=O)NS(C)(=O)=O.O=S(=O)(Cl)c1ccccc1>>CS(=O)(=O)N(S(C)(=O)=O)S(=O)(=O)c1ccccc1": [
+                {
+                    "temperature": 104.16893768310547,
+                    "solvent": "",
+                    "reagent": "[Na+].[OH-]",
+                    "catalyst": "",
+                    "prob": 0.6046762106015556
+                },
+                {
+                    "temperature": 30.850059509277344,
+                    "solvent": "C1CCOC1",
+                    "reagent": "[H-].[Na+]",
+                    "catalyst": "",
+                    "prob": 0.6532054871738151
+                },
+                {
+                    "temperature": 45.25770950317383,
+                    "solvent": "CN(C)C=O",
+                    "reagent": "[H-].[Na+]",
+                    "catalyst": "",
+                    "prob": 0.7866157469142023
+                },
+                {
+                    "temperature": 159.5038604736328,
+                    "solvent": "",
+                    "reagent": "",
+                    "catalyst": "",
+                    "prob": 0.7279890125394686
+                },
+                {
+                    "temperature": 127.01671600341797,
+                    "solvent": "",
+                    "reagent": "[K+].[OH-]",
+                    "catalyst": "",
+                    "prob": 0.6046762106015556
+                }
+            ]
+        }
+    ],
+    "CS(=O)(=O)N(C(=O)O)S(=O)(=O)c1ccc(Br)cc1": [
+        {
+            "CS(N)(=O)=O.O=S(=O)(Cl)c1ccc(Br)cc1>>CS(=O)(=O)NS(=O)(=O)c1ccc(Br)cc1": [
+                {
+                    "temperature": 30.64776611328125,
+                    "solvent": "",
+                    "reagent": "[Na+].[OH-]",
+                    "catalyst": "",
+                    "prob": 0.9981683418872196
+                },
+                {
+                    "temperature": 28.01357650756836,
+                    "solvent": "",
+                    "reagent": "c1ccncc1",
+                    "catalyst": "",
+                    "prob": 0.9995796023502556
+                },
+                {
+                    "temperature": 50.76747512817383,
+                    "solvent": "",
+                    "reagent": "[K+].[OH-]",
+                    "catalyst": "",
+                    "prob": 0.9981683418872196
+                },
+                {
+                    "temperature": 12.903478622436523,
+                    "solvent": "ClCCl",
+                    "reagent": "CCN(CC)CC",
+                    "catalyst": "",
+                    "prob": 0.9998673506593483
+                },
+                {
+                    "temperature": 14.845638275146484,
+                    "solvent": "ClCCl",
+                    "reagent": "c1ccncc1",
+                    "catalyst": "",
+                    "prob": 0.9994466994960658
+                }
+            ]
+        },
+        {
+            "CS(=O)(=O)NS(=O)(=O)c1ccc(Br)cc1.N.N.O=C(O)O>>CS(=O)(=O)N(C(=O)O)S(=O)(=O)c1ccc(Br)cc1": [
+                {
+                    "temperature": 69.92997741699219,
+                    "solvent": "",
+                    "reagent": "",
+                    "catalyst": "",
+                    "prob": 0.3790684285898741
+                }
+            ]
+        }
+    ]
+}
