@@ -177,10 +177,6 @@ def largest_temp_groups(temp_groups, num=5):
     value is a set of reactions in that range.
     Returns a list of dicts.
     """
-    # Function to get the length of the list value in a dictionary
-    def get_list_length(d):
-        return len(next(iter(d.values())))
-
     # Sorting the list of dictionaries by the length of the lists in descending order
     # sorted_dict_values = sorted(my_dict.items(), key=lambda item: item[1])
 
@@ -274,9 +270,61 @@ def wellplate_sequence(filtered_pathways):
     return wellplates
 
 
+def top_sequences(filtered_pathways, num):
+    """
+    Returns a list of "num" possible wellplate sequences, where each sequence is a
+    dict. Each wellplate sequence is generated from one of the top "num" largest
+    temp_groups from the first iteration.
+    """
+    # initialize variables
+    rxns_top_conditions, uncompleted, rxns_to_pathways = transform_data(filtered_pathways)
+    completed = set()
+    # wellplates = {}
+    top_seqs = []
+
+    # first find the top "num" largest temp_groups from the first iteration
+    next_group = make_next_group(completed, uncompleted, rxns_to_pathways)
+    temp_groups = temperature_groups(next_group, rxns_top_conditions)
+    top_temp_groups = largest_temp_groups(temp_groups, num)
+
+    # make a separate path for each of these groups
+    for top_temp_group in top_temp_groups:
+        # initialize new wellplates dict for each temperature group
+        plate_id = 0
+        wellplates = {}
+        recent_group = set()
+        # top_temp_group is a tuple where 1st elem is the temp range
+        # and 2nd elem is a set of reactions
+        temp_range, recent_group = top_temp_group
+        # be careful of mutation!! update_step_2 doesn't mutate the original completed and uncompleted sets
+        new_completed, new_uncompleted = update_step_2(recent_group, completed, uncompleted)
+        recent_group_with_conditions = get_conditions(recent_group, rxns_top_conditions)
+        wellplate_key = f'{plate_id}_{temp_range}'
+        wellplates[wellplate_key] = recent_group_with_conditions
+        plate_id += 1
+
+        # continue sorting reactions into wellplates until uncompleted is empty
+        while new_uncompleted:
+            next_group = make_next_group(new_completed, new_uncompleted, rxns_to_pathways)
+            # print(f'next_group: {next_group}')
+            # temp_groups is a list of dicts??
+            temp_groups = temperature_groups(next_group, rxns_top_conditions)
+            # print(f'temp_groups: {temp_groups}')
+            temp_range, recent_group, new_completed, new_uncompleted = update_step(temp_groups, new_completed,new_uncompleted)
+            recent_group_with_conditions = get_conditions(recent_group, rxns_top_conditions)
+            wellplate_key = f'{plate_id}_{temp_range}'
+            wellplates[wellplate_key] = recent_group_with_conditions
+            plate_id += 1
+
+        top_seqs.append(wellplates)
+
+    return top_seqs
+
+
 def find_all_paths(filtered_pathways):
     """
-
+    Returns a list of all possible wellplate sequences, given that the top specified num of
+    largest groups are expanded into paths at each iteration.
     """
     # first transform data
     rxns_top_conditions, uncompleted, rxns_to_pathways = transform_data(filtered_pathways)
@@ -321,13 +369,9 @@ def find_all_paths(filtered_pathways):
             # print(f'agenda path: {agenda_path}')
 
             if new_uncompleted == set():
-                completed_paths.append(new_state)
-                if len(completed_paths) == 1:
-                    print(completed_paths)
+                completed_paths.append(new_state[0])
             else:
                 agenda.append(new_state)
-                if len(completed_paths) == 10:
-                    print(agenda)
 
     return completed_paths
 
@@ -344,6 +388,56 @@ def save_completed_paths(completed_paths, dir, filename):
             json.dump(path, outfile, indent=4)
         print(f'File saved to {filepath}')
         id += 1
+
+
+def iterate_reactions(rxns, products):
+    """
+    Helper function that counts the number of products
+    in a given list of reactions.
+    """
+    update_count = 0
+    # eaxh rxn is a dict with one k,v pair
+    for rxn in rxns:
+        for k in rxn.keys():
+            if k.split('>>')[1] in products:
+                update_count += 1
+    return update_count
+
+def count_products(wellplates, num, products):
+    """
+    Helper function that returns the number of products produced in the
+    first "num" wellplates of a sequence.
+    """
+    count = 0
+    for i in range(1, num+1):
+        for k in wellplates.keys():
+            if k.startswith(str(i)):
+                rxns = wellplates[k]
+                update_count = iterate_reactions(rxns, products)
+                count += update_count
+                break
+    return count
+
+def max_count_sequence(dir, filename, sequences, num, filtered_pathways):
+    """
+    Returns the ID of the wellplate sequence with the greatest number
+    of products produced in the first "num" wellplates.
+    """
+    products = set(filtered_pathways.keys())
+    product_counts = []
+
+    for id in range(0, sequences+1):
+        filepath = os.path.join(dir, filename)
+        filepath += f'_{id}'
+        with open(filepath, 'r') as jsonfile:
+            wellplates = json.load(jsonfile)
+        # print(f'wellplates: {wellplates}')
+        count = count_products(wellplates, num, products)
+        product_counts.append(count)
+
+    id_of_greatest = product_counts.index(max(product_counts)) + 1
+    max_count = max(product_counts)
+    return id_of_greatest, max_count, product_counts
 
 
 if __name__ == "__main__":
@@ -400,6 +494,18 @@ if __name__ == "__main__":
     inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_filtered_pathways.json'
     with open(inp_filepath, 'r') as jsonfile:
         filtered_pathways = json.load(jsonfile)
+
+    # inp_filepath = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/test_cases/pathfinding_small.json"
+    # with open(inp_filepath, 'r') as jsonfile:
+    #     filtered_pathways = json.load(jsonfile)
+
+    top_seqs = top_sequences(filtered_pathways, 5)
+    for i, top_seq in enumerate(top_seqs):
+        products = set(filtered_pathways.keys())
+        count = count_products(top_seq, 9, products)
+        print(f'{i}: {count}')
+    # print(f'top_seqs: {top_seqs}')
+
     # rxns_top_conditions, all_rxns, rxns_to_pathways = transform_data(filtered_pathways)
     # print(f'rxns_top_conditions: {rxns_top_conditions[]}')
     # print(f'all_rxns: {all_rxns}')
@@ -413,8 +519,16 @@ if __name__ == "__main__":
     # print(f'File saved to {out_filepath}')
 
     # find all paths
-    completed_paths = find_all_paths(filtered_pathways)
-    print(completed_paths[0])
+    # completed_paths = find_all_paths(filtered_pathways)
+    # print(completed_paths)
+
+
+    # dir = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/test_cases/"
+    # max = max_count_sequence(dir, "pathfinding_small_path", 44, 5, filtered_pathways)
+    # print(max)
+
+
+    # save_completed_paths(completed_paths, dir, "pathfinding_small_path")
 
     def total_elements(dictionary):
         total = 0
