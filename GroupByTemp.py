@@ -1,5 +1,6 @@
 # imports
 import json
+import os
 
 # input data is a dictionary where keys are product SMILES strings
 # and values are a list of reactions, each of which is a dictionary
@@ -137,7 +138,6 @@ def sort_rxns_by_temp(next_group, rxns_top_conditions):
 
     # Sort the list of tuples by temperature
     sorted_reactions = sorted(reactions_list, key=lambda x: x[1])
-    print(f'sorted rxns: {sorted_reactions}')
     return sorted_reactions
 
 
@@ -148,7 +148,6 @@ def temperature_groups(next_group, rxns_top_conditions):
     mapping a temperature range to a set of reactions within that range.
     """
     sorted_next_group = sort_rxns_by_temp(next_group, rxns_top_conditions)
-    print()
     temp_groups = {}
     current_group = set()
     current_temp = None
@@ -170,13 +169,37 @@ def temperature_groups(next_group, rxns_top_conditions):
     return temp_groups
 
 
+def largest_temp_groups(temp_groups, num=5):
+    """
+    Helper function that returns up to the top [num] (default 5)
+    largest temperature groups.
+    temp_groups is a dict where each key is a temperature range and each
+    value is a set of reactions in that range.
+    Returns a list of dicts.
+    """
+    # Function to get the length of the list value in a dictionary
+    def get_list_length(d):
+        return len(next(iter(d.values())))
+
+    # Sorting the list of dictionaries by the length of the lists in descending order
+    # sorted_dict_values = sorted(my_dict.items(), key=lambda item: item[1])
+
+    sorted_list = sorted(temp_groups.items(), key=lambda item: len(item[1]), reverse=True)
+
+    # Selecting the top five dictionaries with the largest lists
+    top_five = sorted_list[:5]
+
+    return top_five
+
+
 def update_step(temp_groups, completed, uncompleted):
     """
     Helper function that selects the biggest temperature group and mutates
     the completed and uncompleted sets to reflect that these reactions
     have been performed.
-    Returns a 3-elem tuple: a list of the most recently completed reactions;
-    updated completed set; updated uncompleted set.
+    Returns a 4-elem tuple: a string of the temp range; a list of the most
+    recently completed reactions; an updated completed set;
+    an updated uncompleted set.
     """
     temp_range = None
     largest_group = []
@@ -190,6 +213,33 @@ def update_step(temp_groups, completed, uncompleted):
     completed.update(largest_group)
     uncompleted.difference_update(largest_group)
     return temp_range, list(largest_group), completed, uncompleted
+
+
+def update_step_2(recent_group, completed, uncompleted):
+    """
+    Helper function that takes in a set of reaction SMILES to be performed,
+    a set of completed reactions, and a of uncompleted reactions.
+    Returns a 2-elem tuple of two new (not mutated) completed and uncompleted sets.
+    """
+    new_completed = recent_group | completed
+    new_uncompleted = uncompleted - recent_group
+    return new_completed, new_uncompleted
+
+
+def get_conditions(recent_group, rxns_top_conditions):
+    """
+    Helper function that takes as input a list of reactions SMILES
+    and a dict of top reaction conditions.
+    Returns a list where each element is a dict with one key-value pair,
+    the key being the reaction SMILES and the value being another dict
+    containing the optimal reaction conditions.
+    """
+    recent_group_with_conditions = []
+    for reaction in recent_group:
+        rxn_with_conditions = {}
+        rxn_with_conditions[reaction] = rxns_top_conditions[reaction]
+        recent_group_with_conditions.append(rxn_with_conditions)
+    return recent_group_with_conditions
 
 
 # initially uncompleted is the same as all_rxns
@@ -210,23 +260,90 @@ def wellplate_sequence(filtered_pathways):
 
     # continue sorting reactions into wellplates until uncompleted is empty
     while uncompleted:
-        print(f'plate ID: {plate_id}')
         next_group = make_next_group(completed, uncompleted, rxns_to_pathways)
         # print(f'next_group: {next_group}')
-        # temp_groups is a dict
+        # temp_groups is a list of dicts??
         temp_groups = temperature_groups(next_group, rxns_top_conditions)
         # print(f'temp_groups: {temp_groups}')
         temp_range, recent_group, completed, uncompleted = update_step(temp_groups, completed, uncompleted)
-        recent_group_with_conditions = []
-        for reaction in recent_group:
-            rxn_with_conditions = {}
-            rxn_with_conditions[reaction] = rxns_top_conditions[reaction]
-            recent_group_with_conditions.append(rxn_with_conditions)
+        recent_group_with_conditions = get_conditions(recent_group, rxns_top_conditions)
         wellplate_key = f'{plate_id}_{temp_range}'
         wellplates[wellplate_key] = recent_group_with_conditions
         plate_id += 1
 
     return wellplates
+
+
+def find_all_paths(filtered_pathways):
+    """
+
+    """
+    # first transform data
+    rxns_top_conditions, uncompleted, rxns_to_pathways = transform_data(filtered_pathways)
+
+    # initialize variables and start state
+    wellplates = {}
+    completed = set()
+    start = (wellplates, completed, uncompleted)
+
+    # initialize list to store paths that are being extended
+    agenda = [start]
+    agenda_path = 0
+
+    # initialize list to store paths that are completed
+    completed_paths = []
+
+    # keep looping while there are paths with a non-empty uncompleted set
+    while agenda:
+        this_path = agenda.pop(0)
+        wellplates, completed, uncompleted = this_path
+        next_group = make_next_group(completed, uncompleted, rxns_to_pathways)
+        temp_groups = temperature_groups(next_group, rxns_top_conditions)
+        # a list of 2-elem tuples of the format (temp_range, {set of rxns})
+        neighbors = largest_temp_groups(temp_groups)
+
+        # try building paths with each of the neighbors
+        for neighbor in neighbors:
+            temp_range, recent_group = neighbor
+            # this function returns new completed and uncompleted sets to avoid mutating the original
+            new_completed, new_uncompleted = update_step_2(recent_group, completed, uncompleted)
+            # make a copy to avoid mutation
+            updated_wellplates = {k:v for k,v in this_path[0].items()}
+            # returns a list where each element is a dict mapping a reation SMILES to a dict
+            # of its optimal conditions
+            recent_group_with_conditions = get_conditions(recent_group, rxns_top_conditions)
+            new_plate_id = len(updated_wellplates) + 1
+            wellplate_key = f'{new_plate_id}_{temp_range}'
+            updated_wellplates[wellplate_key] = recent_group_with_conditions
+            new_state = (updated_wellplates, new_completed, new_uncompleted)
+
+            agenda_path += 1
+            # print(f'agenda path: {agenda_path}')
+
+            if new_uncompleted == set():
+                completed_paths.append(new_state)
+                if len(completed_paths) == 1:
+                    print(completed_paths)
+            else:
+                agenda.append(new_state)
+                if len(completed_paths) == 10:
+                    print(agenda)
+
+    return completed_paths
+
+
+def save_completed_paths(completed_paths, dir, filename):
+    """
+    Saves each completed path to a separate file.
+    """
+    id = 0
+    for path in completed_paths:
+        no_dir_filepath = f'{filename}_{id}'
+        filepath = os.path.join(dir, no_dir_filepath)
+        with open(filepath, 'w') as outfile:
+            json.dump(path, outfile, indent=4)
+        print(f'File saved to {filepath}')
+        id += 1
 
 
 if __name__ == "__main__":
@@ -243,6 +360,24 @@ if __name__ == "__main__":
     # print(largest_group)
     # print(completed)
     # print(uncompleted)
+
+    # largest temp groups
+    # temp_groups = {
+    # '15_25': {'rxn1', 'rxn2', 'rxn3'},
+    # '28_38': {'rxn4', 'rxn5'},
+    # '45_55': {'rxn6', 'rxn7', 'rxn8', 'rxn9'},
+    # '60_70': {'rxn10', 'rxn11'},
+    # '75_85': {'rxn12'},
+    # '90_100': {'rxn13', 'rxn14', 'rxn15', 'rxn16', 'rxn17'}
+    # }
+
+    # result = largest_temp_groups(temp_groups)
+    # print(f'result: {result}')
+    # result = [('90_100', {'rxn17', 'rxn14', 'rxn16', 'rxn15', 'rxn13'}),
+    #         ('45_55', {'rxn9', 'rxn6', 'rxn8', 'rxn7'}),
+    #         ('15_25', {'rxn1', 'rxn3', 'rxn2'}),
+    #         ('28_38', {'rxn5', 'rxn4'}),
+    #         ('60_70', {'rxn11', 'rxn10'})]
 
     # main function test case
     # wellplates = wellplate_sequence(data)
@@ -262,9 +397,9 @@ if __name__ == "__main__":
 
     # wellplates time!!
 
-    # inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_filtered_pathways.json'
-    # with open(inp_filepath, 'r') as jsonfile:
-    #     filtered_pathways = json.load(jsonfile)
+    inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_filtered_pathways.json'
+    with open(inp_filepath, 'r') as jsonfile:
+        filtered_pathways = json.load(jsonfile)
     # rxns_top_conditions, all_rxns, rxns_to_pathways = transform_data(filtered_pathways)
     # print(f'rxns_top_conditions: {rxns_top_conditions[]}')
     # print(f'all_rxns: {all_rxns}')
@@ -276,6 +411,10 @@ if __name__ == "__main__":
     # with open(out_filepath, 'w') as outfile:
     #     json.dump(wellplates_dict, outfile, indent=4)
     # print(f'File saved to {out_filepath}')
+
+    # find all paths
+    completed_paths = find_all_paths(filtered_pathways)
+    print(completed_paths[0])
 
     def total_elements(dictionary):
         total = 0
