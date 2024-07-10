@@ -141,32 +141,75 @@ def sort_rxns_by_temp(next_group, rxns_top_conditions):
     return sorted_reactions
 
 
+# def temperature_groups(next_group, rxns_top_conditions):
+    # """
+    # Helper function that takes in a list of unsorted uncompleted reactions.
+    # Returns a list of dicts, where each dict contains one key-value pair
+    # mapping a temperature range to a set of reactions within that range.
+    # """
+    # sorted_next_group = sort_rxns_by_temp(next_group, rxns_top_conditions)
+    # temp_groups = {}
+    # current_group = set()
+    # current_temp = None
+
+    # for rxn, temp in sorted_next_group:
+    #     if current_temp is None:
+    #         current_group.add(rxn)
+    #         current_temp = temp
+    #     elif (temp - current_temp) < 10:
+    #         current_group.add(rxn)
+    #     else:
+    #         temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
+    #         # reinitialize current_group to only contain the current reaction
+    #         current_group = {rxn}
+    #         # reinitialize minimum temp at start of new group
+    #         current_temp = temp
+    # temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
+
+    # return temp_groups
+
+
 def temperature_groups(next_group, rxns_top_conditions):
     """
-    Helper function that takes in a list of unsorted uncompleted reactions.
+    Helper function that is similar to the one above, except it uses recursion
+    to generate every possible temperature group.
     Returns a list of dicts, where each dict contains one key-value pair
     mapping a temperature range to a set of reactions within that range.
     """
     sorted_next_group = sort_rxns_by_temp(next_group, rxns_top_conditions)
     temp_groups = {}
-    current_group = set()
-    current_temp = None
 
-    for rxn, temp in sorted_next_group:
-        if current_temp is None:
-            current_group.add(rxn)
-            current_temp = temp
-        elif (temp - current_temp) < 10:
-            current_group.add(rxn)
-        else:
-            temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
-            # reinitialize current_group to only contain the current reaction
-            current_group = {rxn}
-            # reinitialize minimum temp at start of new group
-            current_temp = temp
-    temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
+    def temp_helper(sorted_next_group, temp_groups):
+        """
+        Nested helper function that takes in a sorted group
+        """
+        # initialize variables
+        current_group = set()
+        current_temp = None
+        # base case: doesn't mutate temp_groups because there's no temp groups
+        # just return temp_groups
+        if not sorted_next_group:
+            return temp_groups
+        # recursive case: first build up temp groups for the passed in sorted group
+        for rxn, temp in sorted_next_group:
+            if current_temp is None:
+                current_group.add(rxn)
+                current_temp = temp
+            elif (temp - current_temp) < 10:
+                current_group.add(rxn)
+            else:
+                temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
+                # reinitialize current_group to only contain the current reaction
+                current_group = {rxn}
+                # reinitialize minimum temp at start of new group
+                current_temp = temp
+        temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
+        # then build up temp groups for every reaction except the first one in the
+        # current sorted group
+        return temp_helper(sorted_next_group[1:], temp_groups)
 
-    return temp_groups
+    return temp_helper(sorted_next_group, temp_groups)
+
 
 
 def largest_temp_groups(temp_groups, num=5):
@@ -303,20 +346,55 @@ def top_sequences(filtered_pathways, num):
         wellplates[wellplate_key] = recent_group_with_conditions
         plate_id += 1
 
-        # continue sorting reactions into wellplates until uncompleted is empty
-        while new_uncompleted:
-            next_group = make_next_group(new_completed, new_uncompleted, rxns_to_pathways)
-            # print(f'next_group: {next_group}')
-            # temp_groups is a list of dicts??
-            temp_groups = temperature_groups(next_group, rxns_top_conditions)
-            # print(f'temp_groups: {temp_groups}')
-            temp_range, recent_group, new_completed, new_uncompleted = update_step(temp_groups, new_completed,new_uncompleted)
+        # actually helpp now we're going to branch on 2nd iteration—functional programmer time
+        # for each top_temp_group, branch into 5 more groups
+        next_group = make_next_group(new_completed, new_uncompleted, rxns_to_pathways)
+        temp_groups = temperature_groups(next_group, rxns_top_conditions)
+        next_top_temp_groups = largest_temp_groups(temp_groups, num)
+        # create a separate path for each group
+        for next_top_temp_group in next_top_temp_groups:
+            plate_id = 1
+            # make a copy to avoid mutation
+            new_wellplates = wellplates.copy()
+            temp_range, recent_group = next_top_temp_group
+            # create new completed and uncompleted sets for the new path
+            next_completed, next_uncompleted = update_step_2(recent_group, new_completed, new_uncompleted)
             recent_group_with_conditions = get_conditions(recent_group, rxns_top_conditions)
             wellplate_key = f'{plate_id}_{temp_range}'
-            wellplates[wellplate_key] = recent_group_with_conditions
+            new_wellplates[wellplate_key] = recent_group_with_conditions
             plate_id += 1
 
-        top_seqs.append(wellplates)
+            # let's branch at 3rd iteration for fun!
+            next_group = make_next_group(next_completed, next_uncompleted, rxns_to_pathways)
+            temp_groups = temperature_groups(next_group, rxns_top_conditions)
+            next_top_temp_groups_2 = largest_temp_groups(temp_groups, num)
+            # create a separate path for each group
+            for next_top_temp_group_2 in next_top_temp_groups_2:
+                plate_id = 2
+                # make a copy to avoid mutation
+                new_wellplates_2 = new_wellplates.copy()
+                temp_range, recent_group = next_top_temp_group_2
+                # create new completed and uncompleted sets for the new path
+                next_completed_2, next_uncompleted_2 = update_step_2(recent_group, next_completed, next_uncompleted)
+                recent_group_with_conditions = get_conditions(recent_group, rxns_top_conditions)
+                wellplate_key = f'{plate_id}_{temp_range}'
+                new_wellplates_2[wellplate_key] = recent_group_with_conditions
+                plate_id += 1
+
+                # continue sorting reactions into wellplates until uncompleted is empty
+                while next_uncompleted_2:
+                    next_group = make_next_group(next_completed_2, next_uncompleted_2, rxns_to_pathways)
+                    # print(f'next_group: {next_group}')
+                    # temp_groups is a list of dicts??
+                    temp_groups = temperature_groups(next_group, rxns_top_conditions)
+                    # print(f'temp_groups: {temp_groups}')
+                    temp_range, recent_group, next_completed_2, next_uncompleted_2 = update_step(temp_groups, next_completed_2, next_uncompleted_2)
+                    recent_group_with_conditions = get_conditions(recent_group, rxns_top_conditions)
+                    wellplate_key = f'{plate_id}_{temp_range}'
+                    new_wellplates_2[wellplate_key] = recent_group_with_conditions
+                    plate_id += 1
+
+                top_seqs.append(new_wellplates_2)
 
     return top_seqs
 
@@ -443,9 +521,14 @@ def max_count_sequence(dir, filename, sequences, num, filtered_pathways):
 if __name__ == "__main__":
     # helper function test cases
 
+    # inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/test_cases/pathfinding_small.json'
+    # with open(inp_filepath, 'r') as jsonfile:
+    #     data = json.load(jsonfile)
+
     # rxns_top_conditions, uncompleted, rxns_to_pathways = transform_data(data)
     # completed = {'B(C1=CC=CC=C1)(O)O.Nc1ncccn1>>c1ccc(Nc2ncccn2)cc1'}
-    # uncompleted.remove('B(C1=CC=CC=C1)(O)O.Nc1ncccn1>>c1ccc(Nc2ncccn2)cc1')
+    # # uncompleted.remove('B(C1=CC=CC=C1)(O)O.Nc1ncccn1>>c1ccc(Nc2ncccn2)cc1')
+    # completed = {}
     # next_group = make_next_group(completed, uncompleted, rxns_to_pathways)
     # temp_groups = temperature_groups(next_group, rxns_top_conditions)
     # print(temp_groups)
@@ -499,11 +582,14 @@ if __name__ == "__main__":
     # with open(inp_filepath, 'r') as jsonfile:
     #     filtered_pathways = json.load(jsonfile)
 
-    top_seqs = top_sequences(filtered_pathways, 5)
-    for i, top_seq in enumerate(top_seqs):
-        products = set(filtered_pathways.keys())
-        count = count_products(top_seq, 9, products)
-        print(f'{i}: {count}')
+    # top_seqs = top_sequences(filtered_pathways, 5)
+    # counts = []
+    # for i, top_seq in enumerate(top_seqs):
+    #     products = set(filtered_pathways.keys())
+    #     count = count_products(top_seq, 6, products)
+    #     counts.append(count)
+    #     print(f'{i}: {count}')
+    # print(max(counts))
     # print(f'top_seqs: {top_seqs}')
 
     # rxns_top_conditions, all_rxns, rxns_to_pathways = transform_data(filtered_pathways)
