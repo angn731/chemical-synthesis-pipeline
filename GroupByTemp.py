@@ -1,6 +1,7 @@
 # imports
 import json
 import os
+import numpy as np
 
 # input data is a dictionary where keys are product SMILES strings
 # and values are a list of reactions, each of which is a dictionary
@@ -141,75 +142,122 @@ def sort_rxns_by_temp(next_group, rxns_top_conditions):
     return sorted_reactions
 
 
-# def temperature_groups(next_group, rxns_top_conditions):
-    # """
-    # Helper function that takes in a list of unsorted uncompleted reactions.
-    # Returns a list of dicts, where each dict contains one key-value pair
-    # mapping a temperature range to a set of reactions within that range.
-    # """
-    # sorted_next_group = sort_rxns_by_temp(next_group, rxns_top_conditions)
-    # temp_groups = {}
-    # current_group = set()
-    # current_temp = None
-
-    # for rxn, temp in sorted_next_group:
-    #     if current_temp is None:
-    #         current_group.add(rxn)
-    #         current_temp = temp
-    #     elif (temp - current_temp) < 10:
-    #         current_group.add(rxn)
-    #     else:
-    #         temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
-    #         # reinitialize current_group to only contain the current reaction
-    #         current_group = {rxn}
-    #         # reinitialize minimum temp at start of new group
-    #         current_temp = temp
-    # temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
-
-    # return temp_groups
+def log_bins(sorted_next_group, num_bins=8):
+    """
+    Helper function that takes in a list of unsorted uncompleted reactions.
+    next_group is a list of reaction SMILES.
+    Returns a list of dicts, where each dict contains one key-value pair
+    mapping a temperature range to a set of reactions within that range.
+    """
+    min_temp = min(sorted_next_group, key=lambda x: x[1])[1]
+    max_temp = max(sorted_next_group, key=lambda x: x[1])[1]
+    # +273 converts into Kelvin and -273 at end converts back into Celsius; bins get bigger
+    # as temp increases since this is a logarithmic scale
+    bin_edges = np.logspace(np.log10(min_temp+273), np.log10(max_temp+273), num_bins+1) - 273
+    return bin_edges
 
 
 def temperature_groups(next_group, rxns_top_conditions):
     """
-    Helper function that is similar to the one above, except it uses recursion
-    to generate every possible temperature group.
-    Returns a list of dicts, where each dict contains one key-value pair
-    mapping a temperature range to a set of reactions within that range.
+    Creates new logarithmic bins at all iterations.
     """
+    # there will be 125 of these
+    rxns_set = set(next_group)
     sorted_next_group = sort_rxns_by_temp(next_group, rxns_top_conditions)
+    bin_edges = log_bins(sorted_next_group)
     temp_groups = {}
+    # initialize temperature groups in the dict
+    for i in range(len(bin_edges)-1):
+        min_temp = int(float(bin_edges[i]))
+        max_temp = int(float(bin_edges[i+1]))
+        temp_groups[f'{min_temp}_{max_temp}'] = set()
+    for rxn, temp in sorted_next_group:
+        for temp_range, rxns in temp_groups.items():
+            min_temp = int(temp_range.split('_')[0])
+            max_temp = int(temp_range.split('_')[1])
+            if temp < max_temp and temp >= min_temp:
+                rxns.add(rxn)
+                rxns_set.remove(rxn)
 
-    def temp_helper(sorted_next_group, temp_groups):
-        """
-        Nested helper function that takes in a sorted group
-        """
-        # initialize variables
-        current_group = set()
-        current_temp = None
-        # base case: doesn't mutate temp_groups because there's no temp groups
-        # just return temp_groups
-        if not sorted_next_group:
-            return temp_groups
-        # recursive case: first build up temp groups for the passed in sorted group
-        for rxn, temp in sorted_next_group:
-            if current_temp is None:
-                current_group.add(rxn)
-                current_temp = temp
-            elif (temp - current_temp) < 10:
-                current_group.add(rxn)
-            else:
-                temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
-                # reinitialize current_group to only contain the current reaction
-                current_group = {rxn}
-                # reinitialize minimum temp at start of new group
-                current_temp = temp
-        temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
-        # then build up temp groups for every reaction except the first one in the
-        # current sorted group
-        return temp_helper(sorted_next_group[1:], temp_groups)
+    # check if rxns_set contains more reactions
+    if rxns_set != set():
+        for rxn in rxns_set:
+            min_temp = int(rxns_top_conditions[rxn]["temperature"])
+            max_temp = min_temp + 10
+            temp_groups[f'{min_temp}_{max_temp}'] = {rxn}
 
-    return temp_helper(sorted_next_group, temp_groups)
+    # may contain keys mapped to empty sets
+    return temp_groups
 
+
+# def temperature_groups(next_group, rxns_top_conditions):
+#     """
+#     Helper function that takes in a list of unsorted uncompleted reactions.
+#     Returns a list of dicts, where each dict contains one key-value pair
+#     mapping a temperature range of 10 degrees to a set of reactions within that range.
+#     """
+#     sorted_next_group = sort_rxns_by_temp(next_group, rxns_top_conditions)
+#     temp_groups = {}
+#     current_group = set()
+#     current_temp = None
+
+#     for rxn, temp in sorted_next_group:
+#         if current_temp is None:
+#             current_group.add(rxn)
+#             current_temp = temp
+#         elif (temp - current_temp) < 10:
+#             current_group.add(rxn)
+#         else:
+#             temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
+#             # reinitialize current_group to only contain the current reaction
+#             current_group = {rxn}
+#             # reinitialize minimum temp at start of new group
+#             current_temp = temp
+#     temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
+
+#     return temp_groups
+
+
+# def temperature_groups(next_group, rxns_top_conditions):
+#     """
+#     Helper function that is similar to the one above, except it uses recursion
+#     to generate every possible temperature group.
+#     Returns a list of dicts, where each dict contains one key-value pair
+#     mapping a temperature range to a set of reactions within that range.
+#     """
+#     sorted_next_group = sort_rxns_by_temp(next_group, rxns_top_conditions)
+#     temp_groups = {}
+
+#     def temp_helper(sorted_next_group, temp_groups):
+#         """
+#         Nested helper function that takes in a sorted group
+#         """
+#         # initialize variables
+#         current_group = set()
+#         current_temp = None
+#         # base case: doesn't mutate temp_groups because there's no temp groups
+#         # just return temp_groups
+#         if not sorted_next_group:
+#             return temp_groups
+#         # recursive case: first build up temp groups for the passed in sorted group
+#         for rxn, temp in sorted_next_group:
+#             if current_temp is None:
+#                 current_group.add(rxn)
+#                 current_temp = temp
+#             elif (temp - current_temp) < 10:
+#                 current_group.add(rxn)
+#             else:
+#                 temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
+#                 # reinitialize current_group to only contain the current reaction
+#                 current_group = {rxn}
+#                 # reinitialize minimum temp at start of new group
+#                 current_temp = temp
+#         temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
+#         # then build up temp groups for every reaction except the first one in the
+#         # current sorted group
+#         return temp_helper(sorted_next_group[1:], temp_groups)
+
+#     return temp_helper(sorted_next_group, temp_groups)
 
 
 def largest_temp_groups(temp_groups, num=5):
@@ -395,6 +443,7 @@ def top_sequences(filtered_pathways, num):
                     plate_id += 1
 
                 top_seqs.append(new_wellplates_2)
+                # print(f'num top_seqs: {len(top_seqs)}')
 
     return top_seqs
 
@@ -530,8 +579,11 @@ if __name__ == "__main__":
     # # uncompleted.remove('B(C1=CC=CC=C1)(O)O.Nc1ncccn1>>c1ccc(Nc2ncccn2)cc1')
     # completed = {}
     # next_group = make_next_group(completed, uncompleted, rxns_to_pathways)
+    # print(next_group)
     # temp_groups = temperature_groups(next_group, rxns_top_conditions)
     # print(temp_groups)
+    # log_temp_groups = log_temperature_groups(next_group, rxns_top_conditions)
+    # print(log_temp_groups)
     # temp_range, largest_group, completed, uncompleted = update_step(temp_groups, completed, uncompleted)
     # print(temp_range)
     # print(largest_group)
@@ -574,9 +626,24 @@ if __name__ == "__main__":
 
     # wellplates time!!
 
-    inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_filtered_pathways.json'
-    with open(inp_filepath, 'r') as jsonfile:
-        filtered_pathways = json.load(jsonfile)
+    # inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_filtered_pathways.json'
+    # with open(inp_filepath, 'r') as jsonfile:
+    #     filtered_pathways = json.load(jsonfile)
+
+    # rxns_top_conditions, uncompleted, rxns_to_pathways = transform_data(filtered_pathways)
+    # completed = {}
+    # next_group = make_next_group(completed, uncompleted, rxns_to_pathways)
+    # log_temp_groups = temperature_groups(next_group, rxns_top_conditions)
+    # print(log_temp_groups)
+    # largest_groups = largest_temp_groups(log_temp_groups)
+    # print(largest_groups)
+    # print([len(rxns) for temp_range, rxns in largest_groups])
+
+    # problematic next_group
+    # next_group = ['Cc1cc(C(=O)Nn2cnnc2)no1.OB(O)c1ccsc1>>Cc1cc(C(=O)N(c2ccsc2)n2cnnc2)no1', 'CO.NC1CCCCC1>>CNC1CCCCC1']
+    # log_temp_groups = temperature_groups(next_group, rxns_top_conditions)
+    # print(log_temp_groups)
+
 
     # inp_filepath = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/test_cases/pathfinding_small.json"
     # with open(inp_filepath, 'r') as jsonfile:
@@ -584,12 +651,25 @@ if __name__ == "__main__":
 
     # top_seqs = top_sequences(filtered_pathways, 5)
     # counts = []
+    # max_count = 0
+    # best_seq = None
     # for i, top_seq in enumerate(top_seqs):
     #     products = set(filtered_pathways.keys())
-    #     count = count_products(top_seq, 6, products)
+    #     count = count_products(top_seq, 5, products)
+    #     if count > max_count:
+    #         max_count = count
+    #         best_seq = top_seq
     #     counts.append(count)
-    #     print(f'{i}: {count}')
+        # print(f'{i}: {count}')
     # print(max(counts))
+    # print(f'best_seq count: {count_products(best_seq, 5, products)}')
+
+    # dir = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols"
+    # filename = f"MFBO_selected_mols_five_plate_seq_{max_count}.json"
+    # filepath = os.path.join(dir, filename)
+    # with open(filepath, 'w') as outfile:
+    #     json.dump(best_seq, outfile, indent=4)
+
     # print(f'top_seqs: {top_seqs}')
 
     # rxns_top_conditions, all_rxns, rxns_to_pathways = transform_data(filtered_pathways)
