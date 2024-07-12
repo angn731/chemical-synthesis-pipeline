@@ -310,13 +310,17 @@ if __name__ == "__main__":
 
 
     # load json file with products and their associated data
-    products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_for_synthesis.json'
-    products_data = read_file(products_path)
-    all_reactions, reaction_pathways = make_synthesis_pathways(products_data)
+    # products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_for_synthesis.json'
+    # products_data = read_file(products_path)
+    # reaction_pathways = make_synthesis_pathways(products_data)[1]
 
-    dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols'
-    file_name = 'MFBO_selected_mols'
-    pathways_with_conditions(dir, file_name, all_reactions, reaction_pathways)
+    # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/synthesis_pathways.json'
+    # with open(out_filepath, 'w') as outfile:
+    #     json.dump(reaction_pathways, outfile, indent=4)
+
+    # dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols'
+    # file_name = 'MFBO_selected_mols'
+    # pathways_with_conditions(dir, file_name, all_reactions, reaction_pathways)
 
 
     # # problematic molecules
@@ -327,37 +331,37 @@ if __name__ == "__main__":
     # print(reaction_pathways)
 
     # test cases cuz pytest isn't working...
-    def test_intermediate_rxn():
-        """
-        Intermediate reaction in synthesis pathway doesn't work -> return None.
-        """
-        molecule = {"Cc1ccc(S(=O)(=O)N(c2ccc(-n3cc(CCCO)nn3)cc2)c2ccccc2C)cc1":
-                    {"HDAC_Docking": ["0.002662945346571803", "-1.26"],
-                    "LogP": ["4.39157551055326", "0.116244274465366"],
-                    "Toxicity": ["1.383194056838727", "0.032358073478579774"],
-                    "similarity": ["0.41583626050085826", 0],
-                    "rank": 4,
-                    "initial_mol": "Cc1ccccc1F",
-                    "templates": [{"_id": "SnAr_ForCl", "reactants": ["Nc1ccc(N)cc1"]},
-                                {"_id": "Sulfonamide", "reactants": ["Cc1ccc(S(=O)(=O)Cl)cc1"]},
-                                {"_id": "ClickChem_aryl_amine2azide", "reactants": ["C#CCCCO"]}]
-                        }
-                    }
-        product = "Cc1ccc(S(=O)(=O)N(c2ccc(-n3cc(CCCO)nn3)cc2)c2ccccc2C)cc1"
-        data = {"HDAC_Docking": ["0.002662945346571803", "-1.26"],
-                    "LogP": ["4.39157551055326", "0.116244274465366"],
-                    "Toxicity": ["1.383194056838727", "0.032358073478579774"],
-                    "similarity": ["0.41583626050085826", 0],
-                    "rank": 4,
-                    "initial_mol": "Cc1ccccc1F",
-                    "templates": [{"_id": "SnAr_ForCl", "reactants": ["Nc1ccc(N)cc1"]},
-                                {"_id": "Sulfonamide", "reactants": ["Cc1ccc(S(=O)(=O)Cl)cc1"]},
-                                {"_id": "ClickChem_aryl_amine2azide", "reactants": ["C#CCCCO"]}]
-                        }
-        pathway_result = synthesis_pathway(product, data)
-        full_result = make_synthesis_pathways(molecule)
-        full_expected = ([], {})
-        assert pathway_result == None
-        assert full_result == full_expected
+    # def test_intermediate_rxn():
+    #     """
+    #     Intermediate reaction in synthesis pathway doesn't work -> return None.
+    #     """
+    #     molecule = {"Cc1ccc(S(=O)(=O)N(c2ccc(-n3cc(CCCO)nn3)cc2)c2ccccc2C)cc1":
+    #                 {"HDAC_Docking": ["0.002662945346571803", "-1.26"],
+    #                 "LogP": ["4.39157551055326", "0.116244274465366"],
+    #                 "Toxicity": ["1.383194056838727", "0.032358073478579774"],
+    #                 "similarity": ["0.41583626050085826", 0],
+    #                 "rank": 4,
+    #                 "initial_mol": "Cc1ccccc1F",
+    #                 "templates": [{"_id": "SnAr_ForCl", "reactants": ["Nc1ccc(N)cc1"]},
+    #                             {"_id": "Sulfonamide", "reactants": ["Cc1ccc(S(=O)(=O)Cl)cc1"]},
+    #                             {"_id": "ClickChem_aryl_amine2azide", "reactants": ["C#CCCCO"]}]
+    #                     }
+    #                 }
+    #     product = "Cc1ccc(S(=O)(=O)N(c2ccc(-n3cc(CCCO)nn3)cc2)c2ccccc2C)cc1"
+    #     data = {"HDAC_Docking": ["0.002662945346571803", "-1.26"],
+    #                 "LogP": ["4.39157551055326", "0.116244274465366"],
+    #                 "Toxicity": ["1.383194056838727", "0.032358073478579774"],
+    #                 "similarity": ["0.41583626050085826", 0],
+    #                 "rank": 4,
+    #                 "initial_mol": "Cc1ccccc1F",
+    #                 "templates": [{"_id": "SnAr_ForCl", "reactants": ["Nc1ccc(N)cc1"]},
+    #                             {"_id": "Sulfonamide", "reactants": ["Cc1ccc(S(=O)(=O)Cl)cc1"]},
+    #                             {"_id": "ClickChem_aryl_amine2azide", "reactants": ["C#CCCCO"]}]
+    #                     }
+    #     pathway_result = synthesis_pathway(product, data)
+    #     full_result = make_synthesis_pathways(molecule)
+    #     full_expected = ([], {})
+    #     assert pathway_result == None
+    #     assert full_result == full_expected
 
     # test_intermediate_rxn()

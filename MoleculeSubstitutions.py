@@ -56,34 +56,33 @@ def tanimoto(missing_mols, reagents):
 
 if __name__ == "__main__":
 
-    filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/reagents_smiles.json'
-    with open(filepath, 'r') as jsonfile:
-        reagents = json.load(jsonfile)
+    # filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/reagents_smiles.json'
+    # with open(filepath, 'r') as jsonfile:
+    #     reagents = json.load(jsonfile)
 
-    filepath_2 = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/missing_mols_smiles.json'
-    with open(filepath_2, 'r') as jsonfile:
-        missing_mols = json.load(jsonfile)
+    # filepath_2 = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/missing_mols_smiles.json'
+    # with open(filepath_2, 'r') as jsonfile:
+    #     missing_mols = json.load(jsonfile)
 
-    filepath_3 = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/no_color_reagents_smiles.json'
-    with open(filepath_3, 'r') as jsonfile:
-        no_color_reagents = json.load(jsonfile)
+    # filepath_3 = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/no_color_reagents_smiles.json'
+    # with open(filepath_3, 'r') as jsonfile:
+    #     no_color_reagents = json.load(jsonfile)
 
-    reagents = set(reagents)
-    missing_mols = set(missing_mols)
-    no_color_reagents = set(no_color_reagents)
-    all_reagents = reagents | no_color_reagents
-    all_reagents = all_reagents - missing_mols
+    # reagents = set(reagents)
+    # missing_mols = set(missing_mols)
+    # no_color_reagents = set(no_color_reagents)
+    # all_reagents = reagents | no_color_reagents
+    # all_reagents = all_reagents - missing_mols
 
-    all_reagents = list(all_reagents)
-    missing_mols = list(missing_mols)
+    # all_reagents = list(all_reagents)
+    # missing_mols = list(missing_mols)
 
 
-    tanimoto_values, closest_reagents = tanimoto(missing_mols, all_reagents)
+    # tanimoto_values, closest_reagents = tanimoto(missing_mols, all_reagents)
 
-    out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/missing_mols_tanimoto_all.json'
-    with open(out_filepath, 'w') as outfile:
-        json.dump(tanimoto_values, outfile, indent=4)
+    # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/missing_mols_tanimoto_all.json'
+    # with open(out_filepath, 'w') as outfile:
+    #     json.dump(tanimoto_values, outfile, indent=4)
 
-    out_filepath_2 = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/missing_mols_closest_reagents_all.json'
-    with open(out_filepath_2, 'w') as outfile:
-        json.dump(closest_reagents, outfile, indent=4)
+    original_smiles = "C1=C(C=C(C=C1Br)Br)F"
+    print(Chem.MolToSmiles(Chem.MolFromSmiles(original_smiles)))
