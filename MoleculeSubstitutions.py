@@ -54,7 +54,22 @@ def tanimoto(missing_mols, reagents):
     return tanimoto_values, closest_reagents
 
 
+# def rxns_with_subs(missing_mols, synthesis_pathways):
+#     """
+#     Takes in a dict with keys as missing molecule SMILES and values as the closest
+#     tanimoto neighbor, as well as a dict mapping product SMILES to tuples of reactions.
+#     Returns a dict mapping missing molecules to the synthesis pathway they're in.
+#     """
+#     for mol in missing_mols.keys():
+#         for prod, pathway in synthesis_pathways:
+
+
+
 if __name__ == "__main__":
+
+    """
+    Saving all the closest reagents to a file.
+    """
 
     # filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/reagents_smiles.json'
     # with open(filepath, 'r') as jsonfile:
@@ -77,12 +92,23 @@ if __name__ == "__main__":
     # all_reagents = list(all_reagents)
     # missing_mols = list(missing_mols)
 
-
     # tanimoto_values, closest_reagents = tanimoto(missing_mols, all_reagents)
 
     # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/missing_mols_tanimoto_all.json'
     # with open(out_filepath, 'w') as outfile:
     #     json.dump(tanimoto_values, outfile, indent=4)
 
-    original_smiles = "C1=C(C=C(C=C1Br)Br)F"
+    """
+
+    """
+    filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/missing_mols/missing_mols_closest_reagents.json'
+    with open(filepath, 'r') as jsonfile:
+        missing_mols = json.load(jsonfile)
+
+    filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/synthesis_pathways.json'
+    with open(filepath, 'r') as jsonfile:
+        # synthesis_pathways is a dict mapping products to a list of reaction SMILES
+        synthesis_pathways = json.load(jsonfile)
+
+    original_smiles = "CC1=CC=C(C=C1)S(=O)(=O)NN"
     print(Chem.MolToSmiles(Chem.MolFromSmiles(original_smiles)))

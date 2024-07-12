@@ -631,6 +631,10 @@ if __name__ == "__main__":
         filtered_pathways = json.load(jsonfile)
 
     rxns_top_conditions, uncompleted, rxns_to_pathways = transform_data(filtered_pathways)
+    out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/rxns_to_pathways.json'
+    with open(out_filepath, 'w') as outfile:
+        json.dump(rxns_to_pathways, outfile, indent=4)
+
     # completed = {}
     # next_group = make_next_group(completed, uncompleted, rxns_to_pathways)
     # log_temp_groups = temperature_groups(next_group, rxns_top_conditions)
@@ -649,26 +653,26 @@ if __name__ == "__main__":
     # with open(inp_filepath, 'r') as jsonfile:
     #     filtered_pathways = json.load(jsonfile)
 
-    top_seqs = top_sequences(filtered_pathways, 5)
-    counts = []
-    max_count = 0
-    best_seq = None
-    for i, top_seq in enumerate(top_seqs):
-        products = set(filtered_pathways.keys())
-        count = count_products(top_seq, 6, products)
-        if count > max_count:
-            max_count = count
-            best_seq = top_seq
-        counts.append(count)
-        print(f'{i}: {count}')
-    print(max(counts))
-    print(f'best_seq count: {count_products(best_seq, 6, products)}')
+    # top_seqs = top_sequences(filtered_pathways, 5)
+    # counts = []
+    # max_count = 0
+    # best_seq = None
+    # for i, top_seq in enumerate(top_seqs):
+    #     products = set(filtered_pathways.keys())
+    #     count = count_products(top_seq, 6, products)
+    #     if count > max_count:
+    #         max_count = count
+    #         best_seq = top_seq
+    #     counts.append(count)
+    #     print(f'{i}: {count}')
+    # print(max(counts))
+    # print(f'best_seq count: {count_products(best_seq, 6, products)}')
 
-    dir = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols"
-    filename = f"MFBO_selected_mols_six_plate_seq_{max_count}.json"
-    filepath = os.path.join(dir, filename)
-    with open(filepath, 'w') as outfile:
-        json.dump(best_seq, outfile, indent=4)
+    # dir = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols"
+    # filename = f"MFBO_selected_mols_six_plate_seq_{max_count}.json"
+    # filepath = os.path.join(dir, filename)
+    # with open(filepath, 'w') as outfile:
+    #     json.dump(best_seq, outfile, indent=4)
 
     # print(f'top_seqs: {top_seqs}')
 
