@@ -6,7 +6,7 @@ import os
 # element is a dict representing one rxn
 
 
-def get_rxn_data(rxn_smiles, conditions, pathways):
+def get_rxn_data(rxn_smiles, conditions, pathway):
     """
     Conditions is a dict containing information about the specified rxn.
     Pathways is a dict that maps each rxn SMILES to a tuple of the pathway
@@ -15,12 +15,15 @@ def get_rxn_data(rxn_smiles, conditions, pathways):
     for the queue.
     """
     # extract information from pathways
-    pathway = pathways[rxn_smiles]
+    # pathway = pathways[rxn_smiles]
     rxn_steps = len(pathway)
     rxn_step = None
+    pathway_product = None
     for i, rxn_in_pathway in enumerate(pathway):
         if rxn_smiles == rxn_in_pathway:
             rxn_step = i + 1
+        if i == len(pathway) - 1:
+            pathway_product = rxn_in_pathway.split('>>')[1]
 
     # store information about rxn in dict
     collect_product = ''
@@ -30,7 +33,7 @@ def get_rxn_data(rxn_smiles, conditions, pathways):
         collect_product = 'no'
     rxn_data = {}
     final_product = [rxn_step, collect_product,
-                     conditions['pathway product'], rxn_steps]
+                     pathway_product, rxn_steps]
     predicted_catalysts = [conditions['catalyst']]
     predicted_reactants = rxn_smiles.split('>>')[0].split('.')
     predicted_reagents = [conditions['reagent']]
@@ -51,6 +54,17 @@ def get_rxn_data(rxn_smiles, conditions, pathways):
     return rxn_data
 
 
+def get_multiple_rxn_data(rxn_smiles, conditions, pathways):
+    """
+    Returns a list of data for a particular reaction.
+    """
+    rxn_data = []
+    for pathway in pathways[rxn_smiles]:
+        pathway_data = get_rxn_data(rxn_smiles, conditions, pathway)
+        rxn_data.append(pathway_data)
+    return rxn_data
+
+
 def get_plate_queue_data(rxns, pathways):
     """
     rxns is a list where each element is a dict with 1 k,v pair. Key is
@@ -62,16 +76,22 @@ def get_plate_queue_data(rxns, pathways):
     # rxn is a dict with 1 k,v pair
     for rxn in rxns:
         for rxn_smiles, conditions in rxn.items():
-            rxn_data = get_rxn_data(rxn_smiles, conditions, pathways)
-            plate_queue_data.append(rxn_data)
+            rxn_data = get_multiple_rxn_data(rxn_smiles, conditions, pathways)
+            # extend instead of append
+            plate_queue_data.extend(rxn_data)
     return plate_queue_data
 
 if __name__ == "__main__":
     # seqs is a list of dicts
     # rxns is a list
-    filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/rxns_to_pathways.json'
+    filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/new_rxns_to_pathways.json'
     with open(filepath, 'r') as jsonfile:
         pathways = json.load(jsonfile)
+
+    # print(f'pathways: {pathways['Nn1cnnc1.COc1ccc(B(O)O)cc1>>COc1ccc(Nn2cnnc2)cc1']}')
+    # print(f'pathways: {pathways['COc1ccc(Nn2cnnc2)cc1.Cc1noc(C)c1B(O)O>>COc1ccc(N(c2c(C)noc2C)n2cnnc2)cc1']}')
+    # first_two_items = {k: pathways[k] for k in list(pathways)[:2]}
+    # print(first_two_items)
 
     seq_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/best_six_plate_seq/MFBO_selected_mols_six_plate_seq_product_key.json'
     with open(seq_filepath, 'r') as jsonfile:
@@ -83,7 +103,7 @@ if __name__ == "__main__":
         if plate[0:2] in plate_ids:
             plate_queue_data = get_plate_queue_data(rxns, pathways)
             dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/queue_data'
-            filename = f'{plate}_queue.json'
+            filename = f'new_{plate}_queue.json'
             filepath = os.path.join(dir, filename)
 
         with open(filepath, 'w') as outfile:
