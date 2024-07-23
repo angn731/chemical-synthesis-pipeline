@@ -1,7 +1,6 @@
 # imports
 import json
 import os
-from GroupByTemp import transform_data
 
 def iterate_reactions(rxns, products):
     """
