@@ -154,8 +154,9 @@ def transform_data(filtered_pathways):
                 # different pathways from each other
                 modified_reaction_smiles = f'{str(count)}_{reaction_smiles}'
                 all_rxns.add(modified_reaction_smiles)
-                current_pathway.append(reaction_smiles)
+                current_pathway.append(modified_reaction_smiles)
         # print(f'current pathway: {current_pathway}')
+        # reaction is already tagged
         for reaction in current_pathway:
             current = rxns_to_pathways.setdefault(reaction, [current_pathway])
             if current_pathway not in current:
@@ -621,7 +622,9 @@ if __name__ == "__main__":
     with open(inp_filepath, 'r') as jsonfile:
         filtered_pathways = json.load(jsonfile)
 
-    rxns_to_pathways = transform_to_pathways(filtered_pathways)
+    rxns_top_conditions, uncompleted, rxns_to_pathways = transform_data(filtered_pathways)
+    print(rxns_to_pathways)
+
     # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/new_rxns_to_pathways.json'
     # with open(out_filepath, 'w') as outfile:
     #     json.dump(rxns_to_pathways, outfile, indent=4)
