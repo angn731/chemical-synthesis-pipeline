@@ -17,6 +17,10 @@ import numpy as np
 # (actually can pull this from synthesize_pathway())
 # somewhere along the way create a set of reactions that have been completed
 
+"""
+Initial filtering
+"""
+
 def save_file(file_path, data):
     """
     Helper function that saves data into a json file.
@@ -70,6 +74,10 @@ def filter_data(pathways_with_conditions):
     return filtered_pathways
 
 
+"""
+Transforming the data to make it easier to determine temperature bins
+"""
+
 def transform_data(filtered_pathways):
     """
     Helper function that takes in the final output from SynthesisPathway and
@@ -77,15 +85,11 @@ def transform_data(filtered_pathways):
     1st element: Dictionary where each key is a reaction SMILES and each value
     is a dict storing the set of conditions with the highest probability of success.
     2nd element: Set of all the reaction strings.
-    3rd element: Dictionary where each key is a reaction SMILES and each value is
-    a list of the synthesis pathway it's in.
     """
     rxns_top_conditions = {}
     all_rxns = set()
-    rxns_to_pathways = {}
     # pathway is a list
     for product, pathway in filtered_pathways.items():
-        current_pathway = []
         # each pathway is a list where elements are dicts
         for reaction in pathway:
             # conditions is a list of dictionaries
@@ -98,22 +102,14 @@ def transform_data(filtered_pathways):
                         top_condition = condition
                 rxns_top_conditions[reaction_smiles] = top_condition
                 all_rxns.add(reaction_smiles)
-                current_pathway.append(reaction_smiles)
-        # print(f'current pathway: {current_pathway}')
-        for reaction in current_pathway:
-            rxns_to_pathways[reaction] = current_pathway
-    return rxns_top_conditions, all_rxns, rxns_to_pathways
+    return rxns_top_conditions, all_rxns
 
 
-def transform_data2(filtered_pathways):
+def transform_to_pathways(filtered_pathways):
     """
-    Helper function that takes in the final output from SynthesisPathway and
-    returns a tuple of 3 elements.
-    1st element: Dictionary where each key is a reaction SMILES and each value
-    is a dict storing the set of conditions with the highest probability of success.
-    2nd element: Set of all the reaction strings.
-    3rd element: Dictionary where each key is a reaction SMILES and each value is
-    a list of the synthesis pathway it's in.
+    Returns a dictionary where each key is a SMILES that is mapped to a list.
+    Each list element is a list of a reaction SMILES representing a
+    synthesis pathway.
     """
     rxns_to_pathways = {}
     # pathway is a list
@@ -183,8 +179,6 @@ def log_bins(sorted_next_group, num_bins=8):
     bin_edges = np.logspace(np.log10(min_temp+273), np.log10(max_temp+273), num_bins+1) - 273
     return bin_edges
 
-# hi there
-
 
 def temperature_groups(next_group, rxns_top_conditions):
     """
@@ -217,76 +211,6 @@ def temperature_groups(next_group, rxns_top_conditions):
 
     # may contain keys mapped to empty sets
     return temp_groups
-
-
-# def temperature_groups(next_group, rxns_top_conditions):
-#     """
-#     Helper function that takes in a list of unsorted uncompleted reactions.
-#     Returns a list of dicts, where each dict contains one key-value pair
-#     mapping a temperature range of 10 degrees to a set of reactions within that range.
-#     """
-#     sorted_next_group = sort_rxns_by_temp(next_group, rxns_top_conditions)
-#     temp_groups = {}
-#     current_group = set()
-#     current_temp = None
-
-#     for rxn, temp in sorted_next_group:
-#         if current_temp is None:
-#             current_group.add(rxn)
-#             current_temp = temp
-#         elif (temp - current_temp) < 10:
-#             current_group.add(rxn)
-#         else:
-#             temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
-#             # reinitialize current_group to only contain the current reaction
-#             current_group = {rxn}
-#             # reinitialize minimum temp at start of new group
-#             current_temp = temp
-#     temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
-
-#     return temp_groups
-
-
-# def temperature_groups(next_group, rxns_top_conditions):
-#     """
-#     Helper function that is similar to the one above, except it uses recursion
-#     to generate every possible temperature group.
-#     Returns a list of dicts, where each dict contains one key-value pair
-#     mapping a temperature range to a set of reactions within that range.
-#     """
-#     sorted_next_group = sort_rxns_by_temp(next_group, rxns_top_conditions)
-#     temp_groups = {}
-
-#     def temp_helper(sorted_next_group, temp_groups):
-#         """
-#         Nested helper function that takes in a sorted group
-#         """
-#         # initialize variables
-#         current_group = set()
-#         current_temp = None
-#         # base case: doesn't mutate temp_groups because there's no temp groups
-#         # just return temp_groups
-#         if not sorted_next_group:
-#             return temp_groups
-#         # recursive case: first build up temp groups for the passed in sorted group
-#         for rxn, temp in sorted_next_group:
-#             if current_temp is None:
-#                 current_group.add(rxn)
-#                 current_temp = temp
-#             elif (temp - current_temp) < 10:
-#                 current_group.add(rxn)
-#             else:
-#                 temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
-#                 # reinitialize current_group to only contain the current reaction
-#                 current_group = {rxn}
-#                 # reinitialize minimum temp at start of new group
-#                 current_temp = temp
-#         temp_groups[f'{current_temp}_{current_temp + 10}'] = current_group
-#         # then build up temp groups for every reaction except the first one in the
-#         # current sorted group
-#         return temp_helper(sorted_next_group[1:], temp_groups)
-
-#     return temp_helper(sorted_next_group, temp_groups)
 
 
 def largest_temp_groups(temp_groups, num=5):
@@ -366,7 +290,8 @@ def wellplate_sequence(filtered_pathways):
     with the reaction conditions.
     """
     # initialize variables
-    rxns_top_conditions, uncompleted, rxns_to_pathways = transform_data(filtered_pathways)
+    rxns_top_conditions, uncompleted= transform_data(filtered_pathways)
+    new_rxns_to_pathways = transform_to_pathways(filtered_pathways)
     # print(f'rxns_top_conditions: {rxns_top_conditions}')
     # print(f'uncompleted: {uncompleted}')
     # print(f'rxns_to_pathways: {rxns_to_pathways}')
@@ -659,7 +584,7 @@ if __name__ == "__main__":
     with open(inp_filepath, 'r') as jsonfile:
         filtered_pathways = json.load(jsonfile)
 
-    rxns_to_pathways = transform_data2(filtered_pathways)
+    rxns_to_pathways = transform_to_pathways(filtered_pathways)
     # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/new_rxns_to_pathways.json'
     # with open(out_filepath, 'w') as outfile:
     #     json.dump(rxns_to_pathways, outfile, indent=4)
