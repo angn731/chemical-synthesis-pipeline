@@ -78,33 +78,6 @@ def filter_data(pathways_with_conditions):
 Transforming the data to make it easier to determine temperature bins
 """
 
-def transform_data(filtered_pathways):
-    """
-    Helper function that takes in the final output from SynthesisPathway and
-    returns a tuple of 3 elements.
-    1st element: Dictionary where each key is a reaction SMILES and each value
-    is a dict storing the set of conditions with the highest probability of success.
-    2nd element: Set of all the reaction strings.
-    """
-    rxns_top_conditions = {}
-    all_rxns = set()
-    # pathway is a list
-    for product, pathway in filtered_pathways.items():
-        # each pathway is a list where elements are dicts
-        for reaction in pathway:
-            # conditions is a list of dictionaries
-            for reaction_smiles, conditions in reaction.items():
-                max_prob = 0
-                top_condition = None
-                for condition in conditions:
-                    if condition["prob"] > max_prob:
-                        max_prob = condition["prob"]
-                        top_condition = condition
-                rxns_top_conditions[reaction_smiles] = top_condition
-                all_rxns.add(reaction_smiles)
-    return rxns_top_conditions, all_rxns
-
-
 def increment_count(rxns_count, reaction_smiles):
     """
     Helper function that directly mutates rxns_count to update the
@@ -158,9 +131,7 @@ def transform_data(filtered_pathways):
         # print(f'current pathway: {current_pathway}')
         # reaction is already tagged
         for reaction in current_pathway:
-            current = rxns_to_pathways.setdefault(reaction, [current_pathway])
-            if current_pathway not in current:
-                current.append(current_pathway)
+            rxns_to_pathways[reaction] = current_pathway
     return rxns_top_conditions, all_rxns, rxns_to_pathways
 
 
@@ -623,9 +594,9 @@ if __name__ == "__main__":
         filtered_pathways = json.load(jsonfile)
 
     rxns_top_conditions, uncompleted, rxns_to_pathways = transform_data(filtered_pathways)
-    print(rxns_to_pathways)
+    # print(rxns_to_pathways)
 
-    # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/new_rxns_to_pathways.json'
+    # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/tagged_rxns_to_pathways.json'
     # with open(out_filepath, 'w') as outfile:
     #     json.dump(rxns_to_pathways, outfile, indent=4)
 
