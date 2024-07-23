@@ -105,13 +105,35 @@ def transform_data(filtered_pathways):
     return rxns_top_conditions, all_rxns
 
 
-def transform_to_pathways(filtered_pathways):
+def increment_count(rxns_count, reaction_smiles):
     """
-    Returns a dictionary where each key is a SMILES that is mapped to a list.
-    Each list element is a list of a reaction SMILES representing a
-    synthesis pathway.
+    Helper function that directly mutates rxns_count to update the
+    count associated with a particular reaction.
     """
+    if reaction_smiles in rxns_count.keys():
+        rxns_count[reaction_smiles] += 1
+    else:
+        rxns_count[reaction_smiles] = 0
+    count = rxns_count[reaction_smiles]
+    return count
+
+
+def transform_data(filtered_pathways):
+    """
+    Helper function that takes in the final output from SynthesisPathway and
+    returns a tuple of 3 elements.
+    1st element: Dictionary where each key is a reaction SMILES and each value
+    is a dict storing the set of conditions with the highest probability of success.
+    2nd element: Set of all the reaction strings.
+    3rd element: Dictionary where each key is a reaction SMILES and each value is
+    a list of lists containing the synthesis pathways it's in.
+    """
+    # initialize variables
+    rxns_count = {}
+    rxns_top_conditions = {}
+    all_rxns = set()
     rxns_to_pathways = {}
+
     # pathway is a list
     for product, pathway in filtered_pathways.items():
         current_pathway = []
@@ -119,13 +141,26 @@ def transform_to_pathways(filtered_pathways):
         for reaction in pathway:
             # conditions is a list of dictionaries
             for reaction_smiles, conditions in reaction.items():
+                max_prob = 0
+                top_condition = None
+                for condition in conditions:
+                    if condition["prob"] > max_prob:
+                        max_prob = condition["prob"]
+                        top_condition = condition
+                rxns_top_conditions[reaction_smiles] = top_condition
+                # modify reaction smiles
+                count = increment_count(rxns_count, reaction_smiles)
+                # tag each reaction with an ID to distinguish same rxns in
+                # different pathways from each other
+                modified_reaction_smiles = f'{str(count)}_{reaction_smiles}'
+                all_rxns.add(modified_reaction_smiles)
                 current_pathway.append(reaction_smiles)
         # print(f'current pathway: {current_pathway}')
         for reaction in current_pathway:
             current = rxns_to_pathways.setdefault(reaction, [current_pathway])
             if current_pathway not in current:
                 current.append(current_pathway)
-    return rxns_to_pathways
+    return rxns_top_conditions, all_rxns, rxns_to_pathways
 
 
 def make_next_group(completed, uncompleted, rxns_to_pathways):
@@ -135,12 +170,15 @@ def make_next_group(completed, uncompleted, rxns_to_pathways):
     Returns the next group of reactions that can be completed.
     """
     next_group = []
+    # each current_reaction is tagged with a unique ID
     for current_reaction in uncompleted:
-        pathway = rxns_to_pathways[current_reaction]
-        idx = pathway.index(current_reaction)
+        current_reaction_no_id = current_reaction[2:]
+        pathways = rxns_to_pathways[current_reaction]
+        for pathway in pathways:
+            idx = pathway.index(current_reaction_no_id)
 
-        if idx == 0 or pathway[idx - 1] in completed:
-            next_group.append(current_reaction)
+            if idx == 0 or pathway[idx - 1] in completed:
+                next_group.append(current_reaction)
 
     return next_group
 
@@ -290,8 +328,7 @@ def wellplate_sequence(filtered_pathways):
     with the reaction conditions.
     """
     # initialize variables
-    rxns_top_conditions, uncompleted= transform_data(filtered_pathways)
-    new_rxns_to_pathways = transform_to_pathways(filtered_pathways)
+    rxns_top_conditions, uncompleted, rxns_to_pathways = transform_data(filtered_pathways)
     # print(f'rxns_top_conditions: {rxns_top_conditions}')
     # print(f'uncompleted: {uncompleted}')
     # print(f'rxns_to_pathways: {rxns_to_pathways}')
