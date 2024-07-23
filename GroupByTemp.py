@@ -115,7 +115,6 @@ def transform_data2(filtered_pathways):
     3rd element: Dictionary where each key is a reaction SMILES and each value is
     a list of the synthesis pathway it's in.
     """
-    rxns_top_conditions = {}
     rxns_to_pathways = {}
     # pathway is a list
     for product, pathway in filtered_pathways.items():
@@ -124,20 +123,13 @@ def transform_data2(filtered_pathways):
         for reaction in pathway:
             # conditions is a list of dictionaries
             for reaction_smiles, conditions in reaction.items():
-                max_prob = 0
-                top_condition = None
-                for condition in conditions:
-                    if condition["prob"] > max_prob:
-                        max_prob = condition["prob"]
-                        top_condition = condition
-                rxns_top_conditions[reaction_smiles] = top_condition
                 current_pathway.append(reaction_smiles)
         # print(f'current pathway: {current_pathway}')
         for reaction in current_pathway:
             current = rxns_to_pathways.setdefault(reaction, [current_pathway])
             if current_pathway not in current:
                 current.append(current_pathway)
-    return rxns_top_conditions, rxns_to_pathways
+    return rxns_to_pathways
 
 
 def make_next_group(completed, uncompleted, rxns_to_pathways):
@@ -190,6 +182,8 @@ def log_bins(sorted_next_group, num_bins=8):
     # as temp increases since this is a logarithmic scale
     bin_edges = np.logspace(np.log10(min_temp+273), np.log10(max_temp+273), num_bins+1) - 273
     return bin_edges
+
+# hi there
 
 
 def temperature_groups(next_group, rxns_top_conditions):
@@ -665,10 +659,10 @@ if __name__ == "__main__":
     with open(inp_filepath, 'r') as jsonfile:
         filtered_pathways = json.load(jsonfile)
 
-    rxns_top_conditions, rxns_to_pathways = transform_data2(filtered_pathways)
-    out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/new_rxns_to_pathways.json'
-    with open(out_filepath, 'w') as outfile:
-        json.dump(rxns_to_pathways, outfile, indent=4)
+    rxns_to_pathways = transform_data2(filtered_pathways)
+    # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/new_rxns_to_pathways.json'
+    # with open(out_filepath, 'w') as outfile:
+    #     json.dump(rxns_to_pathways, outfile, indent=4)
 
     # completed = {}
     # next_group = make_next_group(completed, uncompleted, rxns_to_pathways)
