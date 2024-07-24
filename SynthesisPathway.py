@@ -176,7 +176,7 @@ def synthesis_pathway(product, data):
         reactant1 = intermediate
     # the final product should be the desired product
     # may not need this
-    if Chem.MolToSmiles(Chem.MolFromSmiles(product)) != reactant1:
+    if Chem.MolToSmiles(Chem.MolFromSmiles(product)) != reactant1 and product != reactant1:
         raise ValueError("The final product does not match the desired product.")
     return rxn_pathway
 
@@ -229,7 +229,8 @@ def make_synthesis_pathways(products_data):
         # produce a valid result, so skip the product entirely
         if pathway is None:
             continue
-        reaction_pathways[prod] = synthesis_pathway(prod, data)
+        # reaction_pathways[prod] = synthesis_pathway(prod, data)
+        reaction_pathways[prod] = pathway
         rxns = list(reaction_pathways[prod])
         all_reactions.extend(rxns)
     # print(f'all_reactions: {all_reactions}')
@@ -310,13 +311,18 @@ if __name__ == "__main__":
 
 
     # load json file with products and their associated data
-    # products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_for_synthesis.json'
+    # products_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/gen_mols/gen_mols_Jun2024.json'
     # products_data = read_file(products_path)
-    # reaction_pathways = make_synthesis_pathways(products_data)[1]
+    # reactions_to_request, reaction_pathways = make_synthesis_pathways(products_data)
 
-    # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/synthesis_pathways.json'
+    # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/gen_mols/synthesis_pathways.json'
     # with open(out_filepath, 'w') as outfile:
     #     json.dump(reaction_pathways, outfile, indent=4)
+
+    # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/gen_mols/rxns_to_request.json'
+    # with open(out_filepath, 'w') as outfile:
+    #     json.dump(reactions_to_request, outfile, indent=4)
+
 
     # dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols'
     # file_name = 'MFBO_selected_mols'

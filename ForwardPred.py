@@ -4,7 +4,6 @@ import json
 import yaml
 import os
 import csv
-from SynthesisPathway import save_file
 
 # sets ip API client to communicate with server
 hostname = r'https://askcos.mit.edu:7000/'
@@ -23,8 +22,15 @@ def read_file(original_filename, directory):
     with open(target_directory, 'r') as jsonfile:
         incoming_rxns = json.load(jsonfile)
         reactions_to_request = incoming_rxns
-    print(f'reactions_to_request: {reactions_to_request}')
     return reactions_to_request
+
+def save_file(file_path, data):
+    """
+    Helper function that saves data into a json file.
+    """
+    with open(file_path, 'w') as outfile:
+        json.dump(data, outfile, indent=4)
+    print(f"File saved to {file_path}")
 
 # def save_file(original_filename, directory, tail, data):
 #     """
@@ -102,7 +108,7 @@ def contexts_and_preds(reactions_to_request):
         req_group_id += 1
         for rxn_smiles in request_group:
             mol_id += 1
-            print(f'on molecule {mol_id}')
+            print(f'on reaction {mol_id}')
             current_ids = []
             params = {'reactants':rxn_smiles.split('>>')[0],
                             'products': rxn_smiles.split('>>')[1],
@@ -138,7 +144,8 @@ def contexts_and_preds(reactions_to_request):
                 current_contexts[smiles_str]= rxn_result
         # print(f'req group id: {req_group_id}')
         if req_group_id % 3 == 0:
-            file_path = f'/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_contexts_and_preds_{req_group_id}.json'
+            # update this each time!!
+            file_path = f'/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/gen_mols/gen_mols_contexts_and_preds/group_{req_group_id/3}.json'
             save_file(file_path, current_contexts)
             current_contexts = {}
     return contexts
@@ -181,20 +188,68 @@ def compare_products(contexts):
         matching_product[rxn_smiles] = valid_conditions
     return matching_product
 
+
+def pathways_with_conditions(dir, file_name, all_reactions, reaction_pathways):
+    """
+    Helper function that takes in a list of all reactions (all_reactions) and a dict with
+    desired product mapped to a tuple of SMILES strings representing reactions (reaction_pathways).
+    Generates conditions and top products for each set of conditions for each reaction.
+    Then filters to keep sets of conditions that generate the desired product.
+    Finally, loops through all of the tuples in reaction_pathways and grabs a list of dictionaries
+    of conditions for each of the reactions in the tuples.
+    Returns a dictionary containing this information.
+    """
+    rxn_contexts_and_preds = contexts_and_preds(all_reactions)
+    print('finished predicting contexts and top products')
+    # save file
+    file_path1 = file_name + "_all_contexts_and_preds.json"
+    file_path1 = os.path.join(dir, file_path1)
+    save_file(file_path1, rxn_contexts_and_preds)
+    print(f'saved contexts and top products to {file_path1}')
+
+    valid_conditions = compare_products(rxn_contexts_and_preds)
+    print('finished comparing top products to desired product')
+    # save file
+    file_path2 = file_name + "_matching_prods.json"
+    file_path2 = os.path.join(dir, file_path2)
+    save_file(file_path2, valid_conditions)
+    print(f'saved conditions with matching products to {file_path2}')
+
+    pathways_with_conditions = {}
+    for product, pathway in reaction_pathways.items():
+        pathway_with_conditions = tuple()
+        for reaction in pathway:
+            reaction_dict = {}
+            reaction_dict[reaction] = valid_conditions[reaction]
+            pathway_with_conditions += (reaction_dict,)
+        pathways_with_conditions[product] = pathway_with_conditions
+    print('finished adding conditions to pathways')
+    pathways_path = file_name + "_pathways_w_conditions.json"
+    save_file(pathways_path, pathways_with_conditions)
+    print(f"File saved to {pathways_path}")
+
+    return pathways_with_conditions
+
+
 if __name__ == "__main__":
     # read in the list of reaction SMILES strings
-    original_filename = 'test_smiles_askcos_forward_pred.json'  # json of smiles to try and synthesize
-    directory = r"/Users/angelinaning/Downloads/jensen_lab_urop"
+    original_filename = 'rxns_to_request.json'  # json of smiles to try and synthesize
+    directory = r"/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/gen_mols"
     target_directory = os.path.join(directory, original_filename)
     reactions_to_request = read_file(original_filename, directory)
 
+    pathways_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/gen_mols/synthesis_pathways.json'
+    with open(pathways_filepath, 'r') as file:
+        reaction_pathways = json.load(file)
+
     # save a file containing all reactions mapped to top reaction conditions and
     # the top products associated with each set of conditions
-    rxn_contexts_and_preds = contexts_and_preds(reactions_to_request)
-    filename = original_filename.split('.')[0]
+    # rxn_contexts_and_preds = contexts_and_preds(reactions_to_request)
+    filename = 'gen_mols'
+    pathways_with_conditions(directory, filename, reactions_to_request, reaction_pathways)
     # save_file(filename, directory, "contexts_and_pred_prods", rxn_contexts_and_preds)
 
     # only keep conditions where the highest probability product matches the desired product
-    valid_conditions = compare_products(rxn_contexts_and_preds)
-    new_filename = filename.split('_contexts_and_pred_prods')[0]
+    # valid_conditions = compare_products(rxn_contexts_and_preds)
+    # new_filename = filename.split('_contexts_and_pred_prods')[0]
     # save_file(new_filename, directory, "contexts_matching_prod", valid_conditions)
