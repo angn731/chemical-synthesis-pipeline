@@ -539,16 +539,16 @@ if __name__ == "__main__":
             best_seq = top_seq
         counts.append(count)
         # print(f'{i}: {count}')
-    # print(max(counts))
-    # print(f'best_seq count: {count_products(best_seq, 6, products)}')
+    print(max(counts))
+    print(f'best_seq count: {count_products(best_seq, 6, products)}')
 
     # print(best_seq)
 
-    dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/corrected_best_six_plate_seq'
-    filename = f"corrected_six_plate_seq_{max_count}.json"
-    filepath = os.path.join(dir, filename)
-    with open(filepath, 'w') as outfile:
-        json.dump(best_seq, outfile, indent=4)
+    # dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/corrected_best_six_plate_seq'
+    # filename = f"corrected_six_plate_seq_{max_count}.json"
+    # filepath = os.path.join(dir, filename)
+    # with open(filepath, 'w') as outfile:
+    #     json.dump(best_seq, outfile, indent=4)
 
     # print(f'top_seqs: {top_seqs}')
 

@@ -1,6 +1,7 @@
 # imports
 import json
 import os
+import GroupByTemp
 
 def iterate_reactions(rxns, products):
     """
@@ -50,7 +51,9 @@ def indicate_products(wellplates, num, set_prods, rxns_to_pathways):
         if int(plate[0]) in plate_ids:
             # rxns is a list of dicts, each with 1 k,v pair
             for rxn in rxns:
+                # there is only 1 rxn_smiles and conditions pair
                 for rxn_smiles, conditions in rxn.items():
+                    # print(rxn_smiles)
                     pathway = rxns_to_pathways[rxn_smiles]
                     conditions["pathway product"] = pathway[-1].split('>>')[1]
                     conditions["final product"] = False
@@ -87,15 +90,20 @@ if __name__ == "__main__":
     # rxns_top_conditions, all_rxns, rxns_to_pathways = transform_data(filtered_pathways)
     # print(rxns_to_pathways)
 
-    wellplate_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/best_six_plate_seq/MFBO_selected_mols_six_plate_seq_85.json'
+    wellplate_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/corrected_best_six_plate_seq/corrected_six_plate_seq_86.json'
     with open(wellplate_filepath, 'r') as jsonfile:
         wellplate_seq = json.load(jsonfile)
 
+    rxns_to_pathways_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/tagged_rxns_to_pathways.json'
+    with open(rxns_to_pathways_filepath, 'r') as jsonfile:
+        rxns_to_pathways = json.load(jsonfile)
+
     # check for number of products produced
     set_prods = set_products(wellplate_seq, 6, products)
-    print(f'set_prods: {set_prods}')
+    # print(len(set_prods))
 
-    # updated_wellplates, final_prods, updates = indicate_products(wellplate_seq, 6, set_prods, rxns_to_pathways)
+    updated_wellplates, final_prods, updates = indicate_products(wellplate_seq, 6, set_prods, rxns_to_pathways)
+    print(len(final_prods))
 
     # save mutated dict
     # dir = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols"
@@ -114,13 +122,17 @@ if __name__ == "__main__":
     dir = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/best_six_plate_seq"
     filename = f"six_plate_reactants.json"
     filepath = os.path.join(dir, filename)
-    # reactants = identify_reactants(set_prods, products_data)
+    reactants = identify_reactants(set_prods, products_data)
+    # print(len(reactants))
+    new_reactants = set(reactants)
     # print(products_data['CS(=O)(=O)N(S(=O)(=O)c1ccc(C=Cc2ccccc2)cc1)S(=O)(=O)c1cccs1'])
     # with open(filepath, 'w') as outfile:
     #     json.dump(list(reactants), outfile, indent=4)
 
     with open(filepath, 'r') as jsonfile:
         original_reactants = json.load(jsonfile)
+
+    print(new_reactants - set(original_reactants))
 
     # small test case
     # products_data = {
@@ -143,22 +155,22 @@ if __name__ == "__main__":
     # print(identify_reactants(set_prods, products_data))
 
     """updates"""
-    inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/new_rxns_to_pathways.json'
-    with open(inp_filepath, 'r') as jsonfile:
-        rxns_to_pathways = json.load(jsonfile)
+    # inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/new_rxns_to_pathways.json'
+    # with open(inp_filepath, 'r') as jsonfile:
+    #     rxns_to_pathways = json.load(jsonfile)
 
     # create a new
 
-    reactants = set()
-    for rxn_smiles, list_pathways in rxns_to_pathways.items():
-        for pathway in list_pathways:
-            for rxn in pathway:
-                # print(f'rxn:{rxn}')
-                new_reacts = rxn.split('>>')[0].split('.')
-                reactants.update(new_reacts)
+    # reactants = set()
+    # for rxn_smiles, list_pathways in rxns_to_pathways.items():
+    #     for pathway in list_pathways:
+    #         for rxn in pathway:
+    #             # print(f'rxn:{rxn}')
+    #             new_reacts = rxn.split('>>')[0].split('.')
+    #             reactants.update(new_reacts)
 
-    print('-------------')
-    set_og = set(original_reactants)
-    needed_reactants = reactants - set_prods
-    differences = needed_reactants - set_og
-    print(f'diff: {differences}')
+    # print('-------------')
+    # set_og = set(original_reactants)
+    # needed_reactants = reactants - set_prods
+    # differences = needed_reactants - set_og
+    # print(f'diff: {differences}')
