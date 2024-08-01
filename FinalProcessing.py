@@ -1,7 +1,6 @@
 # imports
 import json
 import os
-import GroupByTemp
 
 def iterate_reactions(rxns, products):
     """
@@ -81,6 +80,22 @@ def identify_reactants(set_products, products_data):
     return reactants
 
 
+def identify_reactants2(queue_folder_path):
+    """
+    Given a folder of queue docs, returns a set of reactants.
+    """
+    reactants = set()
+    for filename in os.listdir(queue_folder_path):
+        file_path = os.path.join(queue_folder_path, filename)
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        # assume each json file contains a list of dictionaries, where
+        # each dictionary contains the key "predicted_reactants"
+        for reaction in data:
+            reactants.update(reaction["predicted_reactants"])
+    return reactants
+
+
 if __name__ == "__main__":
     pathways_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_filtered_pathways.json'
     with open(pathways_filepath, 'r') as jsonfile:
@@ -106,11 +121,17 @@ if __name__ == "__main__":
     dir = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2"
     filename = f"iter2_indicate_products.json"
     filepath = os.path.join(dir, filename)
-    with open(filepath, 'w') as outfile:
-        json.dump(updated_wellplates, outfile, indent=4)
+    # with open(filepath, 'w') as outfile:
+    #     json.dump(updated_wellplates, outfile, indent=4)
 
-    # save a set of the necessary reactants
-    products_data_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_for_synthesis.json'
-    with open(products_data_filepath, 'r') as jsonfile:
-        products_data = json.load(jsonfile)
+    # save a set of the necessary reactants (MFBO mols)
+    # products_data_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_for_synthesis.json'
+    # with open(products_data_filepath, 'r') as jsonfile:
+    #     products_data = json.load(jsonfile)
     # print(f'products_data: {products_data}')
+
+    # save a set of the necessary reactants (iter2 mols)
+    iter2_reactants = identify_reactants2('/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/queue_data')
+    reactants_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/reactants.json'
+    with open(reactants_filepath, 'w') as outfile:
+        json.dump(list(iter2_reactants), outfile, indent=4)
