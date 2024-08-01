@@ -151,6 +151,29 @@ def contexts_and_preds(reactions_to_request):
     return contexts
 
 
+def all_contexts_and_preds(folder_path, output_path):
+    """
+    In case of an error when running contexts_and_preds(), combine data from all the intermediate
+    contexts_and_preds files into one file.
+    """
+    combined_data = {}
+
+    # Iterate through all files in the folder
+    for filename in os.listdir(folder_path):
+        if filename.startswith('group'):
+            file_path = os.path.join(folder_path, filename)
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+                # Assume each JSON file contains a single dictionary
+                combined_data.update(data)
+
+    # Write combined data to a new JSON file
+    with open(output_path, 'w') as file:
+        json.dump(combined_data, file, indent=4)
+
+    print(f"Combined data has been written to {output_path}")
+
+
 # ////////////////////////////////////////
 # COMPARE TOP PRODUCTS TO TARGET PRODUCT
 # ////////////////////////////////////////
@@ -189,6 +212,25 @@ def compare_products(contexts):
     return matching_product
 
 
+def match_pathways_to_conditions(reaction_pathways, valid_conditions):
+    """
+    Helper function that matches each reaction in a pathway to a list of
+    top conditions that produce the specified product.
+    Takes as input reaction_pathways, a dict mapping product SMILES to a tuple of
+    their synthesis pathways; valid_conditions, a dict mapping reaction SMILES to
+    top conditions that produce the specified product.
+    """
+    pathways_with_conditions = {}
+    for product, pathway in reaction_pathways.items():
+        pathway_with_conditions = tuple()
+        for reaction in pathway:
+            reaction_dict = {}
+            reaction_dict[reaction] = valid_conditions[reaction]
+            pathway_with_conditions += (reaction_dict,)
+        pathways_with_conditions[product] = pathway_with_conditions
+    return pathways_with_conditions
+
+
 def pathways_with_conditions(dir, file_name, all_reactions, reaction_pathways):
     """
     Helper function that takes in a list of all reactions (all_reactions) and a dict with
@@ -215,14 +257,7 @@ def pathways_with_conditions(dir, file_name, all_reactions, reaction_pathways):
     save_file(file_path2, valid_conditions)
     print(f'saved conditions with matching products to {file_path2}')
 
-    pathways_with_conditions = {}
-    for product, pathway in reaction_pathways.items():
-        pathway_with_conditions = tuple()
-        for reaction in pathway:
-            reaction_dict = {}
-            reaction_dict[reaction] = valid_conditions[reaction]
-            pathway_with_conditions += (reaction_dict,)
-        pathways_with_conditions[product] = pathway_with_conditions
+    pathways_with_conditions = match_pathways_to_conditions(reaction_pathways, valid_conditions)
     print('finished adding conditions to pathways')
     pathways_path = file_name + "_pathways_w_conditions.json"
     save_file(pathways_path, pathways_with_conditions)
@@ -242,11 +277,53 @@ if __name__ == "__main__":
     with open(pathways_filepath, 'r') as file:
         reaction_pathways = json.load(file)
 
+    """
+    Save file with only contexts and preds of reactions involved in iteration 2
+    """
+
+    folder_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/gen_mols/gen_mols_contexts_and_preds'
+    output_path = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/gen_mols/gen_mols_contexts_and_preds/gen_mols_all_contexts_and_preds.json'
+    # all_contexts_and_preds(folder_path, output_path)
+
+    with open(output_path, 'r') as file:
+        all_contexts_and_predictions = json.load(file)
+
+    iter2_pathways_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_synthesis_pathways.json'
+    with open(iter2_pathways_filepath, 'r') as file:
+        iter2_pathways = json.load(file)
+
+    iter2_reactions = set()
+    count = 0
+    for product, pathway in iter2_pathways.items():
+        iter2_reactions.update(pathway)
+        count += len(pathway)
+    iter2_contexts_and_preds = {}
+    for reaction, data in all_contexts_and_predictions.items():
+        if reaction in iter2_reactions:
+            iter2_contexts_and_preds[reaction] = data
+
+    # iter2_contexts_and_preds_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_contexts_and_preds.json'
+    # save_file(iter2_contexts_and_preds_filepath, iter2_contexts_and_preds)
+
+    """
+    Save file containing only conditions with matching top products
+    """
+    valid_conditions = compare_products(iter2_contexts_and_preds)
+    # matching_prods_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_matching_prods.json'
+    # save_file(matching_prods_filepath, valid_conditions)
+
+    """
+    Save file mapping synthesis pathways to top conditions
+    """
+    pathways_w_conditions = match_pathways_to_conditions(iter2_pathways, valid_conditions)
+    pathways_w_conditions_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_pathways_w_conditions.json'
+    save_file(pathways_w_conditions_filepath, pathways_w_conditions)
+
     # save a file containing all reactions mapped to top reaction conditions and
     # the top products associated with each set of conditions
     # rxn_contexts_and_preds = contexts_and_preds(reactions_to_request)
-    filename = 'gen_mols'
-    pathways_with_conditions(directory, filename, reactions_to_request, reaction_pathways)
+    # filename = 'gen_mols'
+    # pathways_with_conditions(directory, filename, reactions_to_request, reaction_pathways)
     # save_file(filename, directory, "contexts_and_pred_prods", rxn_contexts_and_preds)
 
     # only keep conditions where the highest probability product matches the desired product

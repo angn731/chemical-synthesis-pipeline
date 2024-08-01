@@ -1,0 +1,940 @@
+{
+    "CC1=CC(=C(C(=C1)C)N)C.O=C(O)c1ccno1>>Cc1cc(C)c(NC(=O)c2ccno2)c(C)c1": [
+        {
+            "temperature": 8.406805038452148,
+            "solvent": "ClCCl",
+            "reagent": "CCN(CC)CC.CCOC(=O)Cl",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.999831259293325,
+                    "smiles": "Cc1cc(C)c(NC(=O)c2ccno2)c(C)c1"
+                },
+                {
+                    "prob": 0.00015142837031161663,
+                    "smiles": "Cc1cc(C)c(N)c(C)c1"
+                },
+                {
+                    "prob": 1.7312336363452587e-05,
+                    "smiles": "CC[N+](CC)(CC)C(=O)c1ccno1"
+                }
+            ]
+        },
+        {
+            "temperature": 22.22426986694336,
+            "solvent": "ClCCl",
+            "reagent": "O=S(Cl)Cl.CCN(CC)CC",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9999820993730575,
+                    "smiles": "Cc1cc(C)c(NC(=O)c2ccno2)c(C)c1"
+                },
+                {
+                    "prob": 1.4963881217160713e-05,
+                    "smiles": "Cc1cc(C)c(N)c(C)c1"
+                },
+                {
+                    "prob": 2.936745725333984e-06,
+                    "smiles": "Cc1cc(C)c(NC(O)c2ccno2)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 60.70153045654297,
+            "solvent": "",
+            "reagent": "O=S(Cl)Cl",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9996154842659967,
+                    "smiles": "Cc1cc(C)c(NC(=O)c2ccno2)c(C)c1"
+                },
+                {
+                    "prob": 0.00031548550991132774,
+                    "smiles": "Cc1cc(C)cc(C)c1"
+                },
+                {
+                    "prob": 6.90302240920413e-05,
+                    "smiles": "Cc1cc(C)c(N)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 21.178783416748047,
+            "solvent": "C1CCOC1",
+            "reagent": "O=S(Cl)Cl.CCN(CC)CC",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9999756818353815,
+                    "smiles": "Cc1cc(C)c(NC(=O)c2ccno2)c(C)c1"
+                },
+                {
+                    "prob": 1.9022414572732326e-05,
+                    "smiles": "Cc1cc(C)c(N)c(C)c1"
+                },
+                {
+                    "prob": 2.676407576983379e-06,
+                    "smiles": "CC[N+](CC)(CC)C(=O)c1ccno1"
+                },
+                {
+                    "prob": 2.6193424687587424e-06,
+                    "smiles": "Cc1cc(C)c(NC(O)c2ccno2)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 18.01865005493164,
+            "solvent": "ClCCl",
+            "reagent": "CN(C)c1ccncc1.C(=NC1CCCCC1)=NC1CCCCC1",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9998881943651587,
+                    "smiles": "Cc1cc(C)c(NC(=O)c2ccno2)c(C)c1"
+                },
+                {
+                    "prob": 0.00010737868205712729,
+                    "smiles": "C(=NC1CCCCC1)=NC1CCCCC1"
+                },
+                {
+                    "prob": 4.42695278408844e-06,
+                    "smiles": "Cc1cc(C)c(NC(O)c2ccno2)c(C)c1"
+                }
+            ]
+        }
+    ],
+    "C1=C(C(=CN=C1Cl)C#N)Cl.Cc1cccc(Nc2ccccc2C(=O)O)c1C>>Cc1cccc(N(c2cc(Cl)ncc2C#N)c2ccccc2C(=O)O)c1C": [
+        {
+            "temperature": 36.549102783203125,
+            "solvent": "CN(C)C=O",
+            "reagent": "[H-].[Na+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.8915987438257187,
+                    "smiles": "Cc1cccc(N(c2cc(Cl)ncc2C#N)c2ccccc2C(=O)O)c1C"
+                },
+                {
+                    "prob": 0.08262420093066454,
+                    "smiles": "Cc1cccc(Nc2ccccc2C(=O)Oc2cc(Cl)ncc2C#N)c1C"
+                },
+                {
+                    "prob": 0.012466705065036153,
+                    "smiles": "Cc1cccc(Nc2ccccc2C(=O)c2cc(Cl)ncc2C#N)c1C"
+                },
+                {
+                    "prob": 0.00802890063214482,
+                    "smiles": "Cc1c(Cc2cc(Cl)ncc2C#N)cccc1Nc1ccccc1C(=O)O"
+                },
+                {
+                    "prob": 0.00528144954643578,
+                    "smiles": "Cc1cccc(Nc2ccccc2C(=O)O)c1Cc1cc(Cl)ncc1C#N"
+                }
+            ]
+        },
+        {
+            "temperature": 40.80927658081055,
+            "solvent": "CN(C)C=O.CN(C)P(=O)(F)N(C)C",
+            "reagent": "CC(C)(C)[O-].[K+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.7121866497958944,
+                    "smiles": "Cc1cccc(N(c2cc(Cl)ncc2C#N)c2ccccc2C(=O)O)c1C"
+                },
+                {
+                    "prob": 0.28781335020410553,
+                    "smiles": "Cc1cccc(Nc2ccccc2C(=O)O)c1C"
+                }
+            ]
+        },
+        {
+            "temperature": 37.93848419189453,
+            "solvent": "CN(C)C=O.CN(C)P(=O)(F)N(C)C",
+            "reagent": "[H-].[Na+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.7104266422105472,
+                    "smiles": "Cc1cccc(N(c2cc(Cl)ncc2C#N)c2ccccc2C(=O)O)c1C"
+                },
+                {
+                    "prob": 0.1816546948393795,
+                    "smiles": "Cc1cccc(Nc2ccccc2C(=O)c2cc(Cl)ncc2C#N)c1C"
+                },
+                {
+                    "prob": 0.1079186629500733,
+                    "smiles": "Cc1cccc(Nc2ccccc2C(=O)O)c1C"
+                }
+            ]
+        },
+        {
+            "temperature": 49.14982604980469,
+            "solvent": "CN(C)C=O.CN(C)P(=O)(F)N(C)C",
+            "reagent": "CC(C)(C)[O-].[Na+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.7121866497958944,
+                    "smiles": "Cc1cccc(N(c2cc(Cl)ncc2C#N)c2ccccc2C(=O)O)c1C"
+                },
+                {
+                    "prob": 0.28781335020410553,
+                    "smiles": "Cc1cccc(Nc2ccccc2C(=O)O)c1C"
+                }
+            ]
+        },
+        {
+            "temperature": 25.81968879699707,
+            "solvent": "C1CCOC1",
+            "reagent": "CC(C)(C)[O-].[K+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.958801603495862,
+                    "smiles": "Cc1cccc(N(c2cc(Cl)ncc2C#N)c2ccccc2C(=O)O)c1C"
+                },
+                {
+                    "prob": 0.014518369504684152,
+                    "smiles": "Cc1c(Cc2cc(Cl)ncc2C#N)cccc1Nc1ccccc1C(=O)O"
+                },
+                {
+                    "prob": 0.011579966395214577,
+                    "smiles": "Cc1cccc(Nc2ccccc2C(=O)O)c1Cc1cc(Cl)ncc1C#N"
+                },
+                {
+                    "prob": 0.009335705078132863,
+                    "smiles": "Cc1cccc(Nc2ccccc2C(=O)Oc2cc(Cl)ncc2C#N)c1C"
+                },
+                {
+                    "prob": 0.0057643555261064705,
+                    "smiles": "Cc1cccc(Nc2ccccc2C(=O)O)c1C"
+                }
+            ]
+        }
+    ],
+    "CC1=CC(=C(C(=C1)C)N)C.O=C(O)C1CCNCC1>>Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1": [
+        {
+            "temperature": 70.23638916015625,
+            "solvent": "",
+            "reagent": "O=C(N1C=CN=C1)N1C=CN=C1",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.5609299477830908,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1"
+                },
+                {
+                    "prob": 0.43907005221690926,
+                    "smiles": "O=C(n1ccnc1)n1ccnc1"
+                }
+            ]
+        },
+        {
+            "temperature": 35.33787155151367,
+            "solvent": "",
+            "reagent": "O=S(Cl)Cl",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.88749018481498,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1"
+                },
+                {
+                    "prob": 0.11250981518502001,
+                    "smiles": "Cc1cc(C)c(N)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 22.060407638549805,
+            "solvent": "C1CCOC1.C1CCOC1",
+            "reagent": "O=C(N1C=CN=C1)N1C=CN=C1",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.5089925710487153,
+                    "smiles": "O=C(n1ccnc1)n1ccnc1"
+                },
+                {
+                    "prob": 0.4910074289512847,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 46.31275939941406,
+            "solvent": "",
+            "reagent": "C(=NC1CCCCC1)=NC1CCCCC1",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.6791827335649256,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1"
+                },
+                {
+                    "prob": 0.3208172664350743,
+                    "smiles": "C(=NC1CCCCC1)=NC1CCCCC1"
+                }
+            ]
+        },
+        {
+            "temperature": 16.059101104736328,
+            "solvent": "CN(C)C=O",
+            "reagent": "On1nnc2ccccc21.C(=NC1CCCCC1)=NC1CCCCC1",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.6363022804468251,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1"
+                },
+                {
+                    "prob": 0.36369771955317487,
+                    "smiles": "C(=NC1CCCCC1)=NC1CCCCC1"
+                }
+            ]
+        }
+    ],
+    "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1.CS(=O)(=O)Cl>>Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1": [
+        {
+            "temperature": 10.516719818115234,
+            "solvent": "ClCCl",
+            "reagent": "CCN(CC)CC",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9999890477742129,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                },
+                {
+                    "prob": 1.0952225787019335e-05,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 16.06523895263672,
+            "solvent": "C1CCOC1",
+            "reagent": "CCN(CC)CC",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9999675555866975,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                },
+                {
+                    "prob": 3.2444413302551644e-05,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 20.443923950195312,
+            "solvent": "CC#N",
+            "reagent": "CCN(CC)CC",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9999883641592332,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                },
+                {
+                    "prob": 1.1635840766835733e-05,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 15.172572135925293,
+            "solvent": "ClCCl",
+            "reagent": "",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9999918635052192,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                },
+                {
+                    "prob": 6.611486057049733e-06,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1"
+                },
+                {
+                    "prob": 9.92577808549032e-07,
+                    "smiles": "Cc1cc(C)c(N(C(=O)C2CCNCC2)S(C)(=O)=O)c(C)c1"
+                },
+                {
+                    "prob": 5.324309152305605e-07,
+                    "smiles": "Cc1cc(C)c(NC(=O)Cl)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 11.063554763793945,
+            "solvent": "ClCCl",
+            "reagent": "CCN(C(C)C)C(C)C",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9999951719233917,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                },
+                {
+                    "prob": 4.815174947937091e-06,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1"
+                },
+                {
+                    "prob": 1.290166030251952e-08,
+                    "smiles": "Cc1ccc(NC(=O)C2CCNCC2)c(C)c1"
+                }
+            ]
+        }
+    ],
+    "Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1.O=[N+]([O-])c1cccc(B(O)O)c1>>Cc1cc(C)c(N(C(=O)C2CCN(S(C)(=O)=O)CC2)c2cccc([N+](=O)[O-])c2)c(C)c1": [
+        {
+            "temperature": 68.00458526611328,
+            "solvent": "COCCOC.O",
+            "reagent": "O=C([O-])[O-].[Na+]",
+            "catalyst": "CC(=O)[O-].[Cu+2]",
+            "top_products": [
+                {
+                    "prob": 0.9995607638182441,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                },
+                {
+                    "prob": 0.0002211426005284584,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1"
+                },
+                {
+                    "prob": 0.00021809358122743,
+                    "smiles": "Cc1ccc(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 74.41130828857422,
+            "solvent": "C1COCCO1.O",
+            "reagent": "O=C([O-])[O-].[Na+]",
+            "catalyst": "CC(=O)[O-].[Cu+2]",
+            "top_products": [
+                {
+                    "prob": 0.9997445003750632,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                },
+                {
+                    "prob": 0.0002554996249367709,
+                    "smiles": "Cc1ccc(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 88.94023895263672,
+            "solvent": "C1COCCO1.O",
+            "reagent": "O=C([O-])[O-].[Na+]",
+            "catalyst": "Cl[Pd](Cl)([P](c1ccccc1)(c1ccccc1)c1ccccc1)[P](c1ccccc1)(c1ccccc1)c1ccccc1",
+            "top_products": [
+                {
+                    "prob": 0.9997445003750632,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                },
+                {
+                    "prob": 0.0002554996249367709,
+                    "smiles": "Cc1ccc(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 77.3223648071289,
+            "solvent": "Cc1ccccc1.O",
+            "reagent": "O=C([O-])[O-].[Na+]",
+            "catalyst": "CC(=O)[O-].[Cu+2]",
+            "top_products": [
+                {
+                    "prob": 0.995314752350636,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                },
+                {
+                    "prob": 0.003146615024430159,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(B(O)O)c1"
+                },
+                {
+                    "prob": 0.0015386326249337895,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCNCC2)c(C)c1"
+                }
+            ]
+        },
+        {
+            "temperature": 87.92748260498047,
+            "solvent": "C1COCCO1.O",
+            "reagent": "O=C([O-])[O-].[K+]",
+            "catalyst": "Cl[Pd](Cl)([P](c1ccccc1)(c1ccccc1)c1ccccc1)[P](c1ccccc1)(c1ccccc1)c1ccccc1",
+            "top_products": [
+                {
+                    "prob": 0.9997445003750632,
+                    "smiles": "Cc1cc(C)c(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                },
+                {
+                    "prob": 0.0002554996249367709,
+                    "smiles": "Cc1ccc(NC(=O)C2CCN(S(C)(=O)=O)CC2)c(C)c1"
+                }
+            ]
+        }
+    ],
+    "COc1cc(Cl)ccc1Cl.Nc1cc(Cl)ncn1>>COc1cc(Nc2cc(Cl)ncn2)ccc1Cl": [
+        {
+            "temperature": 104.54703521728516,
+            "solvent": "Cc1ccccc1",
+            "reagent": "C1=CC=C(P(C2=CC=CC=C2)C2=C(C3=C(P(C4=CC=CC=C4)C4=CC=CC=C4)C=CC4=C3C=CC=C4)C3=C(C=CC=C3)C=C2)C=C1.CC(C)(C)[O-].[Na+]",
+            "catalyst": "O=C(C=Cc1ccccc1)C=Cc1ccccc1.[Pd]",
+            "top_products": [
+                {
+                    "prob": 1.0,
+                    "smiles": "c1ccc(P(c2ccccc2)c2ccc3ccccc3c2-c2c(P(c3ccccc3)c3ccccc3)ccc3ccccc23)cc1"
+                }
+            ]
+        },
+        {
+            "temperature": 104.02810668945312,
+            "solvent": "Cc1ccccc1",
+            "reagent": "CC(C)(C)[O-].[Na+]",
+            "catalyst": "O=C(C=Cc1ccccc1)C=Cc1ccccc1.[Pd]",
+            "top_products": [
+                {
+                    "prob": 0.9956460889710437,
+                    "smiles": "COc1cc(Cl)ccc1Cl"
+                },
+                {
+                    "prob": 0.0043539110289563775,
+                    "smiles": "CC(C)(C)Oc1cc(N)ncn1"
+                }
+            ]
+        },
+        {
+            "temperature": 96.83369445800781,
+            "solvent": "Cc1ccccc1",
+            "reagent": "CC(C)(C)P(C1=CC=CC=C1C1=CC=CC=C1)C(C)(C)C.CC(C)(C)[O-].[Na+]",
+            "catalyst": "O=C(C=Cc1ccccc1)C=Cc1ccccc1.[Pd]",
+            "top_products": [
+                {
+                    "prob": 1.0,
+                    "smiles": "CC(C)(C)P(c1ccccc1-c1ccccc1)C(C)(C)C"
+                }
+            ]
+        },
+        {
+            "temperature": 45.9727668762207,
+            "solvent": "",
+            "reagent": "CC(=O)[IH2](C(C)=O)C1=CC=CC=C1",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.585553740594014,
+                    "smiles": "COc1cc(Cl)ccc1Cl"
+                },
+                {
+                    "prob": 0.3218361033103528,
+                    "smiles": "CC(=O)I(C(C)=O)c1ccccc1"
+                },
+                {
+                    "prob": 0.09261015609563328,
+                    "smiles": "CC(=O)Nc1cc(Cl)ncn1"
+                }
+            ]
+        },
+        {
+            "temperature": 112.80339813232422,
+            "solvent": "C1COCCO1",
+            "reagent": "CC1(C)C2=C(OC3=C1C=CC=C3P(C1=CC=CC=C1)C1=CC=CC=C1)C(P(C1=CC=CC=C1)C1=CC=CC=C1)=CC=C2.CC(C)(C)[O-].[Na+]",
+            "catalyst": "O=C(C=Cc1ccccc1)C=Cc1ccccc1.[Pd]",
+            "top_products": [
+                {
+                    "prob": 1.0,
+                    "smiles": "CC1(C)c2cccc(P(c3ccccc3)c3ccccc3)c2Oc2c(P(c3ccccc3)c3ccccc3)cccc21"
+                }
+            ]
+        }
+    ],
+    "COc1cc(Nc2cc(Cl)ncn2)ccc1Cl.O=C(Cl)CCBr>>COc1cc(N(C(=O)CCBr)c2cc(Cl)ncn2)ccc1Cl": [
+        {
+            "temperature": 21.702251434326172,
+            "solvent": "C1CCOC1",
+            "reagent": "[H-].[Na+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9575104908198379,
+                    "smiles": "COc1cc(N(C(=O)CCBr)c2cc(Cl)ncn2)ccc1Cl"
+                },
+                {
+                    "prob": 0.01935527951364631,
+                    "smiles": "COc1cc(N(C=O)c2cc(Cl)ncn2)ccc1Cl"
+                },
+                {
+                    "prob": 0.01308518872704963,
+                    "smiles": "COc1cc(N2C(=O)c3cc2ncn3)ccc1Cl"
+                },
+                {
+                    "prob": 0.010049040939466243,
+                    "smiles": "O=C(CCBr)Nc1cc(Cl)ncn1"
+                }
+            ]
+        },
+        {
+            "temperature": 37.91450500488281,
+            "solvent": "CN(C)C=O",
+            "reagent": "O=C([O-])[O-].[K+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.8360331553328494,
+                    "smiles": "COc1cc(N(C(=O)CCBr)c2cc(Cl)ncn2)ccc1Cl"
+                },
+                {
+                    "prob": 0.11174777014858926,
+                    "smiles": "COc1cc([N+]2(c3cc(Cl)ncn3)CCC2=O)ccc1Cl"
+                },
+                {
+                    "prob": 0.025516397942124704,
+                    "smiles": "COc1cc([N+](C)(C(C)=O)c2cc(Cl)ncn2)ccc1Cl"
+                },
+                {
+                    "prob": 0.01394566411032003,
+                    "smiles": "COc1cc(N(CCC(=O)Cl)c2cc(Cl)ncn2)ccc1Cl"
+                },
+                {
+                    "prob": 0.012757012466116657,
+                    "smiles": "COc1cc(Nc2cc(Cl)ncn2)c(C(=O)CCBr)cc1Cl"
+                }
+            ]
+        },
+        {
+            "temperature": 31.387304306030273,
+            "solvent": "C1CCOC1",
+            "reagent": "O=C([O-])[O-].[K+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9289248318403434,
+                    "smiles": "COc1cc(N(C(=O)CCBr)c2cc(Cl)ncn2)ccc1Cl"
+                },
+                {
+                    "prob": 0.04719167742252699,
+                    "smiles": "COc1cc([N+]2(c3cc(Cl)ncn3)CCC2=O)ccc1Cl"
+                },
+                {
+                    "prob": 0.01429519666658479,
+                    "smiles": "COc1cc(N(C=O)c2cc(Cl)ncn2)ccc1Cl"
+                },
+                {
+                    "prob": 0.009588294070544815,
+                    "smiles": "COc1cc([N+](C)(C(C)=O)c2cc(Cl)ncn2)ccc1Cl"
+                }
+            ]
+        },
+        {
+            "temperature": 34.857120513916016,
+            "solvent": "CN(C)C=O",
+            "reagent": "O=C([O-])[O-].[Cs+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.8360331553328494,
+                    "smiles": "COc1cc(N(C(=O)CCBr)c2cc(Cl)ncn2)ccc1Cl"
+                },
+                {
+                    "prob": 0.11174777014858926,
+                    "smiles": "COc1cc([N+]2(c3cc(Cl)ncn3)CCC2=O)ccc1Cl"
+                },
+                {
+                    "prob": 0.025516397942124704,
+                    "smiles": "COc1cc([N+](C)(C(C)=O)c2cc(Cl)ncn2)ccc1Cl"
+                },
+                {
+                    "prob": 0.01394566411032003,
+                    "smiles": "COc1cc(N(CCC(=O)Cl)c2cc(Cl)ncn2)ccc1Cl"
+                },
+                {
+                    "prob": 0.012757012466116657,
+                    "smiles": "COc1cc(Nc2cc(Cl)ncn2)c(C(=O)CCBr)cc1Cl"
+                }
+            ]
+        },
+        {
+            "temperature": 32.20707702636719,
+            "solvent": "CN(C)C=O.CN(C)P(=O)(F)N(C)C",
+            "reagent": "O=C([O-])[O-].[Cs+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.7153034110278346,
+                    "smiles": "COc1cc(N(C(=O)CCBr)c2cc(Cl)ncn2)ccc1Cl"
+                },
+                {
+                    "prob": 0.15313870990920753,
+                    "smiles": "COc1cc(N(CCC(=O)Cl)c2cc(Cl)ncn2)ccc1Cl"
+                },
+                {
+                    "prob": 0.08980221920923023,
+                    "smiles": "COc1cc([N+]2(c3cc(Cl)ncn3)CCC2=O)ccc1Cl"
+                },
+                {
+                    "prob": 0.026642724499440874,
+                    "smiles": "COc1cc(Nc2cc(Cl)ncn2)c(C(=O)CCBr)cc1Cl"
+                },
+                {
+                    "prob": 0.015112935354286776,
+                    "smiles": "COc1cc([N+](C)(C(C)=O)c2cc(Cl)ncn2)ccc1Cl"
+                }
+            ]
+        }
+    ],
+    "C1=C(C(=CN=C1Cl)C#N)Cl.Nc1cc(Cl)ncn1>>N#Cc1cnc(Cl)cc1Nc1cc(Cl)ncn1": [
+        {
+            "temperature": 86.1514663696289,
+            "solvent": "CN(C)C=O",
+            "reagent": "O=C([O-])[O-].[Cs+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9532965661389821,
+                    "smiles": "N#Cc1cnc(Cl)cc1Nc1cc(Cl)ncn1"
+                },
+                {
+                    "prob": 0.02297406142605437,
+                    "smiles": "N#Cc1cnc(Cl)cc1-[n+]1cnc(N)cc1Cl"
+                },
+                {
+                    "prob": 0.008660135077148348,
+                    "smiles": "N#Cc1ccc(Cl)nc1"
+                },
+                {
+                    "prob": 0.007594401207798005,
+                    "smiles": "N#Cc1cnc(Cl)cc1-[n+]1cnc(Cl)cc1N"
+                },
+                {
+                    "prob": 0.007474836150017172,
+                    "smiles": "N#Cc1cnc(Cl)cc1-c1nc(N)cc(Cl)n1"
+                }
+            ]
+        },
+        {
+            "temperature": 85.41588592529297,
+            "solvent": "CC#N",
+            "reagent": "O=C([O-])[O-].[Cs+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9549485831896434,
+                    "smiles": "N#Cc1cnc(Cl)cc1Nc1cc(Cl)ncn1"
+                },
+                {
+                    "prob": 0.018848371524274498,
+                    "smiles": "N#Cc1cnc(Cl)cc1-c1nc(N)cc(Cl)n1"
+                },
+                {
+                    "prob": 0.013856309096095568,
+                    "smiles": "N#Cc1ccc(Cl)nc1"
+                },
+                {
+                    "prob": 0.007681588487838487,
+                    "smiles": "N#Cc1cnc(Cl)cc1-[n+]1cnc(N)cc1Cl"
+                },
+                {
+                    "prob": 0.0046651477021481145,
+                    "smiles": "N#CCc1cc(Cl)ncc1C#N"
+                }
+            ]
+        },
+        {
+            "temperature": 17.05371856689453,
+            "solvent": "C1CCOC1",
+            "reagent": "C[Si](C)(C)[N-][Si](C)(C)C.[Na+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9995089032721762,
+                    "smiles": "N#Cc1cnc(Cl)cc1Nc1cc(Cl)ncn1"
+                },
+                {
+                    "prob": 0.00027047206599599253,
+                    "smiles": "C[Si](C)(C)[N-][Si](C)(C)C"
+                },
+                {
+                    "prob": 0.0001314300667080799,
+                    "smiles": "N#Cc1cnc(Cl)cc1-c1nc(N)cc(Cl)n1"
+                },
+                {
+                    "prob": 7.77553103905089e-05,
+                    "smiles": "N#Cc1cnc(Cl)cc1-[n+]1cnc(N)cc1Cl"
+                },
+                {
+                    "prob": 1.1439284729141076e-05,
+                    "smiles": "N#Cc1cnc(Cl)cc1C1CCCO1"
+                }
+            ]
+        },
+        {
+            "temperature": 54.11756134033203,
+            "solvent": "CN(C)C=O",
+            "reagent": "[H-].[Na+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9980292597051572,
+                    "smiles": "N#Cc1cnc(Cl)cc1Nc1cc(Cl)ncn1"
+                },
+                {
+                    "prob": 0.0008020667129373897,
+                    "smiles": "N#Cc1cnc(Cl)cc1-[n+]1cnc(N)cc1Cl"
+                },
+                {
+                    "prob": 0.000505125310676567,
+                    "smiles": "N#Cc1cnc(Cl)cc1-[n+]1cnc(Cl)cc1N"
+                },
+                {
+                    "prob": 0.00040388256351193134,
+                    "smiles": "N#Cc1cnc(Cl)cc1-c1nc(N)cc(Cl)n1"
+                },
+                {
+                    "prob": 0.0002596657077169352,
+                    "smiles": "N#Cc1ccc(Cl)nc1"
+                }
+            ]
+        },
+        {
+            "temperature": 58.97614669799805,
+            "solvent": "CN(C)C=O",
+            "reagent": "CC(C)(C)[O-].[K+]",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.8050694833029105,
+                    "smiles": "N#Cc1cnc(Cl)cc1Nc1cc(Cl)ncn1"
+                },
+                {
+                    "prob": 0.15055710764350208,
+                    "smiles": "N#Cc1cnc(Cl)cc1-[n+]1cnc(N)cc1Cl"
+                },
+                {
+                    "prob": 0.022404880354031115,
+                    "smiles": "N#Cc1cnc(Cl)cc1-[n+]1cnc(Cl)cc1N"
+                },
+                {
+                    "prob": 0.012208617849482479,
+                    "smiles": "N#Cc1c[n+]2c(Cl)cc1-2"
+                },
+                {
+                    "prob": 0.0097599108500738,
+                    "smiles": "N#Cc1ccc(Cl)nc1"
+                }
+            ]
+        }
+    ],
+    "N#Cc1cnc(Cl)cc1Nc1cc(Cl)ncn1.COc1cc(C(=O)O)ccc1Br>>COc1cc(C(=O)N(c2cc(Cl)ncn2)c2cc(Cl)ncc2C#N)ccc1Br": [
+        {
+            "temperature": 25.088420867919922,
+            "solvent": "CN(C)C=O",
+            "reagent": "CCN(C(C)C)C(C)C.CN(C)C(N1N=N(=O)C2=C1C=CC=N2)=[N+](C)C.FP(F)(F)(F)(F)F",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9275675612521935,
+                    "smiles": "COc1cc(C(=O)N(c2cc(Cl)ncn2)c2cc(Cl)ncc2C#N)ccc1Br"
+                },
+                {
+                    "prob": 0.07243243874780646,
+                    "smiles": "N#Cc1cnc(Cl)cc1Nc1cc(Cl)ncn1"
+                }
+            ]
+        },
+        {
+            "temperature": 25.177350997924805,
+            "solvent": "CN(C)C=O",
+            "reagent": "CN(C)c1ccncc1.CCN=C=NCCCN(C)C.Cl",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.96758226274594,
+                    "smiles": "COc1cc(C(=O)N(c2cc(Cl)ncn2)c2cc(Cl)ncc2C#N)ccc1Br"
+                },
+                {
+                    "prob": 0.03241773725406009,
+                    "smiles": "N#Cc1cnc(Cl)cc1Nc1cc(Cl)ncn1"
+                }
+            ]
+        },
+        {
+            "temperature": 31.295194625854492,
+            "solvent": "CN(C)C=O",
+            "reagent": "CN(C)[P+](On1nnc2ccccc21)(N(C)C)N(C)C.F[P](F)(F)(F)(F)F.CCN(C(C)C)C(C)C",
+            "catalyst": "",
+            "top_products": [
+                {
+                    "prob": 0.9971361577883052,
+                    "smiles": "COc1cc(C(=O)N(c2cc(Cl)ncn2)c2cc(Cl)ncc2C#N)ccc1Br"
+                },
+                {
+                    "prob": 0.0028638422116948332,
+                    "smiles": "CN(C)[P+](On1nnc2ccccc21)(N(C)C)N(C)C"
+                }
+            ]
+        },
+        {
+            "temperature": 25.557640075683594,
+            "solvent": "CN(C)C=O",
+            "reagent": "CCN(C(C)C)C(C)C",
+            "catalyst": "CN(C)C(ON1N=NC2=C1N=CC=C2)=[N+](C)C.FP(F)(F)(F)(F)F",
+            "top_products": [
+                {
+                    "prob": 0.4784136263038374,
+                    "smiles": "COc1cc(C(=O)O)ccc1-c1cc(Nc2cc(Cl)ncc2C#N)ncn1"
+                },
+                {
+                    "prob": 0.42203994249053484,
+                    "smiles": "COc1cc(C(=O)Oc2cc(Nc3cc(Cl)ncc3C#N)ncn2)ccc1Br"
+                },
+                {
+                    "prob": 0.047581481171985754,
+                    "smiles": "N#Cc1cnc(Cl)cc1Nc1ccncn1"
+                },
+                {
+                    "prob": 0.03589272385430279,
+                    "smiles": "CC(C)N(c1cc(Nc2cc(Cl)ncc2C#N)ncn1)C(C)C"
+                },
+                {
+                    "prob": 0.01607222617933928,
+                    "smiles": "N#Cc1cnc(Cl)cc1Nc1cc(Cl)ncn1"
+                }
+            ]
+        },
+        {
+            "temperature": 26.28788185119629,
+            "solvent": "CN(C)C=O",
+            "reagent": "CCN(CC)CC",
+            "catalyst": "CN(C)C(ON1N=NC2=C1N=CC=C2)=[N+](C)C.FP(F)(F)(F)(F)F",
+            "top_products": [
+                {
+                    "prob": 0.6401864975716896,
+                    "smiles": "COc1cc(C(=O)O)ccc1-c1cc(Nc2cc(Cl)ncc2C#N)ncn1"
+                },
+                {
+                    "prob": 0.24028295614220607,
+                    "smiles": "COc1cc(C(=O)Oc2cc(Nc3cc(Cl)ncc3C#N)ncn2)ccc1Br"
+                },
+                {
+                    "prob": 0.07965095452476695,
+                    "smiles": "COc1cc(C(=O)c2cc(Nc3cc(Cl)ncc3C#N)ncn2)ccc1Br"
+                },
+                {
+                    "prob": 0.028286084927889775,
+                    "smiles": "N#Cc1cnc(Cl)cc1Nc1ccncn1"
+                },
+                {
+                    "prob": 0.011593506833447705,
+                    "smiles": "N#Cc1cnc(Cl)cc1Nc1cc(Cl)ncn1"
+                }
+            ]
+        }
+    ]
+}
