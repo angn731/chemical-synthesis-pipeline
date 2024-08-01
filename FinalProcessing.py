@@ -26,7 +26,7 @@ def set_products(wellplates, num, products):
     products_produced = set()
     for i in range(0, num):
         for k in wellplates.keys():
-            if k.startswith(str(i)):
+            if k.startswith(f'{str(i)}_'):
                 rxns = wellplates[k]
                 update_products = iterate_reactions(rxns, products)
                 products_produced.update(update_products)
@@ -48,7 +48,7 @@ def indicate_products(wellplates, num, set_prods, rxns_to_pathways):
     updates = 0
     final_prods = set()
     for plate, rxns in wellplates.items():
-        if int(plate[0]) in plate_ids:
+        if int(plate[0]) in plate_ids and plate[1] == '_':
             # rxns is a list of dicts, each with 1 k,v pair
             for rxn in rxns:
                 # there is only 1 rxn_smiles and conditions pair
@@ -58,7 +58,7 @@ def indicate_products(wellplates, num, set_prods, rxns_to_pathways):
                     conditions["pathway product"] = pathway[-1].split('>>')[1]
                     conditions["final product"] = False
                     # updates += 1
-                    if rxn_smiles.split('>>')[1] in set_prods:
+                    if rxn_smiles.split('>>')[1] == conditions["pathway product"]:
                         conditions["final product"] = True
                         final_prods.add(rxn_smiles.split('>>')[1])
                         updates += 1
@@ -91,83 +91,26 @@ if __name__ == "__main__":
     with open(wellplate_filepath, 'r') as jsonfile:
         wellplate_seq = json.load(jsonfile)
 
-    rxns_to_pathways_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_synthesis_pathways.json'
+    rxns_to_pathways_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_tagged_rxns_to_pathways.json'
     with open(rxns_to_pathways_filepath, 'r') as jsonfile:
         rxns_to_pathways = json.load(jsonfile)
 
     # check for number of products produced
-    set_prods = set_products(wellplate_seq, 6, products)
+    set_prods = set_products(wellplate_seq, 4, products)
     # print(len(set_prods))
 
-    updated_wellplates, final_prods, updates = indicate_products(wellplate_seq, 6, set_prods, rxns_to_pathways)
-    print(len(final_prods))
+    updated_wellplates, final_prods, updates = indicate_products(wellplate_seq, 4, set_prods, rxns_to_pathways)
+    # print(len(final_prods))
 
     # save mutated dict
-    # dir = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols"
-    # filename = f"MFBO_selected_mols_six_plate_seq_product_key.json"
-    # filepath = os.path.join(dir, filename)
-    # with open(filepath, 'w') as outfile:
-    #     json.dump(updated_wellplates, outfile, indent=4)
-    # print(wellplate_seq)
+    dir = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2"
+    filename = f"iter2_indicate_products.json"
+    filepath = os.path.join(dir, filename)
+    with open(filepath, 'w') as outfile:
+        json.dump(updated_wellplates, outfile, indent=4)
 
     # save a set of the necessary reactants
     products_data_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_for_synthesis.json'
     with open(products_data_filepath, 'r') as jsonfile:
         products_data = json.load(jsonfile)
     # print(f'products_data: {products_data}')
-
-    dir = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/best_six_plate_seq"
-    filename = f"six_plate_reactants.json"
-    filepath = os.path.join(dir, filename)
-    reactants = identify_reactants(set_prods, products_data)
-    # print(len(reactants))
-    new_reactants = set(reactants)
-    # print(products_data['CS(=O)(=O)N(S(=O)(=O)c1ccc(C=Cc2ccccc2)cc1)S(=O)(=O)c1cccs1'])
-    # with open(filepath, 'w') as outfile:
-    #     json.dump(list(reactants), outfile, indent=4)
-
-    with open(filepath, 'r') as jsonfile:
-        original_reactants = json.load(jsonfile)
-
-    print(new_reactants - set(original_reactants))
-
-    # small test case
-    # products_data = {
-    # "CS(=O)(=O)N(S(=O)(=O)c1ccc(C=Cc2ccccc2)cc1)S(=O)(=O)c1cccs1": {
-    #     "HDAC_Docking": ["0.003787613349295299", "0.15"],
-    #     "LogP": ["4.156231893789057", "0.33392553915015455"],
-    #     "Toxicity": ["0.6682438342203894", "0.04982561078733472"],
-    #     "similarity": ["0.49042339295468546", 0],
-    #     "rank": 0,
-    #     "initial_mol": "CS(N)(=O)=O",
-    #     "templates": [
-    #     {"_id": "Sulfonamide", "reactants": ["O=S(=O)(Cl)c1ccc(Br)cc1"]},
-    #     {"_id": "Sulfonamide", "reactants": ["O=S(=O)(Cl)c1cccs1"]},
-    #     {"_id": "Suzuki_vinyl_aryl", "reactants": ["OB(O)/C=C/c1ccccc1"]}
-    #     ]
-    # }}
-
-    # set_prods = {"CS(=O)(=O)N(S(=O)(=O)c1ccc(C=Cc2ccccc2)cc1)S(=O)(=O)c1cccs1"}
-
-    # print(identify_reactants(set_prods, products_data))
-
-    """updates"""
-    # inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/new_rxns_to_pathways.json'
-    # with open(inp_filepath, 'r') as jsonfile:
-    #     rxns_to_pathways = json.load(jsonfile)
-
-    # create a new
-
-    # reactants = set()
-    # for rxn_smiles, list_pathways in rxns_to_pathways.items():
-    #     for pathway in list_pathways:
-    #         for rxn in pathway:
-    #             # print(f'rxn:{rxn}')
-    #             new_reacts = rxn.split('>>')[0].split('.')
-    #             reactants.update(new_reacts)
-
-    # print('-------------')
-    # set_og = set(original_reactants)
-    # needed_reactants = reactants - set_prods
-    # differences = needed_reactants - set_og
-    # print(f'diff: {differences}')

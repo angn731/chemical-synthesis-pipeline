@@ -500,9 +500,9 @@ if __name__ == "__main__":
     # print(len(next_temp_groups))
     top_seqs = top_sequences(filtered_pathways, 5)
 
-    # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/tagged_rxns_to_pathways.json'
-    # with open(out_filepath, 'w') as outfile:
-    #     json.dump(rxns_to_pathways, outfile, indent=4)
+    out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_tagged_rxns_to_pathways.json'
+    with open(out_filepath, 'w') as outfile:
+        json.dump(rxns_to_pathways, outfile, indent=4)
 
     # completed = {}
     # next_group = make_next_group(completed, uncompleted, rxns_to_pathways)
