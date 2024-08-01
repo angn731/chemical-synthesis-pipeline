@@ -1,0 +1,870 @@
+[
+    {
+        "final_product": [
+            1,
+            "no",
+            "O=[N+]([O-])c1ccc(N(Cc2ccc(Cl)cc2)c2ccccc2-c2ccccc2)cc1",
+            2
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "O=[N+]([O-])c1ccc(F)cc1",
+            "Nc1ccccc1-c1ccccc1"
+        ],
+        "predicted_reagents": [
+            "CC(C)(C)[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "CS(C)=O"
+        ],
+        "reaction_smiles": "O=[N+]([O-])c1ccc(F)cc1.Nc1ccccc1-c1ccccc1>>O=[N+]([O-])c1ccc(Nc2ccccc2-c2ccccc2)cc1",
+        "target_product": [
+            [
+                "O=[N+]([O-])c1ccc(Nc2ccccc2-c2ccccc2)cc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "Nc1ccc(Nn2cnnc2)cc1",
+            1
+        ],
+        "predicted_catalysts": [
+            "CC(=O)[O-].[Cu+2]"
+        ],
+        "predicted_reactants": [
+            "Nn1cnnc1",
+            "CC1(C)OB(c2ccc(N)cc2)OC1(C)C"
+        ],
+        "predicted_reagents": [
+            "O=O"
+        ],
+        "predicted_solvents": [
+            "CS(C)=O"
+        ],
+        "reaction_smiles": "Nn1cnnc1.CC1(C)OB(c2ccc(N)cc2)OC1(C)C>>Nc1ccc(Nn2cnnc2)cc1",
+        "target_product": [
+            [
+                "Nc1ccc(Nn2cnnc2)cc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "Cc1nnc(Nc2ccccc2Cl)s1",
+            1
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "Clc1ccccc1Cl",
+            "Cc1nnc(N)s1"
+        ],
+        "predicted_reagents": [
+            "CC(C)(C)[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "CC(C)(C)O"
+        ],
+        "reaction_smiles": "Clc1ccccc1Cl.Cc1nnc(N)s1>>Cc1nnc(Nc2ccccc2Cl)s1",
+        "target_product": [
+            [
+                "Cc1nnc(Nc2ccccc2Cl)s1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "CC(C)(C)Nc1cc2ccccc2o1",
+            1
+        ],
+        "predicted_catalysts": [
+            "CC(=O)[O-].[Cu+2].[H]O[H]"
+        ],
+        "predicted_reactants": [
+            "OB(O)c1cc2ccccc2o1",
+            "CC(C)(C)N"
+        ],
+        "predicted_reagents": [
+            ""
+        ],
+        "predicted_solvents": [
+            "O"
+        ],
+        "reaction_smiles": "OB(O)c1cc2ccccc2o1.CC(C)(C)N>>CC(C)(C)Nc1cc2ccccc2o1",
+        "target_product": [
+            [
+                "CC(C)(C)Nc1cc2ccccc2o1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "c1cc2c(cc1Nn1cnnc1)OCO2",
+            1
+        ],
+        "predicted_catalysts": [
+            "CC(=O)[O-].[Cu+2]"
+        ],
+        "predicted_reactants": [
+            "Nn1cnnc1",
+            "OB(O)c1ccc2c(c1)OCO2"
+        ],
+        "predicted_reagents": [
+            "CCN(CC)CC"
+        ],
+        "predicted_solvents": [
+            "CS(C)=O"
+        ],
+        "reaction_smiles": "Nn1cnnc1.OB(O)c1ccc2c(c1)OCO2>>c1cc2c(cc1Nn1cnnc1)OCO2",
+        "target_product": [
+            [
+                "c1cc2c(cc1Nn1cnnc1)OCO2"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            2,
+            "yes",
+            "COc1ccc(N(C(c2ccccc2)c2ccccc2)n2cnnc2)cc1",
+            2
+        ],
+        "predicted_catalysts": [
+            "CC(=O)[O-].[Cu+]"
+        ],
+        "predicted_reactants": [
+            "c1ccc(C(Nn2cnnc2)c2ccccc2)cc1",
+            "COc1ccc(B(O)O)cc1"
+        ],
+        "predicted_reagents": [
+            "c1ccncc1"
+        ],
+        "predicted_solvents": [
+            "Cc1ccccc1"
+        ],
+        "reaction_smiles": "c1ccc(C(Nn2cnnc2)c2ccccc2)cc1.COc1ccc(B(O)O)cc1>>COc1ccc(N(C(c2ccccc2)c2ccccc2)n2cnnc2)cc1",
+        "target_product": [
+            [
+                "COc1ccc(N(C(c2ccccc2)c2ccccc2)n2cnnc2)cc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "no",
+            "Cc1ccccc1N(c1ccc2c(C(F)(F)F)cc(=O)oc2c1)S(=O)(=O)c1cccs1",
+            2
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "Cc1ccccc1F",
+            "Nc1ccc2c(C(F)(F)F)cc(=O)oc2c1"
+        ],
+        "predicted_reagents": [
+            "O=C([O-])[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "CS(C)=O"
+        ],
+        "reaction_smiles": "Cc1ccccc1F.Nc1ccc2c(C(F)(F)F)cc(=O)oc2c1>>Cc1ccccc1Nc1ccc2c(C(F)(F)F)cc(=O)oc2c1",
+        "target_product": [
+            [
+                "Cc1ccccc1Nc1ccc2c(C(F)(F)F)cc(=O)oc2c1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "Oc1ccc2ccc(Nc3ncccn3)cc2c1",
+            1
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "C1=CN=C(N=C1)N",
+            "Oc1ccc2ccc(O)cc2c1"
+        ],
+        "predicted_reagents": [
+            "C[AlH3](C)C"
+        ],
+        "predicted_solvents": [
+            "Cc1ccccc1"
+        ],
+        "reaction_smiles": "C1=CN=C(N=C1)N.Oc1ccc2ccc(O)cc2c1>>Oc1ccc2ccc(Nc3ncccn3)cc2c1",
+        "target_product": [
+            [
+                "Oc1ccc2ccc(Nc3ncccn3)cc2c1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "O=[N+]([O-])c1ccc(NC23CC4CC(CC(C4)C2)C3)cc1",
+            1
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "O=[N+]([O-])c1ccc(F)cc1",
+            "NC12CC3CC(CC(C3)C1)C2"
+        ],
+        "predicted_reagents": [
+            "O=C([O-])[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "CS(C)=O"
+        ],
+        "reaction_smiles": "O=[N+]([O-])c1ccc(F)cc1.NC12CC3CC(CC(C3)C1)C2>>O=[N+]([O-])c1ccc(NC23CC4CC(CC(C4)C2)C3)cc1",
+        "target_product": [
+            [
+                "O=[N+]([O-])c1ccc(NC23CC4CC(CC(C4)C2)C3)cc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "FC(F)(F)c1ccc(Nn2cnnc2)cc1",
+            1
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "Nn1cnnc1",
+            "Fc1ccc(C(F)(F)F)cc1"
+        ],
+        "predicted_reagents": [
+            "CC(C)(C)[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "CS(C)=O"
+        ],
+        "reaction_smiles": "Nn1cnnc1.Fc1ccc(C(F)(F)F)cc1>>FC(F)(F)c1ccc(Nn2cnnc2)cc1",
+        "target_product": [
+            [
+                "FC(F)(F)c1ccc(Nn2cnnc2)cc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "no",
+            "Cc1ccc(S(=O)(=O)Nc2ccc(Nn3cnnc3)nc2)cc1",
+            2
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "Nn1cnnc1",
+            "Nc1ccc(Cl)nc1"
+        ],
+        "predicted_reagents": [
+            "CC(C)(C)[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "CS(C)=O"
+        ],
+        "reaction_smiles": "Nn1cnnc1.Nc1ccc(Cl)nc1>>Nc1ccc(Nn2cnnc2)nc1",
+        "target_product": [
+            [
+                "Nc1ccc(Nn2cnnc2)nc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            2,
+            "yes",
+            "c1ccc2ncc(Nc3ccc(-c4ccsc4)cn3)cc2c1",
+            2
+        ],
+        "predicted_catalysts": [
+            "CC(=O)[O-].[Cu+2]"
+        ],
+        "predicted_reactants": [
+            "Nc1ccc(-c2ccsc2)cn1",
+            "OB(O)c1cnc2ccccc2c1"
+        ],
+        "predicted_reagents": [
+            ""
+        ],
+        "predicted_solvents": [
+            "CS(C)=O"
+        ],
+        "reaction_smiles": "Nc1ccc(-c2ccsc2)cn1.OB(O)c1cnc2ccccc2c1>>c1ccc2ncc(Nc3ccc(-c4ccsc4)cn3)cc2c1",
+        "target_product": [
+            [
+                "c1ccc2ncc(Nc3ccc(-c4ccsc4)cn3)cc2c1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "no",
+            "Clc1ccc(Nc2ccc(-c3ccccc3)cc2)cc1",
+            2
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "Brc1ccccc1",
+            "CC1(C)OB(c2ccc(N)cc2)OC1(C)C"
+        ],
+        "predicted_reagents": [
+            "O=C([O-])[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "O"
+        ],
+        "reaction_smiles": "Brc1ccccc1.CC1(C)OB(c2ccc(N)cc2)OC1(C)C>>Nc1ccc(-c2ccccc2)cc1",
+        "target_product": [
+            [
+                "Nc1ccc(-c2ccccc2)cc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "no",
+            "CC(C)(C)N(c1nc(N)c2nc[nH]c2n1)c1ncccc1-c1ccc(C#N)cc1",
+            3
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "CC(C)(C)O",
+            "Nc1ncccc1Br"
+        ],
+        "predicted_reagents": [
+            "O=S(Cl)Cl"
+        ],
+        "predicted_solvents": [
+            "C1COCCO1"
+        ],
+        "reaction_smiles": "CC(C)(C)O.Nc1ncccc1Br>>CC(C)(C)Nc1ncccc1Br",
+        "target_product": [
+            [
+                "CC(C)(C)Nc1ncccc1Br"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "Cn1nnc(Nc2ccsc2)n1",
+            1
+        ],
+        "predicted_catalysts": [
+            "CC(=O)[O-].[Cu+2]"
+        ],
+        "predicted_reactants": [
+            "B(C1=CSC=C1)(O)O",
+            "Cn1nnc(N)n1"
+        ],
+        "predicted_reagents": [
+            "c1ccc(-c2ccccn2)nc1"
+        ],
+        "predicted_solvents": [
+            "C1CCOC1"
+        ],
+        "reaction_smiles": "B(C1=CSC=C1)(O)O.Cn1nnc(N)n1>>Cn1nnc(Nc2ccsc2)n1",
+        "target_product": [
+            [
+                "Cn1nnc(Nc2ccsc2)n1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "Nc1ccc(Nc2ncccn2)nc1",
+            1
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "C1=CN=C(N=C1)N",
+            "Nc1ccc(F)nc1"
+        ],
+        "predicted_reagents": [
+            "[H-].[Na+]"
+        ],
+        "predicted_solvents": [
+            "CS(C)=O"
+        ],
+        "reaction_smiles": "C1=CN=C(N=C1)N.Nc1ccc(F)nc1>>Nc1ccc(Nc2ncccn2)nc1",
+        "target_product": [
+            [
+                "Nc1ccc(Nc2ncccn2)nc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "no",
+            "Fc1cccc(F)c1-c1ccc2nc(Nc3ccc(C(F)(F)F)cn3)sc2c1",
+            2
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "C1=CC(=NC=C1C(F)(F)F)Cl",
+            "Nc1nc2ccc(Br)cc2s1"
+        ],
+        "predicted_reagents": [
+            "[H-].[Na+]"
+        ],
+        "predicted_solvents": [
+            "CN(C)C=O"
+        ],
+        "reaction_smiles": "C1=CC(=NC=C1C(F)(F)F)Cl.Nc1nc2ccc(Br)cc2s1>>FC(F)(F)c1ccc(Nc2nc3ccc(Br)cc3s2)nc1",
+        "target_product": [
+            [
+                "FC(F)(F)c1ccc(Nc2nc3ccc(Br)cc3s2)nc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            2,
+            "yes",
+            "COc1ccc(N(c2c(C)noc2C)n2cnnc2)cc1",
+            2
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "COc1ccc(Nn2cnnc2)cc1",
+            "Cc1noc(C)c1B(O)O"
+        ],
+        "predicted_reagents": [
+            "O=O"
+        ],
+        "predicted_solvents": [
+            "CN(C)C=O"
+        ],
+        "reaction_smiles": "COc1ccc(Nn2cnnc2)cc1.Cc1noc(C)c1B(O)O>>COc1ccc(N(c2c(C)noc2C)n2cnnc2)cc1",
+        "target_product": [
+            [
+                "COc1ccc(N(c2c(C)noc2C)n2cnnc2)cc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "Nc1ccc(Nn2cnnc2)nc1",
+            1
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "Nn1cnnc1",
+            "Nc1ccc(Cl)nc1"
+        ],
+        "predicted_reagents": [
+            "CC(C)(C)[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "CS(C)=O"
+        ],
+        "reaction_smiles": "Nn1cnnc1.Nc1ccc(Cl)nc1>>Nc1ccc(Nn2cnnc2)nc1",
+        "target_product": [
+            [
+                "Nc1ccc(Nn2cnnc2)nc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "COc1ncc(Nn2cnnc2)cn1",
+            1
+        ],
+        "predicted_catalysts": [
+            "CC(=O)[O-].[Cu+2]"
+        ],
+        "predicted_reactants": [
+            "Nn1cnnc1",
+            "COc1ncc(B(O)O)cn1"
+        ],
+        "predicted_reagents": [
+            "CCN(CC)CC"
+        ],
+        "predicted_solvents": [
+            "CN(C)C=O"
+        ],
+        "reaction_smiles": "Nn1cnnc1.COc1ncc(B(O)O)cn1>>COc1ncc(Nn2cnnc2)cn1",
+        "target_product": [
+            [
+                "COc1ncc(Nn2cnnc2)cn1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "no",
+            "Cc1ccccc1N(C)c1ccc(Nc2nncs2)cc1C(=O)c1ccccc1",
+            2
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "Cc1ccccc1F",
+            "CNc1ccc(Cl)cc1C(=O)c1ccccc1"
+        ],
+        "predicted_reagents": [
+            "[H-].[Na+]"
+        ],
+        "predicted_solvents": [
+            "CN(C)C=O"
+        ],
+        "reaction_smiles": "Cc1ccccc1F.CNc1ccc(Cl)cc1C(=O)c1ccccc1>>Cc1ccccc1N(C)c1ccc(Cl)cc1C(=O)c1ccccc1",
+        "target_product": [
+            [
+                "Cc1ccccc1N(C)c1ccc(Cl)cc1C(=O)c1ccccc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "no",
+            "N#Cc1ccc(Nc2ccc(-c3ccccc3)cc2)cc1",
+            2
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "Brc1ccccc1",
+            "CC1(C)OB(c2ccc(N)cc2)OC1(C)C"
+        ],
+        "predicted_reagents": [
+            "O=C([O-])[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "O"
+        ],
+        "reaction_smiles": "Brc1ccccc1.CC1(C)OB(c2ccc(N)cc2)OC1(C)C>>Nc1ccc(-c2ccccc2)cc1",
+        "target_product": [
+            [
+                "Nc1ccc(-c2ccccc2)cc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "Cc1noc(C)c1NS(C)(=O)=O",
+            1
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "CS(N)(=O)=O",
+            "Cc1noc(C)c1B(O)O"
+        ],
+        "predicted_reagents": [
+            "O=C([O-])[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "O"
+        ],
+        "reaction_smiles": "CS(N)(=O)=O.Cc1noc(C)c1B(O)O>>Cc1noc(C)c1NS(C)(=O)=O",
+        "target_product": [
+            [
+                "Cc1noc(C)c1NS(C)(=O)=O"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "C=COC(=O)CCCCCCBr",
+            1
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "C=CO",
+            "O=C(O)CCCCCCBr"
+        ],
+        "predicted_reagents": [
+            "CC(=O)OC(C)=O"
+        ],
+        "predicted_solvents": [
+            ""
+        ],
+        "reaction_smiles": "C=CO.O=C(O)CCCCCCBr>>C=COC(=O)CCCCCCBr",
+        "target_product": [
+            [
+                "C=COC(=O)CCCCCCBr"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "no",
+            "O=[N+]([O-])c1ccc2nc(N(CCNCC3CCCCC3)c3cc4ccccc4o3)sc2c1",
+            2
+        ],
+        "predicted_catalysts": [
+            "CC(=O)[O-].[Cu+2]"
+        ],
+        "predicted_reactants": [
+            "OB(O)c1cc2ccccc2o1",
+            "Nc1nc2ccc([N+](=O)[O-])cc2s1"
+        ],
+        "predicted_reagents": [
+            ""
+        ],
+        "predicted_solvents": [
+            "ClCCCl"
+        ],
+        "reaction_smiles": "OB(O)c1cc2ccccc2o1.Nc1nc2ccc([N+](=O)[O-])cc2s1>>O=[N+]([O-])c1ccc2nc(Nc3cc4ccccc4o3)sc2c1",
+        "target_product": [
+            [
+                "O=[N+]([O-])c1ccc2nc(Nc3cc4ccccc4o3)sc2c1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "c1ccc2nc(-c3ccsc3)ccc2c1",
+            1
+        ],
+        "predicted_catalysts": [
+            "CC(=O)[O-].[Pd+2]"
+        ],
+        "predicted_reactants": [
+            "B(C1=CSC=C1)(O)O",
+            "Brc1ccc2ccccc2n1"
+        ],
+        "predicted_reagents": [
+            "O=C([O-])[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "CCO.O"
+        ],
+        "reaction_smiles": "B(C1=CSC=C1)(O)O.Brc1ccc2ccccc2n1>>c1ccc2nc(-c3ccsc3)ccc2c1",
+        "target_product": [
+            [
+                "c1ccc2nc(-c3ccsc3)ccc2c1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "O=[N+]([O-])c1ccc2nc(Nc3cc4ccccc4o3)sc2c1",
+            1
+        ],
+        "predicted_catalysts": [
+            "CC(=O)[O-].[Cu+2]"
+        ],
+        "predicted_reactants": [
+            "OB(O)c1cc2ccccc2o1",
+            "Nc1nc2ccc([N+](=O)[O-])cc2s1"
+        ],
+        "predicted_reagents": [
+            ""
+        ],
+        "predicted_solvents": [
+            "ClCCCl"
+        ],
+        "reaction_smiles": "OB(O)c1cc2ccccc2o1.Nc1nc2ccc([N+](=O)[O-])cc2s1>>O=[N+]([O-])c1ccc2nc(Nc3cc4ccccc4o3)sc2c1",
+        "target_product": [
+            [
+                "O=[N+]([O-])c1ccc2nc(Nc3cc4ccccc4o3)sc2c1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "N#Cc1c([N+](=O)[O-])ccc(N2CCS(=O)(=O)CC2)c1Cl",
+            1
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "O=S1(=O)CCNCC1",
+            "N#Cc1c([N+](=O)[O-])ccc(Cl)c1Cl"
+        ],
+        "predicted_reagents": [
+            "O=C([O-])[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "CN(C)C=O"
+        ],
+        "reaction_smiles": "O=S1(=O)CCNCC1.N#Cc1c([N+](=O)[O-])ccc(Cl)c1Cl>>N#Cc1c([N+](=O)[O-])ccc(N2CCS(=O)(=O)CC2)c1Cl",
+        "target_product": [
+            [
+                "N#Cc1c([N+](=O)[O-])ccc(N2CCS(=O)(=O)CC2)c1Cl"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "Nc1cc(Nn2cnnc2)ncn1",
+            1
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "Nn1cnnc1",
+            "Nc1cc(Cl)ncn1"
+        ],
+        "predicted_reagents": [
+            "CC(C)(C)[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "CC(C)(C)O"
+        ],
+        "reaction_smiles": "Nn1cnnc1.Nc1cc(Cl)ncn1>>Nc1cc(Nn2cnnc2)ncn1",
+        "target_product": [
+            [
+                "Nc1cc(Nn2cnnc2)ncn1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "no",
+            "c1ccc(-c2ccc(Nc3cnc4ccccc4n3)cc2)cc1",
+            2
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "Brc1ccccc1",
+            "CC1(C)OB(c2ccc(N)cc2)OC1(C)C"
+        ],
+        "predicted_reagents": [
+            "O=C([O-])[O-].[K+]"
+        ],
+        "predicted_solvents": [
+            "O"
+        ],
+        "reaction_smiles": "Brc1ccccc1.CC1(C)OB(c2ccc(N)cc2)OC1(C)C>>Nc1ccc(-c2ccccc2)cc1",
+        "target_product": [
+            [
+                "Nc1ccc(-c2ccccc2)cc1"
+            ]
+        ],
+        "total_volume": 500
+    },
+    {
+        "final_product": [
+            1,
+            "yes",
+            "FC(F)(F)c1ccc(Nc2nc3ccc(Br)cc3s2)nc1",
+            1
+        ],
+        "predicted_catalysts": [
+            ""
+        ],
+        "predicted_reactants": [
+            "C1=CC(=NC=C1C(F)(F)F)Cl",
+            "Nc1nc2ccc(Br)cc2s1"
+        ],
+        "predicted_reagents": [
+            "[H-].[Na+]"
+        ],
+        "predicted_solvents": [
+            "CN(C)C=O"
+        ],
+        "reaction_smiles": "C1=CC(=NC=C1C(F)(F)F)Cl.Nc1nc2ccc(Br)cc2s1>>FC(F)(F)c1ccc(Nc2nc3ccc(Br)cc3s2)nc1",
+        "target_product": [
+            [
+                "FC(F)(F)c1ccc(Nc2nc3ccc(Br)cc3s2)nc1"
+            ]
+        ],
+        "total_volume": 500
+    }
+]

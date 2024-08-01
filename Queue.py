@@ -35,10 +35,10 @@ def get_rxn_data(rxn_smiles, conditions, pathway):
     final_product = [rxn_step, collect_product,
                      pathway_product, rxn_steps]
     predicted_catalysts = [conditions['catalyst']]
-    predicted_reactants = rxn_smiles.split('>>')[0].split('.')
     predicted_reagents = [conditions['reagent']]
     predicted_solvents = [conditions['solvent']]
-    reaction_smiles = rxn_smiles
+    reaction_smiles = rxn_smiles[2:]
+    predicted_reactants = reaction_smiles.split('>>')[0].split('.')
     target_product = [[rxn_smiles.split('>>')[1]],]
     total_volume = 500
     rxn_data = {
@@ -76,15 +76,16 @@ def get_plate_queue_data(rxns, pathways):
     # rxn is a dict with 1 k,v pair
     for rxn in rxns:
         for rxn_smiles, conditions in rxn.items():
-            rxn_data = get_multiple_rxn_data(rxn_smiles, conditions, pathways)
+            pathway = pathways[rxn_smiles]
+            rxn_data = get_rxn_data(rxn_smiles, conditions, pathway)
             # extend instead of append
-            plate_queue_data.extend(rxn_data)
+            plate_queue_data.append(rxn_data)
     return plate_queue_data
 
 if __name__ == "__main__":
     # seqs is a list of dicts
     # rxns is a list
-    filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/new_rxns_to_pathways.json'
+    filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_tagged_rxns_to_pathways.json'
     with open(filepath, 'r') as jsonfile:
         pathways = json.load(jsonfile)
 
@@ -93,17 +94,18 @@ if __name__ == "__main__":
     # first_two_items = {k: pathways[k] for k in list(pathways)[:2]}
     # print(first_two_items)
 
-    seq_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/best_six_plate_seq/MFBO_selected_mols_six_plate_seq_product_key.json'
+    seq_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_indicate_products.json'
     with open(seq_filepath, 'r') as jsonfile:
         seqs = json.load(jsonfile)
 
     # print(seqs)
-    plate_ids = {'0_', '1_', '2_', '3_', '4_', '5_'}
+    plate_ids = {'0_', '1_', '2_', '3_'}
+    # rxns is a list
     for plate, rxns in seqs.items():
         if plate[0:2] in plate_ids:
             plate_queue_data = get_plate_queue_data(rxns, pathways)
-            dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/queue_data'
-            filename = f'new_{plate}_queue.json'
+            dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/queue_data'
+            filename = f'{plate}_queue.json'
             filepath = os.path.join(dir, filename)
 
         with open(filepath, 'w') as outfile:
