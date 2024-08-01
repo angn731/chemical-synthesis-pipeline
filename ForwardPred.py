@@ -178,10 +178,6 @@ def all_contexts_and_preds(folder_path, output_path):
 # COMPARE TOP PRODUCTS TO TARGET PRODUCT
 # ////////////////////////////////////////
 
-# compare top products to target product and output a file that maps each rxn SMILES string
-# to the condition(s) that generates the desired product (including probability); if none of
-# top product match, output an empty list
-
 def compare_products(contexts):
     """
     Helper function that returns a dictionary where each key is a reaction SMILES
@@ -233,7 +229,7 @@ def match_pathways_to_conditions(reaction_pathways, valid_conditions):
 
 def pathways_with_conditions(dir, file_name, all_reactions, reaction_pathways):
     """
-    Helper function that takes in a list of all reactions (all_reactions) and a dict with
+    Ttakes in a list of all reactions (all_reactions) and a dict with
     desired product mapped to a tuple of SMILES strings representing reactions (reaction_pathways).
     Generates conditions and top products for each set of conditions for each reaction.
     Then filters to keep sets of conditions that generate the desired product.

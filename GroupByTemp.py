@@ -440,7 +440,7 @@ def count_products(wellplates, num, products):
     count = 0
     for i in range(0, num):
         for k in wellplates.keys():
-            if k.startswith(str(i)):
+            if k.startswith(f'{str(i)}_'):
                 rxns = wellplates[k]
                 update_count = iterate_reactions(rxns, products)
                 count += update_count
@@ -470,38 +470,33 @@ def max_count_sequence(dir, filename, sequences, num, filtered_pathways):
 
 
 if __name__ == "__main__":
-    # helper function test cases
-
-    # inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/test_cases/pathfinding_small.json'
-    # with open(inp_filepath, 'r') as jsonfile:
-    #     data = json.load(jsonfile)
-
-    # MFBO mols
-    # inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_contexts_and_preds/MFBO_selected_mols_contexts_and_preds.json'
-    # inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_pathways_w_conditions.json'
-    # with open(inp_filepath, 'r') as jsonfile:
+    """
+    First filter out candidate molecules whose synthesis pathway contains intermediate reactions
+    with low probability success or no valid conditions
+    """
+    # pathways_with_conditions_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_pathways_w_conditions.json'
+    # with open(pathways_with_conditions_filepath, 'r') as jsonfile:
     #     pathways_with_conditions = json.load(jsonfile)
-    # print(f'number of products initially: {len(list(pathways_with_conditions.keys()))}')
+
     # filtered_pathways = filter_data(pathways_with_conditions)
-    # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_filtered_pathways.json'
-    # with open(out_filepath, 'w') as outfile:
+    filtered_pathways_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_filtered_pathways.json'
+    # with open(filtered_pathways_filepath, 'w') as outfile:
     #     json.dump(filtered_pathways, outfile, indent=4)
-    # print(f'number of products after: {len(list(filtered_pathways.keys()))}')
 
-    # wellplates time!!
-
-    inp_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_filtered_pathways.json'
-    with open(inp_filepath, 'r') as jsonfile:
+    """
+    Determine optimal wellplate sequence
+    """
+    with open(filtered_pathways_filepath, 'r') as jsonfile:
         filtered_pathways = json.load(jsonfile)
 
     rxns_top_conditions, uncompleted, rxns_to_pathways = transform_data(filtered_pathways)
     # print(rxns_to_pathways)
-    completed = set()
-    next_group = make_next_group(completed, uncompleted, rxns_to_pathways)
+    # completed = set()
+    # next_group = make_next_group(completed, uncompleted, rxns_to_pathways)
     # print(sort_rxns_by_temp(next_group, rxns_top_conditions))
-    temp_groups = temperature_groups(next_group, rxns_top_conditions)
+    # temp_groups = temperature_groups(next_group, rxns_top_conditions)
     # print(temp_groups)
-    next_temp_groups = largest_temp_groups(temp_groups, 5)
+    # next_temp_groups = largest_temp_groups(temp_groups, 5)
     # print(len(next_temp_groups))
     top_seqs = top_sequences(filtered_pathways, 5)
 
@@ -517,12 +512,6 @@ if __name__ == "__main__":
     # print(largest_groups)
     # print([len(rxns) for temp_range, rxns in largest_groups])
 
-    # problematic next_group
-    # next_group = ['Cc1cc(C(=O)Nn2cnnc2)no1.OB(O)c1ccsc1>>Cc1cc(C(=O)N(c2ccsc2)n2cnnc2)no1', 'CO.NC1CCCCC1>>CNC1CCCCC1']
-    # log_temp_groups = temperature_groups(next_group, rxns_top_conditions)
-    # print(log_temp_groups)
-
-
     # inp_filepath = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/test_cases/pathfinding_small.json"
     # with open(inp_filepath, 'r') as jsonfile:
     #     filtered_pathways = json.load(jsonfile)
@@ -533,53 +522,15 @@ if __name__ == "__main__":
     best_seq = None
     for i, top_seq in enumerate(top_seqs):
         products = set(filtered_pathways.keys())
-        count = count_products(top_seq, 6, products)
+        count = count_products(top_seq, 4, products)
         if count > max_count:
             max_count = count
             best_seq = top_seq
         counts.append(count)
-        # print(f'{i}: {count}')
+        print(f'{i}: {count}')
     print(max(counts))
-    print(f'best_seq count: {count_products(best_seq, 6, products)}')
+    print(f'best_seq count: {count_products(best_seq, 4, products)}')
 
-    # print(best_seq)
-
-    # dir = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/corrected_best_six_plate_seq'
-    # filename = f"corrected_six_plate_seq_{max_count}.json"
-    # filepath = os.path.join(dir, filename)
-    # with open(filepath, 'w') as outfile:
-    #     json.dump(best_seq, outfile, indent=4)
-
-    # print(f'top_seqs: {top_seqs}')
-
-    # rxns_top_conditions, all_rxns, rxns_to_pathways = transform_data(filtered_pathways)
-    # print(f'rxns_top_conditions: {rxns_top_conditions[]}')
-    # print(f'all_rxns: {all_rxns}')
-    # print(f'rxns_to_pathways: {rxns_to_pathways}')
-
-    # print('starting wellplates')
-    # wellplates_dict = wellplate_sequence(filtered_pathways)
-    # out_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_wellplates.json'
-    # with open(out_filepath, 'w') as outfile:
-    #     json.dump(wellplates_dict, outfile, indent=4)
-    # print(f'File saved to {out_filepath}')
-
-    # find all paths
-    # completed_paths = find_all_paths(filtered_pathways)
-    # print(completed_paths)
-
-
-    # dir = "/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/test_cases/"
-    # max = max_count_sequence(dir, "pathfinding_small_path", 44, 5, filtered_pathways)
-    # print(max)
-
-
-    # save_completed_paths(completed_paths, dir, "pathfinding_small_path")
-
-    def total_elements(dictionary):
-        total = 0
-        for key, value in dictionary.items():
-            total += len(value)
-        return total
-
-    # print(f'total rxns: {total_elements(wellplates_dict)}')
+best_seq_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_best_wellplate_seq.json'
+# with open(best_seq_filepath, 'w') as outfile:
+#     json.dump(best_seq, outfile, indent=4)
