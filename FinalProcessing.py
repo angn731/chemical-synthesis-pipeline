@@ -82,19 +82,16 @@ def identify_reactants(set_products, products_data):
 
 
 if __name__ == "__main__":
-    pathways_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_filtered_pathways.json'
+    pathways_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_filtered_pathways.json'
     with open(pathways_filepath, 'r') as jsonfile:
         filtered_pathways = json.load(jsonfile)
     products = set(filtered_pathways.keys())
 
-    # rxns_top_conditions, all_rxns, rxns_to_pathways = transform_data(filtered_pathways)
-    # print(rxns_to_pathways)
-
-    wellplate_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/corrected_best_six_plate_seq/corrected_six_plate_seq_86.json'
+    wellplate_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_best_wellplate_seq.json'
     with open(wellplate_filepath, 'r') as jsonfile:
         wellplate_seq = json.load(jsonfile)
 
-    rxns_to_pathways_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/tagged_rxns_to_pathways.json'
+    rxns_to_pathways_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_synthesis_pathways.json'
     with open(rxns_to_pathways_filepath, 'r') as jsonfile:
         rxns_to_pathways = json.load(jsonfile)
 
