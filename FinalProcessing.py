@@ -77,10 +77,11 @@ def identify_reactants(set_products, products_data):
         # print(f'templates: {templates}')
         for template in templates:
             reactants.update(template['reactants'])
+        reactants.add(data['initial_mol'])
     return reactants
 
 
-def identify_reactants2(queue_folder_path):
+def identify_reagents(queue_folder_path):
     """
     Given a folder of queue docs, returns a set of reactants.
     """
@@ -90,9 +91,9 @@ def identify_reactants2(queue_folder_path):
         with open(file_path, 'r') as file:
             data = json.load(file)
         # assume each json file contains a list of dictionaries, where
-        # each dictionary contains the key "predicted_reactants"
+        # each dictionary contains the key "predicted_reagents"
         for reaction in data:
-            reactants.update(reaction["predicted_reactants"])
+            reactants.update(reaction["predicted_reagents"])
     return reactants
 
 
@@ -124,14 +125,18 @@ if __name__ == "__main__":
     # with open(filepath, 'w') as outfile:
     #     json.dump(updated_wellplates, outfile, indent=4)
 
-    # save a set of the necessary reactants (MFBO mols)
-    # products_data_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/MFBO_selected_mols/MFBO_selected_mols_for_synthesis.json'
-    # with open(products_data_filepath, 'r') as jsonfile:
-    #     products_data = json.load(jsonfile)
-    # print(f'products_data: {products_data}')
+    # save a set of the necessary reactants (iter2 mols)
+    products_data_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/gen_mols/gen_mols_Jun2024.json'
+    with open(products_data_filepath, 'r') as jsonfile:
+        products_data = json.load(jsonfile)
+    iter2_reactants = identify_reactants(set_prods, products_data)
+    reactants_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/reactants.json'
+    # with open(reactants_filepath, 'w') as outfile:
+    #     json.dump(list(iter2_reactants), outfile, indent=4)
+    # print(len(iter2_reactants))
 
     # save a set of the necessary reactants (iter2 mols)
-    iter2_reactants = identify_reactants2('/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/queue_data')
-    reactants_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/reactants.json'
-    with open(reactants_filepath, 'w') as outfile:
-        json.dump(list(iter2_reactants), outfile, indent=4)
+    iter2_reagents = identify_reagents('/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/queue_data')
+    reagents_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/reagents.json'
+    with open(reagents_filepath, 'w') as outfile:
+        json.dump(list(iter2_reagents), outfile, indent=4)
