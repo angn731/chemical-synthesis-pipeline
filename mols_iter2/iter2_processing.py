@@ -24,5 +24,9 @@ for product in product_smiles:
         continue
 
 iter2_pathways_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/iter2_synthesis_pathways.json'
-with open(iter2_pathways_filepath, 'w') as outfile:
-    json.dump(reaction_pathways, outfile, indent=4)
+# with open(iter2_pathways_filepath, 'w') as outfile:
+#     json.dump(reaction_pathways, outfile, indent=4)
+
+reactants_filepath = '/Users/angelinaning/Downloads/jensen_lab_urop/reaction_pathways/reaction_pathways_code/mols_iter2/reactants.json'
+with open(reactants_filepath, 'r') as jsonfile:
+    reactants = json.load(jsonfile)
