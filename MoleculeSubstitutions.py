@@ -54,17 +54,6 @@ def tanimoto(missing_mols, reagents):
     return tanimoto_values, closest_reagents
 
 
-# def rxns_with_subs(missing_mols, synthesis_pathways):
-#     """
-#     Takes in a dict with keys as missing molecule SMILES and values as the closest
-#     tanimoto neighbor, as well as a dict mapping product SMILES to tuples of reactions.
-#     Returns a dict mapping missing molecules to the synthesis pathway they're in.
-#     """
-#     for mol in missing_mols.keys():
-#         for prod, pathway in synthesis_pathways:
-
-
-
 if __name__ == "__main__":
 
     """

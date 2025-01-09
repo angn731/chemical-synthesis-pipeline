@@ -1,5 +1,5 @@
 import pytest
-import SynthesisPathway
+import src.SynthesisPathway as SynthesisPathway
 
 import sys
 sys.setrecursionlimit(10000)
