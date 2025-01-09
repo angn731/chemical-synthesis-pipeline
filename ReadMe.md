@@ -14,8 +14,8 @@ This project implements a pipeline for synthesizing chemical reactions by select
 ## Requirements
 
 - Python 3.8+
+- ASCKOS
 - RDKit
-- NumPy
 
 ## Installation
 
@@ -28,14 +28,6 @@ This project implements a pipeline for synthesizing chemical reactions by select
    ```bash
    pip install -r requirements.txt
    ```
-
-## Usage
-
-To generate synthesis pathways and group reactions into well plates, run the following command:
-
-```bash
-python src/main.py
-```
 
 ## Project Workflow
 
@@ -53,22 +45,9 @@ The code for this approach is included in `archive/unused_approaches.py` for ref
 
 The final pipeline successfully minimized the total number of well plates required while ensuring correct reaction order. It improved efficiency by 20% compared to initial approaches.
 
-## Limitations and Future Work
-
-- The pipeline currently assumes all temperature data is accurate. Future work could involve incorporating uncertainty in temperature measurements.
-- Exploring further optimization techniques for grouping reactions could improve performance.
-
-## Acknowledgments
-
-This project was developed during my research at the Jensen Lab. Special thanks to my mentor for guidance and support.
-
 ## License
 
 This project is licensed under the MIT License. See `LICENSE` for more details.
-
-## Contact
-
-If you have any questions, feel free to contact me at [your-email@example.com](mailto:your-email@example.com) or visit my [GitHub profile](https://github.com/yourusername).
 
 ## Detailed Steps (My Contribution)
 
