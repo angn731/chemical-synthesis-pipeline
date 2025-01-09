@@ -49,9 +49,9 @@ The final pipeline successfully minimized the total number of well plates requir
 
 This project is licensed under the MIT License. See `LICENSE` for more details.
 
-## Detailed Steps (My Contribution)
+## Detailed Steps
 
-### Step III: Generating Synthesis Pathways
+### Step I: Generating Synthesis Pathways
 
 From a JSON file containing SMILES strings of candidate molecules and associated lists of template reactions, RDKit was used to determine the intermediates formed during the synthesis of each molecule. The output was a dictionary where:
 
@@ -63,16 +63,16 @@ Molecules were excluded from further analysis if:
 1. An intermediate reaction did not yield a valid product.
 2. The final product did not match the specified candidate molecule.
 
-### Step IV: Filtering Out Non-viable Synthesis Pathways
+### Step II: Filtering Out Non-viable Synthesis Pathways
 
-Using ASKCOS, predicted reaction conditions were generated for each reaction. We retained only those sets of conditions where:
+Using ASKCOS, predicted reaction conditions were generated for each reaction. I retained only sets of conditions where:
 
 1. The predicted top product matched the specified product for the reaction.
 2. The probability of producing the desired product exceeded 5%.
 
 The output was a filtered list of synthesis pathways, each with viable reaction conditions.
 
-### Step V: Creating Temperature Bins and Optimizing Wellplate Sequences
+### Step III: Creating Temperature Bins and Optimizing Wellplate Sequences
 
 To maximize the number of candidate molecules produced within six well plates, reactions were organized based on temperature using logarithmically scaled bins. The algorithm ensured that:
 
