@@ -2,54 +2,9 @@
 
 ## Introduction
 
-This project implements a pipeline for synthesizing chemical reactions by selecting optimal reaction conditions and grouping reactions into well plates based on temperature constraints. The goal is to minimize the total number of well plates while ensuring reactions are performed in the correct order.
+This project implements a pipeline for synthesizing chemical reactions by selecting optimal reaction conditions and grouping reactions into well plates based on temperature constraints.
 
-## Features
-
-- Generates synthesis pathways for given products.
-- Selects optimal reaction conditions based on probability.
-- Groups reactions into well plates by temperature.
-- Ensures reactions are processed in the correct order.
-
-## Requirements
-
-- Python 3.8+
-- ASCKOS
-- RDKit
-
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/repo-name.git
-   cd repo-name
-   ```
-2. Install the required packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## Project Workflow
-
-1. **Transform Data**: Process the input reaction pathways to extract top conditions and initialize reactions.
-2. **Generate Well Plates**: Iteratively group reactions by temperature and assign them to well plates.
-3. **Output**: The final output is a set of well plates, each containing grouped reactions with optimal conditions.
-
-## Explored but Unused Approaches
-
-During development, a greedy algorithm (`wellplate_sequence()`) was implemented to group reactions by selecting the largest available group at each step. However, it was replaced by a more effective pathfinding solution because the greedy approach did not minimize the total number of well plates as well as the final solution.
-
-The code for this approach is included in `archive/unused_approaches.py` for reference.
-
-## Results
-
-The final pipeline successfully minimized the total number of well plates required while ensuring correct reaction order. It improved efficiency by 20% compared to initial approaches.
-
-## License
-
-This project is licensed under the MIT License. See `LICENSE` for more details.
-
-## Detailed Steps
+## Pipeline
 
 ### Step I: Generating Synthesis Pathways
 
