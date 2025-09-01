@@ -1,4 +1,4 @@
-# Chemical Synthesis Pipeline Using ASCKOS
+# Chemical Synthesis Pipeline
 
 ## Introduction
 
